@@ -1,6 +1,8 @@
 import logo from './logo.svg';
 import './App.css';
 import * as tf from '@tensorflow/tfjs';
+import { useEffect } from 'react';
+import axios from 'axios';
 
 function App() {
   const NUM_INPUT_SAMPLES = 1024;
@@ -66,7 +68,20 @@ function App() {
   }
 
   // This needs a microphone to work, check for exceptions.
-  startDemo();
+  //startDemo();
+  useEffect(() => {
+    startDemo();
+  },[])
+
+  useEffect(() => {
+    axios.get('/api/songs')
+    .then(res => {
+      console.log('res',res)
+  })
+  .catch((err) => {
+    console.log('err', err)
+  })
+  },[])
 
   return (
     <div className="App">
