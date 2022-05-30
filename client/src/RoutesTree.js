@@ -1,5 +1,5 @@
 import React from "react";
-import { Routes, Route, Redirect } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 
 import Home from "./components/Home";
 import SongList from "./components/SongList";
@@ -16,7 +16,7 @@ export default function RoutesTree() {
         <Route path="/preview" element={<Preview />} />
         <Route path="/singalong" element={<SingAlong />} />
         <Route path="/score" element={<Score />} />
-        <Redirect to="/home" />
+        <Route path="*" element={<Navigate to="/" replace/>} />
       </Routes>
     </div>
   );
