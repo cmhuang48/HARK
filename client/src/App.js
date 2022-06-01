@@ -1,11 +1,11 @@
-import "./App.css";
-import * as tf from "@tensorflow/tfjs";
-import { useEffect } from "react";
-import axios from "axios";
+import './App.css';
+import * as tf from '@tensorflow/tfjs';
+import { useEffect } from 'react';
+import axios from 'axios';
 
-import Header from "./components/Header";
-import RoutesTree from "./RoutesTree";
-import Footer from "./components/Footer";
+import Header from './components/Header';
+import RoutesTree from './RoutesTree';
+import Footer from './components/Footer';
 
 function App() {
   // const NUM_INPUT_SAMPLES = 1024;
@@ -90,7 +90,7 @@ function App() {
   //     });
   // }, []);
 
-  console.log("app");
+  console.log('app');
   return (
     <div className="app">
       <Header />
