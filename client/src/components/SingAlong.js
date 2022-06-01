@@ -5,8 +5,8 @@ export default function SingAlong({ score, setScore }) {
     //TBD
     setScore(score + num); //TBD
   };
-  
-  //Note:score temporarily displayed 
+
+  //Note:score temporarily displayed
   return (
     <div className="singAlong">
       <span>

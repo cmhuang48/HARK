@@ -8,6 +8,7 @@ const app = require("./app");
 const init = async () => {
   try {
     console.log("calling init");
+
     await db.sync({ force: true });
 
     const [brunoMars, kellyClarkson, neilDiamond, vanessaCarlton] =
