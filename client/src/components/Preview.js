@@ -1,5 +1,7 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import HeadphonesIcon from "@mui/icons-material/Headphones";
+import Button from "@mui/material/Button";
 
 export default function Preview() {
   return (
@@ -47,6 +49,9 @@ export default function Preview() {
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowfullscreen
       ></iframe>
+      <Link to="/singalong/:id">
+        <Button variant="contained">Start Singing</Button>
+      </Link>
     </div>
   );
 }
