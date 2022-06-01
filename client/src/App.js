@@ -1,6 +1,5 @@
 import "./App.css";
 import * as tf from "@tensorflow/tfjs";
-import { useEffect } from "react";
 import axios from "axios";
 
 import Header from "./components/Header";
