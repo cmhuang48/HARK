@@ -1,14 +1,17 @@
-import axios from 'axios';
+import axios from "axios";
 
-const LOAD_CURRENT_SONG = 'LOAD_CURRENT_SONG';
+// ACTION TYPE
+const LOAD_CURRENT_SONG = "LOAD_CURRENT_SONG";
 
-export const loadCurrentSong = (songId) => {
+// THUNK CREATOR
+export const loadCurrentSong = (id) => {
   return async (dispatch) => {
-    const response = await axios.get(`/api/songs/${songId}`);
+    const response = await axios.get(`/api/songs/${id}`);
     dispatch({ type: LOAD_CURRENT_SONG, payload: response.data });
   };
 };
 
+// REDUCER
 const currentSong = (state = {}, action) => {
   if (action.type === LOAD_CURRENT_SONG) return action.payload;
   return state;
