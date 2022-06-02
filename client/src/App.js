@@ -1,19 +1,21 @@
-<<<<<<< HEAD
-import './App.css';
-import * as tf from '@tensorflow/tfjs';
-import { useEffect } from 'react';
-import axios from 'axios';
-=======
+import React from "react";
+import { connect } from "react-redux";
 import "./App.css";
 import * as tf from "@tensorflow/tfjs";
-import axios from "axios";
->>>>>>> main
 
-import Header from './components/Header';
-import RoutesTree from './RoutesTree';
-import Footer from './components/Footer';
+import { loadSongs, loadArtists, loadCurrentSong } from "./store";
 
-function App() {
+import Header from "./components/Header";
+import RoutesTree from "./RoutesTree";
+import Footer from "./components/Footer";
+
+class App extends React.Component {
+  componentDidMount() {
+    this.props.loadSongs();
+    this.props.loadArtists();
+    //just for testing----------
+    this.props.loadCurrentSong(1);
+  }
   // const NUM_INPUT_SAMPLES = 1024;
   // const MODEL_SAMPLE_RATE = 16000;
   // const PT_OFFSET = 24.374;
@@ -96,14 +98,25 @@ function App() {
   //     });
   // }, []);
 
-  console.log('app');
-  return (
-    <div className="app">
-      <Header />
-      <RoutesTree />
-      <Footer />
-    </div>
-  );
+  render() {
+    return (
+      <div className="app">
+        <Header />
+        <RoutesTree />
+        <Footer />
+      </div>
+    );
+  }
 }
 
-export default App;
+const mapState = (state) => ({ state });
+
+const mapDispatch = (dispatch) => {
+  return {
+    loadSongs: () => dispatch(loadSongs()),
+    loadArtists: () => dispatch(loadArtists()),
+    loadCurrentSong: (id) => dispatch(loadCurrentSong(id)),
+  };
+};
+
+export default connect(mapState, mapDispatch)(App);

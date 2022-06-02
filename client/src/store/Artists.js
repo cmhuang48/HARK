@@ -1,14 +1,17 @@
-import axios from 'axios';
+import axios from "axios";
 
-const LOAD_ARTISTS = 'LOAD_ARTISTS';
+// ACTION TYPE
+const LOAD_ARTISTS = "LOAD_ARTISTS";
 
+// THUNK CREATOR
 export const loadArtists = () => {
   return async (dispatch) => {
-    const response = await axios.get('/api/artists');
+    const response = await axios.get("/api/artists");
     dispatch({ type: LOAD_ARTISTS, payload: response.data });
   };
 };
 
+// REDUCER
 const artists = (state = [], action) => {
   if (action.type === LOAD_ARTISTS) return action.payload;
   return state;

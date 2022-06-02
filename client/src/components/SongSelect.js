@@ -1,12 +1,12 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { loadCurrentSong } from '../store';
+import React from "react";
+import { connect } from "react-redux";
+import { loadCurrentSong } from "../store";
 
 class SongSelect extends React.Component {
   constructor() {
     super();
     this.state = {
-      selectedSong: '',
+      selectedSong: "",
     };
     this.handleSelect = this.handleSelect.bind(this);
   }
@@ -32,7 +32,7 @@ class SongSelect extends React.Component {
           {this.props.songs?.map((song) => (
             <li
               key={song.id}
-              style={{ margin: '1rem' }}
+              style={{ margin: "1rem" }}
               onClick={() => this.handleSelect(song)}
             >
               {song.name}
@@ -46,7 +46,7 @@ class SongSelect extends React.Component {
 
 const mapDispatch = (dispatch) => {
   return {
-    loadCurrentSong: (songId) => dispatch(loadCurrentSong(songId)),
+    loadCurrentSong: (id) => dispatch(loadCurrentSong(id)),
   };
 };
 
