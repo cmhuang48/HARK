@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import SongSelect from './SongSelect';
 import { loadSongs, loadArtists, loadCurrentSong } from '../store';
 
 class Home extends React.Component {
@@ -14,6 +15,7 @@ class Home extends React.Component {
     return (
       <div className="home">
         <h1>Home</h1>
+        <SongSelect />
       </div>
     );
   }
