@@ -1,9 +1,32 @@
-import React from "react";
+import React from 'react';
+import { connect } from 'react-redux';
+import SongSelect from './SongSelect';
+import { loadSongs, loadArtists, loadCurrentSong } from '../store';
 
-export default function Home() {
-  return (
-    <div className="home">
-      <h1>Home</h1>
-    </div>
-  );
+class Home extends React.Component {
+  componentDidMount() {
+    this.props.loadSongs();
+    this.props.loadArtists();
+    //just for testing----------
+    this.props.loadCurrentSong(1);
+  }
+
+  render() {
+    return (
+      <div className="home">
+        <h1>Home</h1>
+        <SongSelect />
+      </div>
+    );
+  }
 }
+
+const mapDispatch = (dispatch) => {
+  return {
+    loadSongs: () => dispatch(loadSongs()),
+    loadArtists: () => dispatch(loadArtists()),
+    loadCurrentSong: (songId) => dispatch(loadCurrentSong(songId)),
+  };
+};
+
+export default connect((state) => state, mapDispatch)(Home);
