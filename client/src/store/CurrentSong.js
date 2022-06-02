@@ -5,13 +5,13 @@ const LOAD_CURRENT_SONG = 'LOAD_CURRENT_SONG';
 export const loadCurrentSong = (songId) => {
   return async (dispatch) => {
     const response = await axios.get(`/api/songs/${songId}`);
-    dispatch({ type: LOAD_CURRENT_SONG, song: response.data });
+    dispatch({ type: LOAD_CURRENT_SONG, payload: response.data });
   };
 };
 
-const currentSongReducer = (state = {}, action) => {
-  if (action.type === LOAD_CURRENT_SONG) return action.song;
+const currentSong = (state = {}, action) => {
+  if (action.type === LOAD_CURRENT_SONG) return action.payload;
   return state;
 };
 
-export default currentSongReducer;
+export default currentSong;

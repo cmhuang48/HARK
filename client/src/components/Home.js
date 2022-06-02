@@ -1,9 +1,12 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
-import { loadCurrentSong } from '../store';
+import { loadSongs, loadArtists, loadCurrentSong } from '../store';
 
 class Home extends React.Component {
   componentDidMount() {
+    this.props.loadSongs();
+    this.props.loadArtists();
+    //just for testing----------
     this.props.loadCurrentSong(1);
   }
 
@@ -18,6 +21,8 @@ class Home extends React.Component {
 
 const mapDispatch = (dispatch) => {
   return {
+    loadSongs: () => dispatch(loadSongs()),
+    loadArtists: () => dispatch(loadArtists()),
     loadCurrentSong: (songId) => dispatch(loadCurrentSong(songId)),
   };
 };
