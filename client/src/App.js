@@ -1,7 +1,13 @@
+<<<<<<< HEAD
 import './App.css';
 import * as tf from '@tensorflow/tfjs';
 import { useEffect } from 'react';
 import axios from 'axios';
+=======
+import "./App.css";
+import * as tf from "@tensorflow/tfjs";
+import axios from "axios";
+>>>>>>> main
 
 import Header from './components/Header';
 import RoutesTree from './RoutesTree';
