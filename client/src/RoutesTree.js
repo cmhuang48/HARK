@@ -1,5 +1,6 @@
 import React from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
+import { connect } from "react-redux";
 
 import Home from "./components/Home";
 import SongList from "./components/SongList";
@@ -7,7 +8,7 @@ import Preview from "./components/Preview";
 import SingAlong from "./components/SingAlong";
 import Score from "./components/Score";
 
-export default function RoutesTree() {
+function RoutesTree() {
   return (
     <div>
       <Routes>
@@ -21,3 +22,7 @@ export default function RoutesTree() {
     </div>
   );
 }
+
+const mapState = (state) => ({ state });
+
+export default connect(mapState)(RoutesTree);

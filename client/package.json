@@ -13,10 +13,18 @@
     "@testing-library/user-event": "^13.5.0",
     "axios": "^0.27.2",
     "react": "^18.1.0",
+    "react-audio-player": "^0.17.0",
     "react-dom": "^18.1.0",
+    "react-material-music-player": "^1.1.6",
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
     "web-vitals": "^2.1.4"
+  },
+  "devDependencies": {
+    "react-redux": "^8.0.2",
+    "redux": "^4.2.0",
+    "redux-logger": "^3.0.6",
+    "redux-thunk": "^2.4.1"
   },
   "scripts": {
     "start": "react-scripts start",

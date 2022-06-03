@@ -1,6 +1,8 @@
 import React from "react";
 import { Box, Button, Typography } from "@mui/material";
 
+import SongSelect from "./SongSelect";
+
 export default function Home() {
   return (
     <div className="home">
