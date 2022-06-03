@@ -26,10 +26,9 @@ export default function SingAlong({ score, setScore }) {
   return (
     <div className="singAlong">
       <span>
-        {/* {questions[currQues].difficulty} */}
         Score : {score}
       </span>
-      {songs.map((item) => {
+      {/* {songs.map((item) => {
         return <div key={item.id}>
           {item.name} 
           <button 
@@ -39,7 +38,7 @@ export default function SingAlong({ score, setScore }) {
             Play
             </button>
         </div>
-      })}
+      })} */}
       <ReactAudioPlayer
           src={song}
           autoPlay

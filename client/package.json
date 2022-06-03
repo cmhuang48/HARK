@@ -20,6 +20,12 @@
     "react-scripts": "5.0.1",
     "web-vitals": "^2.1.4"
   },
+  "devDependencies": {
+    "react-redux": "^8.0.2",
+    "redux": "^4.2.0",
+    "redux-logger": "^3.0.6",
+    "redux-thunk": "^2.4.1"
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
