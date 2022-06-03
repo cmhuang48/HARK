@@ -5,7 +5,7 @@ import axios from "axios";
 
 export default function SingAlong({ score, setScore }) {
   const [songs, setSongs] = useState([])
-  const [song, setSong] = useState("/audio/Sweet-Caroline_vocals.mp3");
+  const [song, setSong] = useState("/audio/Sweet-Caroline_instrumentals.mp3");
 
   const handleScore = (num) => {
     //TBD
