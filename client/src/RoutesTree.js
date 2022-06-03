@@ -11,7 +11,7 @@ export default function RoutesTree() {
   return (
     <div>
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route exact path="/" element={<Home />} />
         <Route path="/songs" element={<SongList />} />
         <Route path="/preview/:id" element={<Preview />} />
         <Route path="/singalong/:id" element={<SingAlong />} />
