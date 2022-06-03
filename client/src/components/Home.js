@@ -1,7 +1,7 @@
 import React from "react";
 import { Box, Button, Typography } from "@mui/material";
 
-import SongSelect from "./SongSelect";
+//import SongSelect from "./SongSelect";
 
 export default function Home() {
   return (
@@ -14,6 +14,7 @@ export default function Home() {
           flexDirection: "column",
           justifyContent: "center",
           alignItems: "center",
+          bgcolor: "#3c2e01",
           backgroundImage: "url(https://hosting.photobucket.com/images/i158/thorny_roses/music1.jpeg)",
           minHeight: "750px",
           backgroundSize: "cover"
