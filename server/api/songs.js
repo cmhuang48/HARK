@@ -4,6 +4,7 @@ const {
 } = require("../db");
 module.exports = router;
 
+// GET songs
 router.get("/", async (req, res, next) => {
   try {
     const songs = await Song.findAll();
@@ -13,6 +14,7 @@ router.get("/", async (req, res, next) => {
   }
 });
 
+// GET song
 router.get("/:id", async (req, res, next) => {
   try {
     const song = await Song.findByPk(req.params.id);
