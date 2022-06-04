@@ -1,3 +1,4 @@
+const { INTEGER } = require("sequelize");
 const Sequelize = require("sequelize");
 const { STRING, TEXT } = Sequelize;
 const db = require("../db");
@@ -25,6 +26,9 @@ const Song = db.define("song", {
   vocalAudio: {
     type: STRING,
     allowNull: false,
+  },
+  duration: {
+    type: INTEGER,
   },
   lyrics: {
     type: TEXT,
