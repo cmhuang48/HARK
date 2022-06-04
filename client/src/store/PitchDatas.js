@@ -5,6 +5,7 @@ import justTheWayYouAreVocals from "../audio/Just-The-Way-You-Are_vocals.mp3";
 // ACTION TYPE
 const LOAD_PITCH_DATAS = "LOAD_PITCH_DATAS";
 const CREATE_PITCH_DATA = "CREATE_PITCH_DATA";
+const UPDATE_DEMO_PITCH_DATA = "UPDATE_DEMO_PITCH_DATA";
 const UPDATE_JUSTTHEWAYYOUARE_PITCH_DATA = "UPDATE_JUSTTHEWAYYOUARE_PITCH_DATA";
 const UPDATE_SINCEUBEENGONE_PITCH_DATA = "UPDATE_SINCEUBEENGONE_PITCH_DATA";
 const UPDATE_SWEETCAROLINE_PITCH_DATA = "UPDATE_SWEETCAROLINE_PITCH_DATA";
@@ -22,6 +23,22 @@ export const createPitchData = (pitchData) => {
   return async (dispatch) => {
     const response = await axios.post("/api/pitchdatas", pitchData);
     dispatch({ type: CREATE_PITCH_DATA, payload: response.data });
+  };
+};
+
+export const updateDemoPitchData = () => {
+  return async (dispatch) => {
+    const pitches = [440];
+    const pitchData = {
+      pitches: pitches,
+      original: true,
+      songId: 1,
+    };
+    const response = axios.put("/api/pitchdatas/1", pitchData);
+    dispatch({
+      type: UPDATE_ATHOUSANDMILES_PITCH_DATA,
+      payload: response.data,
+    });
   };
 };
 
@@ -89,16 +106,16 @@ export const updateJustTheWayYouArePitchData = () => {
     //   };
     // }
 
-    const pitches = [440];
+    const pitches = [];
 
-    // setInterval(getPitchHz(), 1);
+    // setInterval(pitches.push(getPitchHz()), 1);
 
     const pitchData = {
       pitches: pitches,
       original: true,
       songId: 1,
     };
-    const response = axios.put("/api/pitchdatas/1", pitchData);
+    const response = axios.put("/api/pitchdatas/2", pitchData);
     dispatch({
       type: UPDATE_JUSTTHEWAYYOUARE_PITCH_DATA,
       payload: response.data,
@@ -113,7 +130,7 @@ export const updateSinceUBeenGonePitchData = () => {
       original: true,
       songId: 2,
     };
-    const response = axios.put("/api/pitchdatas/2", pitchData);
+    const response = axios.put("/api/pitchdatas/3", pitchData);
     dispatch({
       type: UPDATE_SINCEUBEENGONE_PITCH_DATA,
       payload: response.data,
@@ -129,7 +146,7 @@ export const updateSweetCarolinePitchData = () => {
       original: true,
       songId: 3,
     };
-    const response = axios.put("/api/pitchdatas/3", pitchData);
+    const response = axios.put("/api/pitchdatas/4", pitchData);
     dispatch({ type: UPDATE_SWEETCAROLINE_PITCH_DATA, payload: response.data });
   };
 };
@@ -142,7 +159,7 @@ export const updateAThousandMilesPitchData = () => {
       original: true,
       songId: 4,
     };
-    const response = axios.put("/api/pitchdatas/4", pitchData);
+    const response = axios.put("/api/pitchdatas/5", pitchData);
     dispatch({
       type: UPDATE_ATHOUSANDMILES_PITCH_DATA,
       payload: response.data,
@@ -157,6 +174,10 @@ const pitchDatas = (state = [], action) => {
       return action.payload;
     case CREATE_PITCH_DATA:
       return [...state, action.payload];
+    case UPDATE_DEMO_PITCH_DATA:
+      return state.map((payload) =>
+        payload.id !== action.payload.id ? payload : action.payload
+      );
     case UPDATE_JUSTTHEWAYYOUARE_PITCH_DATA:
       return state.map((payload) =>
         payload.id !== action.payload.id ? payload : action.payload

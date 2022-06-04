@@ -21,6 +21,15 @@ async function seed() {
   const [justTheWayYouAre, sinceUBeenGone, sweetCaroline, aThousandMiles] =
     await Promise.all([
       Song.create({
+        name: "Just The Way You Are (DEMO)",
+        videoURL: "https://www.youtube.com/embed/LjhCEhWiKXk",
+        originalAudio: "/audio/Just-The-Way-You-Are_original.mp3",
+        instrumentalAudio: "./audio/Just-The-Way-You-Are_instrumentals.mp3",
+        vocalAudio: "/audio/Just-The-Way-You-Are_vocals.mp3",
+        lyrics: "",
+        artistId: brunoMars.id,
+      }),
+      Song.create({
         name: "Just The Way You Are",
         videoURL: "https://www.youtube.com/embed/LjhCEhWiKXk",
         originalAudio: "/audio/Just-The-Way-You-Are_original.mp3",
@@ -58,10 +67,15 @@ async function seed() {
       }),
     ]);
 
-  console.log(`seeded 4 songs`);
+  console.log(`seeded demo and 4 songs`);
 
   // Creating pitch datas
   const pitchDatas = await Promise.all([
+    PitchData.create({
+      pitches: [],
+      original: true,
+      songId: justTheWayYouAre.id,
+    }),
     PitchData.create({
       pitches: [],
       original: true,
