@@ -1,18 +1,26 @@
 import React from "react";
-import { Box, MenuItem, Toolbar, Typography } from "@mui/material";
+import { Container, Typography, Link } from "@mui/material";
 
 export default function Footer() {
   return (
     <div className="footer">
-      <Box sx={{ boxShadow: 1 }}>
-        <Toolbar sx={{ justifyContent: "right", bgcolor: "#3c2e01" }}>
-          <MenuItem sx={{ "&:hover": { bgcolor: "transparent" } }}>
-            <Typography color="#f5ebce" variant="subtitle">
-              Footer text here
-            </Typography>
-          </MenuItem>
-        </Toolbar>
-      </Box>
+      <Container
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          padding: "20px",
+        }}
+      >
+        <Typography variant="body2" color="#f5ebce" align="center">
+          {"Copyright © "}
+          <Link color="inherit" href="https://localhost:3000">
+            HARK
+          </Link>{" "}
+          {new Date().getFullYear()}
+          {"."}
+        </Typography>
+      </Container>
     </div>
   );
 }
