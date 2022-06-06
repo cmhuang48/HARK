@@ -1,8 +1,42 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState ,  useRef} from "react";
 import { Button } from "@mui/material";
 import ReactAudioPlayer from 'react-audio-player';
 import axios from "axios";
+import LRC from 'lrc.js'
 
+const lrc_string = `[00:05.10]AAAAAAAAAAAAAAAA
+[00:10.20]BBBBBBBBBBBBBBB
+[00:15.30]CCCCCCCCCCCCCCCCC
+[00:20.40]DDDDDDDDDDDDDDDDDDDDDDDDDDDDDD
+[00:20.14]EEEEE
+[00:26.48]FFFF
+[00:38.41]GGGG
+[00:44.49]HHHH
+[00:50.75]III
+[00:54.56]J
+[00:57.90]K
+[01:03.57]L
+[01:10.15]M
+[01:21.39]N
+[01:24.40]O
+[01:28.00]P
+[01:34.25]Q
+[01:40.31]R
+[01:46.46]S
+[01:58.39]T
+[02:04.68]U
+[02:10.79]V
+[02:14.67]W
+[02:17.95]X
+[02:23.51]Y
+[02:30.25]Z
+[02:36.19]ht
+[02:42.67]不g
+[02:47.96]尽s
+[02:51.72]每g
+[02:54.99]不怕e`;
+ 
+  
 export default function SingAlong({ score, setScore }) {
   // const NUM_INPUT_SAMPLES = 1024;
   // const MODEL_SAMPLE_RATE = 16000;
@@ -74,7 +108,11 @@ export default function SingAlong({ score, setScore }) {
   
   
   const [songs, setSongs] = useState([])
-  const [song, setSong] = useState("/audio/Sweet-Caroline_instrumentals.mp3");
+  const [currentSeconds, setSeconds] = useState(0)
+  const [lrc, setLrc] = useState(() => {
+    return LRC.parse(lrc_string)
+  })
+  const [song, setSong] = useState("/audio/Never-Give-You-Up.mp3");
 
   const handleScore = (num) => {
     //TBD
@@ -91,9 +129,25 @@ export default function SingAlong({ score, setScore }) {
 
     //Note:score temporarily displayed
 
-    console.log(song)
+  console.log(song, currentSeconds, lrc)
+
+  const onListen = (seconds) => {
+    setSeconds(seconds)
+  }
+
+  const displayLyric = () => {
+    const currentIndex = lrc.lines.findIndex((item) =>  item.time >= currentSeconds)
+    const lyric = lrc.lines[currentIndex === 0 ? 0 : currentIndex - 1]
+    return <div>{lyric?.text}</div>
+  }
+  
   return (
     <div className="singAlong">
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
       <span>
         Score : {score}
       </span>
@@ -108,12 +162,18 @@ export default function SingAlong({ score, setScore }) {
             </button>
         </div>
       })} */}
+
       <ReactAudioPlayer
           src={song}
           autoPlay
           controls
+          muted
+          listenInterval={3000}
+          onListen={onListen}
         />
-      <Button
+    
+      {displayLyric()}
+      {/*<Button
         onClick={() => {
           handleScore(1);
         }}
@@ -123,7 +183,7 @@ export default function SingAlong({ score, setScore }) {
         style={{ alignSelf: "center", marginTop: 20 }}
       >
         View Score
-      </Button>
+      </Button>*/}
     </div>
   );
 }
