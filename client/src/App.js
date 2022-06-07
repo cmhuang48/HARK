@@ -24,7 +24,7 @@ class App extends React.Component {
     this.props.loadPitchDatas();
     //just for testing----------
     this.props.loadCurrentSong(1);
-    this.props.updateJustTheWayYouArePitchData();
+    // this.props.updateJustTheWayYouArePitchData();
     this.props.updateSinceUBeenGonePitchData();
     this.props.updateSweetCarolinePitchData();
     this.props.updateAThousandMilesPitchData();

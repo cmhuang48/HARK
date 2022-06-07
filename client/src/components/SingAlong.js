@@ -1,9 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState} from "react";
+import { useParams } from "react-router-dom";
+import { connect } from "react-redux";
 import { Button } from "@mui/material";
 import ReactAudioPlayer from 'react-audio-player';
 import axios from "axios";
+import LRC from 'lrc.js'
 
-export default function SingAlong({ score, setScore }) {
+const lrc_string = ``;
+ 
+  
+function SingAlong({ score, setScore }) {
   // const NUM_INPUT_SAMPLES = 1024;
   // const MODEL_SAMPLE_RATE = 16000;
   // const PT_OFFSET = 24.374;
@@ -72,9 +78,13 @@ export default function SingAlong({ score, setScore }) {
   // This needs a microphone to work, check for exceptions.
   //startDemo();
   
-  
-  const [songs, setSongs] = useState([])
-  const [song, setSong] = useState("/audio/Sweet-Caroline_instrumentals.mp3");
+  const { id } = useParams();
+  // const [songs, setSongs] = useState([])
+  const [currentSeconds, setSeconds] = useState(0)
+  const [lrc, setLrc] = useState(() => {
+    return LRC.parse(lrc_string)
+  })
+  const [song, setSong] = useState("/audio/Never-Give-You-Up.mp3");
 
   const handleScore = (num) => {
     //TBD
@@ -82,18 +92,45 @@ export default function SingAlong({ score, setScore }) {
   };
 
   useEffect(() => {
-    axios.get('/api/songs')
+    axios.get(`/api/songs/${id}`)
     .then(res => {
-      console.log(res)
-      setSongs(res.data);
+      console.log('>>>>>>',res.data.lyrics)
+      setSong(res.data.originalAudio);
+      setLrc(() => {
+        return LRC.parse(res.data.lyrics)
+      });
     })
   }, [])
 
     //Note:score temporarily displayed
 
-    console.log(song)
+  console.log(song, currentSeconds, lrc)
+
+  const onListen = (seconds) => {
+    setSeconds(seconds)
+  }
+
+  const displayLyric = () => {
+    const currentIndex = lrc.lines.findIndex((item) =>  item.time  >= currentSeconds)
+    const futureLyric = lrc.lines[currentIndex === 0 ? 0 : currentIndex]
+    const prevLyric = lrc.lines[currentIndex === 0 ? 0 : currentIndex - 2]
+    const lyric = lrc.lines[currentIndex === 0 ? 0 : currentIndex - 1]
+    return (
+      <div>
+      
+        <p>{prevLyric?.text}</p>
+        <div className='active'>{lyric?.text}</div>
+        <p>{futureLyric?.text}</p>
+      </div>)
+  }
+  
   return (
     <div className="singAlong">
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
       <span>
         Score : {score}
       </span>
@@ -108,12 +145,18 @@ export default function SingAlong({ score, setScore }) {
             </button>
         </div>
       })} */}
+
       <ReactAudioPlayer
           src={song}
           autoPlay
           controls
+          muted
+          listenInterval={3000}
+          onListen={onListen}
         />
-      <Button
+    
+      {displayLyric()}
+      {/*<Button
         onClick={() => {
           handleScore(1);
         }}
@@ -123,7 +166,11 @@ export default function SingAlong({ score, setScore }) {
         style={{ alignSelf: "center", marginTop: 20 }}
       >
         View Score
-      </Button>
+      </Button>*/}
     </div>
   );
 }
+
+const mapState = ({ songs, artists }) => ({ songs, artists });
+
+export default connect(mapState)(SingAlong);
