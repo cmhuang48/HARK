@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 
 import Home from "./components/Home";
 import SongList from "./components/SongList";
+import SongSelect from "./components/SongSelect";
 import Preview from "./components/Preview";
 import SingAlong from "./components/SingAlong";
 import Score from "./components/Score";

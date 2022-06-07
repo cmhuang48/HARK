@@ -7,6 +7,7 @@ export default function SongList() {
   // useEffect(
   //   , [pitches]);
 
+
   return (
     <div className="songList">
       <Box
@@ -46,5 +47,3 @@ export default function SongList() {
     </div>
   );
 }
-
-//  sx={{ marginTop: "10px", marginBottom: "10px", bottomBorder: "2px solid black" }}>
