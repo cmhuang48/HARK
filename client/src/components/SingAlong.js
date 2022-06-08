@@ -1,14 +1,14 @@
-import React, { useEffect, useState} from "react";
-import { useParams } from "react-router-dom";
-import { connect } from "react-redux";
-import { Button } from "@mui/material";
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { Button } from '@mui/material';
 import ReactAudioPlayer from 'react-audio-player';
-import axios from "axios";
-import LRC from 'lrc.js'
+import axios from 'axios';
+import LRC from 'lrc.js';
+import Recorder from './Recorder';
 
 const lrc_string = ``;
- 
-  
+
 function SingAlong({ score, setScore }) {
   // const NUM_INPUT_SAMPLES = 1024;
   // const MODEL_SAMPLE_RATE = 16000;
@@ -77,14 +77,14 @@ function SingAlong({ score, setScore }) {
 
   // This needs a microphone to work, check for exceptions.
   //startDemo();
-  
+
   const { id } = useParams();
   // const [songs, setSongs] = useState([])
-  const [currentSeconds, setSeconds] = useState(0)
+  const [currentSeconds, setSeconds] = useState(0);
   const [lrc, setLrc] = useState(() => {
-    return LRC.parse(lrc_string)
-  })
-  const [song, setSong] = useState("/audio/Never-Give-You-Up.mp3");
+    return LRC.parse(lrc_string);
+  });
+  const [song, setSong] = useState('/audio/Never-Give-You-Up.mp3');
 
   const handleScore = (num) => {
     //TBD
@@ -92,38 +92,39 @@ function SingAlong({ score, setScore }) {
   };
 
   useEffect(() => {
-    axios.get(`/api/songs/${id}`)
-    .then(res => {
-      console.log('>>>>>>',res.data.lyrics)
-      setSong(res.data.originalAudio);
+    axios.get(`/api/songs/${id}`).then((res) => {
+      console.log('>>>>>>', res.data.lyrics);
+      setSong(res.data);
       setLrc(() => {
-        return LRC.parse(res.data.lyrics)
+        return LRC.parse(res.data.lyrics);
       });
-    })
-  }, [])
+    });
+  }, []);
 
-    //Note:score temporarily displayed
+  //Note:score temporarily displayed
 
-  console.log(song, currentSeconds, lrc)
+  console.log(song, currentSeconds, lrc);
 
   const onListen = (seconds) => {
-    setSeconds(seconds)
-  }
+    setSeconds(seconds);
+  };
 
   const displayLyric = () => {
-    const currentIndex = lrc.lines.findIndex((item) =>  item.time  >= currentSeconds)
-    const futureLyric = lrc.lines[currentIndex === 0 ? 0 : currentIndex]
-    const prevLyric = lrc.lines[currentIndex === 0 ? 0 : currentIndex - 2]
-    const lyric = lrc.lines[currentIndex === 0 ? 0 : currentIndex - 1]
+    const currentIndex = lrc.lines.findIndex(
+      (item) => item.time >= currentSeconds
+    );
+    const futureLyric = lrc.lines[currentIndex === 0 ? 0 : currentIndex];
+    const prevLyric = lrc.lines[currentIndex === 0 ? 0 : currentIndex - 2];
+    const lyric = lrc.lines[currentIndex === 0 ? 0 : currentIndex - 1];
     return (
       <div>
-      
         <p>{prevLyric?.text}</p>
-        <div className='active'>{lyric?.text}</div>
+        <div className="active">{lyric?.text}</div>
         <p>{futureLyric?.text}</p>
-      </div>)
-  }
-  
+      </div>
+    );
+  };
+
   return (
     <div className="singAlong">
       <br />
@@ -131,9 +132,7 @@ function SingAlong({ score, setScore }) {
       <br />
       <br />
       <br />
-      <span>
-        Score : {score}
-      </span>
+      <span>Score : {score}</span>
       {/* {songs.map((item) => {
         return <div key={item.id}>
           {item.name} 
@@ -145,16 +144,27 @@ function SingAlong({ score, setScore }) {
             </button>
         </div>
       })} */}
-
+      <p>original song</p>
       <ReactAudioPlayer
-          src={song}
-          autoPlay
-          controls
-          muted
-          listenInterval={3000}
-          onListen={onListen}
-        />
-    
+        src={song.originalAudio}
+        autoPlay
+        controls
+        muted
+        listenInterval={3000}
+        onListen={onListen}
+      />
+      <p>instrumental</p>
+      <ReactAudioPlayer
+        src={song.instrumentalAudio}
+        autoPlay
+        controls
+        muted
+        listenInterval={3000}
+        onListen={onListen}
+      />
+
+      <Recorder />
+
       {displayLyric()}
       {/*<Button
         onClick={() => {
