@@ -20,6 +20,7 @@ function SongList({ songs, artists }) {
           bgcolor: '#21130d',
         }}
       >
+
         <Box sx={{ marginTop: '100px', marginBottom: '30px' }}>
           <Typography
             color="#f2f2f2"
@@ -31,6 +32,7 @@ function SongList({ songs, artists }) {
               lineHeight: 'normal',
             }}
           >
+
             Choose Your Song
           </Typography>
 
