@@ -17,8 +17,8 @@ function SongList({ songs, artists }) {
           bgcolor: "#21130d"
         }}
       >
-        <Box sx={{ marginTop: "100px", marginBottom: "30px" }}>
-          <Typography color="#f2f2f2" variant="h6" sx={{ fontFamily: "Merienda", marginBottom: "8px", fontStyle: "italic", lineHeight: "normal" }}>
+        <Box sx={{ marginTop: "120px", marginBottom: "60px" }}>
+          <Typography color="#f5ebce" variant="h6" sx={{ fontFamily: "Merienda", marginBottom: "8px", fontStyle: "italic", lineHeight: "normal" }}>
             Choose Your Song
           </Typography>
 
@@ -47,4 +47,3 @@ const mapState = ({ songs, artists }) => ({ songs, artists });
 export default connect(mapState)(SongList);
 
 //  sx={{ marginTop: "10px", marginBottom: "10px", bottomBorder: "2px solid black" }}>
-
