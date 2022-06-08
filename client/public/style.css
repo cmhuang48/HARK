@@ -3,9 +3,9 @@
 }
 
 p {
-  color: rgba(105,105,105);
+  color: rgba(105, 105, 105);
   font-size: 14px;
-  margin: .5rem 0;
+  margin: 0.5rem 0;
   transition: all 500ms ease;
 }
 
@@ -16,7 +16,9 @@ p {
 }
 
 .songLinks {
+  color: #f2f2f2;
   text-decoration: none;
+  font-family: Merienda;
 }
 
 .songLinks:visited {
