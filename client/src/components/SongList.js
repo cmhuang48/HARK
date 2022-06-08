@@ -4,9 +4,6 @@ import { Link } from 'react-router-dom';
 
 import { Box, Typography } from '@mui/material';
 
-//testing---
-import Recorder from './Recorder';
-
 function SongList({ songs, artists }) {
   return (
     <div className="songList">
@@ -20,7 +17,6 @@ function SongList({ songs, artists }) {
           bgcolor: '#21130d',
         }}
       >
-
         <Box sx={{ marginTop: '100px', marginBottom: '30px' }}>
           <Typography
             color="#f2f2f2"
@@ -32,7 +28,6 @@ function SongList({ songs, artists }) {
               lineHeight: 'normal',
             }}
           >
-
             Choose Your Song
           </Typography>
 
@@ -66,8 +61,6 @@ function SongList({ songs, artists }) {
           </div>
         </Box>
       </Box>
-      {/* testing */}
-      <Recorder />
     </div>
   );
 }
