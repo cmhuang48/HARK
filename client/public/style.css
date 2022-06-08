@@ -1,0 +1,7 @@
+.songLinks {
+  text-decoration: none;
+}
+
+.songLinks:visited {
+  color: #f2f2f2;
+}
