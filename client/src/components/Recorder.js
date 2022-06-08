@@ -1,7 +1,7 @@
 import React from 'react';
 
 class Recorder extends React.Component {
-  render() {
+  componentDidMount() {
     let preview = document.getElementById('preview');
     let recording = document.getElementById('recording');
     let startButton = document.getElementById('startButton');
@@ -91,74 +91,29 @@ class Recorder extends React.Component {
       },
       false
     );
+  }
 
+  render() {
     return (
       <div>
-        {/* <div class="left">
-          <div id="startButton" class="button">
-            Start Recording
-          </div>
+        <div>
+          <button id="startButton">Start Recording</button>
           <h2>Preview</h2>
-          <video id="preview" width="160" height="120" autoplay muted></video>
+          <video id="preview" width="160" height="120" autoPlay muted></video>
         </div>
-        <div class="right">
-          <div id="stopButton" class="button">
-            Stop Recording
-          </div>
+        <div id="log"></div>
+
+        <div>
+          <button id="stopButton">Stop Recording</button>
           <h2>Recording</h2>
           <video id="recording" width="160" height="120" controls></video>
-          <a id="downloadButton" class="button">
+          <a id="downloadButton" className="button">
             Download
           </a>
-        </div> */}
+        </div>
       </div>
     );
   }
 }
-
-// var canvas = document.querySelector('canvas');
-
-// // Optional frames per second argument.
-// var stream = canvas.captureStream(25);
-// var recordedChunks = [];
-
-// console.log(stream);
-// var options = { mimeType: 'video/webm; codecs=vp9' };
-// var mediaRecorder = new MediaRecorder(stream, options);
-
-// mediaRecorder.ondataavailable = handleDataAvailable;
-// mediaRecorder.start();
-
-// function handleDataAvailable(event) {
-//   console.log('data-available');
-//   if (event.data.size > 0) {
-//     recordedChunks.push(event.data);
-//     console.log(recordedChunks);
-//     download();
-//   } else {
-//     // ...
-//   }
-// }
-
-// function download() {
-//   console.log('download func');
-//   var blob = new Blob(recordedChunks, {
-//     type: 'video/webm',
-//   });
-//   var url = URL.createObjectURL(blob);
-//   var a = document.createElement('a');
-//   document.body.appendChild(a);
-//   a.style = 'display: none';
-//   a.href = url;
-//   a.download = 'test.webm';
-//   a.click();
-//   window.URL.revokeObjectURL(url);
-// }
-
-// // demo: to download after 9sec
-// setTimeout((event) => {
-//   console.log('stopping');
-//   mediaRecorder.stop();
-// }, 9000);
 
 export default Recorder;
