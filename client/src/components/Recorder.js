@@ -9,7 +9,7 @@ class Recorder extends React.Component {
     let downloadButton = document.getElementById('downloadButton');
     let logElement = document.getElementById('log');
 
-    let recordingTimeMS = 5000;
+    let recordingTimeMS = 10000;
 
     function log(msg) {
       logElement.innerHTML += msg + '\n';
@@ -25,6 +25,7 @@ class Recorder extends React.Component {
 
       recorder.ondataavailable = (event) => data.push(event.data);
       recorder.start();
+      logElement.innerHTML = '';
       log(recorder.state + ' for ' + lengthInMS / 1000 + ' seconds...');
 
       let stopped = new Promise((resolve, reject) => {
