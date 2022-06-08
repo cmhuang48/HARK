@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { loadCurrentSong } from "../store";
+import { Link } from "react-router-dom";
 
 class SongSelect extends React.Component {
   constructor() {
@@ -30,9 +31,15 @@ class SongSelect extends React.Component {
         <p> select a song below:</p>
         <ul>
           {this.props.songs?.map((song) => (
-            <li key={song.id} style={{ margin: "1rem" }} onClick={() => this.handleSelect(song)}>
-              {song.name}
-            </li>
+            <Link to={`/preview/${song.id}`}>
+              <li
+                key={song.id}
+                style={{ margin: "1rem" }}
+                onClick={() => this.handleSelect(song)}
+              >
+                {song.name}
+              </li>
+            </Link>
           ))}
         </ul>
       </div>

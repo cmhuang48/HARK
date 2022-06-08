@@ -4,8 +4,6 @@ import { Link } from "react-router-dom";
 
 import { Box, Typography } from "@mui/material";
 
-// import SongSelect from "./SongSelect";
-
 function SongList({ songs, artists }) {
   return (
     <div className="songList">
@@ -49,3 +47,4 @@ const mapState = ({ songs, artists }) => ({ songs, artists });
 export default connect(mapState)(SongList);
 
 //  sx={{ marginTop: "10px", marginBottom: "10px", bottomBorder: "2px solid black" }}>
+
