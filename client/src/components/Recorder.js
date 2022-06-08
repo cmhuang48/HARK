@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
 class Recorder extends React.Component {
   componentDidMount() {
@@ -49,7 +50,7 @@ class Recorder extends React.Component {
       function () {
         navigator.mediaDevices
           .getUserMedia({
-            video: true,
+            // video: true,
             audio: true,
           })
           .then((stream) => {
@@ -61,10 +62,10 @@ class Recorder extends React.Component {
           })
           .then(() => startRecording(preview.captureStream(), recordingTimeMS))
           .then((recordedChunks) => {
-            let recordedBlob = new Blob(recordedChunks, { type: 'video/webm' });
+            let recordedBlob = new Blob(recordedChunks, { type: 'audio/mp3' });
             recording.src = URL.createObjectURL(recordedBlob);
             downloadButton.href = recording.src;
-            downloadButton.download = 'RecordedVideo.webm';
+            downloadButton.download = 'RecordedAudio.mp3';
 
             log(
               'Successfully recorded ' +
@@ -99,15 +100,16 @@ class Recorder extends React.Component {
       <div>
         <div>
           <button id="startButton">Start Recording</button>
-          <h2>Preview</h2>
-          <video id="preview" width="160" height="120" autoPlay muted></video>
+          {/* <video id="preview" width="160" height="120" autoPlay muted></video> */}
+          <audio id="preview" autoPlay muted></audio>
         </div>
         <div id="log"></div>
 
         <div>
           <button id="stopButton">Stop Recording</button>
           <h2>Recording</h2>
-          <video id="recording" width="160" height="120" controls></video>
+          {/* <video id="recording" width="160" height="120" controls></video> */}
+          <audio id="recording" controls></audio>
           <a id="downloadButton" className="button">
             Download
           </a>
@@ -117,4 +119,4 @@ class Recorder extends React.Component {
   }
 }
 
-export default Recorder;
+export default connect((state) => state)(Recorder);
