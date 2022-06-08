@@ -2,16 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import "./App.css";
 
-import {
-  loadSongs,
-  loadArtists,
-  loadPitchDatas,
-  loadCurrentSong,
-  updateJustTheWayYouArePitchData,
-  updateSinceUBeenGonePitchData,
-  updateSweetCarolinePitchData,
-  updateAThousandMilesPitchData,
-} from "./store";
+import { loadSongs, loadArtists, loadPitchDatas, loadCurrentSong, updateJustTheWayYouArePitchData, updateSinceUBeenGonePitchData, updateSweetCarolinePitchData, updateAThousandMilesPitchData } from "./store";
 
 import Header from "./components/Header";
 import RoutesTree from "./RoutesTree";
@@ -49,14 +40,10 @@ const mapDispatch = (dispatch) => {
     loadArtists: () => dispatch(loadArtists()),
     loadPitchDatas: () => dispatch(loadPitchDatas()),
     loadCurrentSong: (id) => dispatch(loadCurrentSong(id)),
-    updateJustTheWayYouArePitchData: () =>
-      dispatch(updateJustTheWayYouArePitchData()),
-    updateSinceUBeenGonePitchData: () =>
-      dispatch(updateSinceUBeenGonePitchData()),
-    updateSweetCarolinePitchData: () =>
-      dispatch(updateSweetCarolinePitchData()),
-    updateAThousandMilesPitchData: () =>
-      dispatch(updateAThousandMilesPitchData()),
+    updateJustTheWayYouArePitchData: () => dispatch(updateJustTheWayYouArePitchData()),
+    updateSinceUBeenGonePitchData: () => dispatch(updateSinceUBeenGonePitchData()),
+    updateSweetCarolinePitchData: () => dispatch(updateSweetCarolinePitchData()),
+    updateAThousandMilesPitchData: () => dispatch(updateAThousandMilesPitchData())
   };
 };
 

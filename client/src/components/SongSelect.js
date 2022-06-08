@@ -7,7 +7,7 @@ class SongSelect extends React.Component {
   constructor() {
     super();
     this.state = {
-      selectedSong: "",
+      selectedSong: ""
     };
     this.handleSelect = this.handleSelect.bind(this);
   }
@@ -49,7 +49,7 @@ class SongSelect extends React.Component {
 
 const mapDispatch = (dispatch) => {
   return {
-    loadCurrentSong: (id) => dispatch(loadCurrentSong(id)),
+    loadCurrentSong: (id) => dispatch(loadCurrentSong(id))
   };
 };
 

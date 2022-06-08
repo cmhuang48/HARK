@@ -14,3 +14,11 @@ p {
   font-size: 26px;
   margin: 1.25rem 0;
 }
+
+.songLinks {
+  text-decoration: none;
+}
+
+.songLinks:visited {
+  color: #f2f2f2;
+}
