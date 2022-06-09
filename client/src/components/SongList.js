@@ -40,7 +40,7 @@ function SongList({ songs, artists }) {
                 <div
                   key={song.id}
                   style={{ margin: '1rem' }}
-                  onClick={() => this.handleSelect(song)}
+                  // onClick={() => this.handleSelect(song)}
                 >
                   <Typography
                     color="#f2f2f2"
