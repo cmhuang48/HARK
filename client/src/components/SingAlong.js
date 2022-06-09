@@ -2,15 +2,34 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Button } from '@mui/material';
 import ReactAudioPlayer from 'react-audio-player';
+import { createSpeechlySpeechRecognition } from '@speechly/speech-recognition-polyfill';
 import axios from 'axios';
 import Recorder from './Recorder';
 import Lyric from './Lyric'
+import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
+
 
 export default function SingAlong({ score, setScore }) {
 
   const { id } = useParams();
   const [currentSeconds, setSeconds] = useState(0);
   const [song, setSong] = useState('/audio/Never-Give-You-Up.mp3');
+  const [userTranscript, setUserTranscript] = useState('')
+
+  const {
+    transcript,
+    listening,
+    resetTranscript,
+    browserSupportsSpeechRecognition
+  } = useSpeechRecognition();
+
+  useEffect(() => {
+    setUserTranscript(transcript);
+  }, [transcript])
+
+  console.log(transcript.split(" "))
+
+  const startListening = () => SpeechRecognition.startListening({ continuous: true })
 
   const handleScore = (num) => {
     //TBD
@@ -60,6 +79,14 @@ export default function SingAlong({ score, setScore }) {
 
       <Recorder />
       <Lyric currentSeconds = {currentSeconds}/>
+
+      <div>
+        <p>Microphone: {listening ? 'on' : 'off'}</p>
+        <button onClick={startListening}>Start</button>
+        <button onClick={SpeechRecognition.stopListening}>Stop</button>
+        <button onClick={resetTranscript}>Reset</button>
+        <p>{transcript}</p>
+      </div>
       {/*<Button
         onClick={() => {
           handleScore(1);
