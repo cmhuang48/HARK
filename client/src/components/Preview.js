@@ -27,7 +27,7 @@ function Preview({ songs, artists }) {
           </Box>
         </Link>
 
-        <Box sx={{ marginTop: "40px", marginBottom: "50px", textAlign: "center", flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
+        <Box sx={{ marginTop: "60px", marginBottom: "50px", textAlign: "center", flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
           <HeadphonesIcon />
           <h1>Wired headphones recommended!</h1>
           <h2>Headphones reduce noise and feedback, so you'll get the most accurate score.</h2>
