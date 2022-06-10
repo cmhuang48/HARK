@@ -18,24 +18,29 @@ async function seed() {
   console.log(`seeded 4 artists`);
 
   // Creating songs
-  const [justTheWayYouAre, sinceUBeenGone, sweetCaroline, aThousandMiles] =
-    await Promise.all([
-      Song.create({
-        name: 'Just The Way You Are (DEMO)',
-        videoURL: 'https://www.youtube.com/embed/LjhCEhWiKXk',
-        originalAudio: '/audio/Just-The-Way-You-Are_original.mp3',
-        instrumentalAudio: '/audio/Just-The-Way-You-Are_instrumentals.mp3',
-        vocalAudio: '/audio/Just-The-Way-You-Are_vocals.mp3',
-        lyrics: '',
-        artistId: brunoMars.id,
-      }),
-      Song.create({
-        name: 'Just The Way You Are',
-        videoURL: 'https://www.youtube.com/embed/LjhCEhWiKXk',
-        originalAudio: '/audio/Just-The-Way-You-Are_original.mp3',
-        instrumentalAudio: '/audio/Just-The-Way-You-Are_instrumentals.mp3',
-        vocalAudio: '/audio/Just-The-Way-You-Are_vocals.mp3',
-        lyrics: `
+  const [
+    demo,
+    justTheWayYouAre,
+    sinceUBeenGone,
+    sweetCaroline,
+    aThousandMiles,
+  ] = await Promise.all([
+    Song.create({
+      name: 'Just The Way You Are (DEMO)',
+      videoURL: 'https://www.youtube.com/embed/LjhCEhWiKXk',
+      originalAudio: '/audio/Just-The-Way-You-Are_original.mp3',
+      instrumentalAudio: '/audio/Just-The-Way-You-Are_instrumentals.mp3',
+      vocalAudio: '/audio/Just-The-Way-You-Are_vocals.mp3',
+      lyrics: '',
+      artistId: brunoMars.id,
+    }),
+    Song.create({
+      name: 'Just The Way You Are',
+      videoURL: 'https://www.youtube.com/embed/LjhCEhWiKXk',
+      originalAudio: '/audio/Just-The-Way-You-Are_original.mp3',
+      instrumentalAudio: '/audio/Just-The-Way-You-Are_instrumentals.mp3',
+      vocalAudio: '/audio/Just-The-Way-You-Are_vocals.mp3',
+      lyrics: `
 
         [ti:Just The Way You Are]
         [ar:Bruno Mars]
@@ -97,16 +102,16 @@ async function seed() {
         [03:21.03]Cause girl you’re amazing
         [03:24.27]Just the way you are
         [03:56.00]...`,
-        artistId: brunoMars.id,
-      }),
-      //lyric timestamps are wrong for since U...
-      Song.create({
-        name: 'Since U Been Gone',
-        videoURL: 'https://www.youtube.com/embed/R7UrFYvl5TE',
-        originalAudio: '/audio/Since-U-Been-Gone_original.mp3',
-        instrumentalAudio: '/audio/Since-U-Been-Gone_instrumentals.mp3',
-        vocalAudio: '/audio/Since-U-Been-Gone_vocals.mp3',
-        lyrics: `[ar:Kelly Clarkson]
+      artistId: brunoMars.id,
+    }),
+    //lyric timestamps are wrong for since U...
+    Song.create({
+      name: 'Since U Been Gone',
+      videoURL: 'https://www.youtube.com/embed/R7UrFYvl5TE',
+      originalAudio: '/audio/Since-U-Been-Gone_original.mp3',
+      instrumentalAudio: '/audio/Since-U-Been-Gone_instrumentals.mp3',
+      vocalAudio: '/audio/Since-U-Been-Gone_vocals.mp3',
+      lyrics: `[ar:Kelly Clarkson]
 
         [ti:Since U Been Gone]
         
@@ -162,15 +167,15 @@ async function seed() {
         [02:59.57]Since you been gone
         [03:03.57]Since you been gone
         [03:17.00]...`,
-        artistId: kellyClarkson.id,
-      }),
-      Song.create({
-        name: 'Sweet Caroline',
-        videoURL: 'https://www.youtube.com/embed/GmK5_lnQUbE',
-        originalAudio: '/audio/Sweet-Caroline_original.mp3',
-        instrumentalAudio: '/audio/Sweet-Caroline_instrumentals.mp3',
-        vocalAudio: '/audio/Sweet-Caroline_vocals.mp3',
-        lyrics: `[ar:Neil Diamond]
+      artistId: kellyClarkson.id,
+    }),
+    Song.create({
+      name: 'Sweet Caroline',
+      videoURL: 'https://www.youtube.com/embed/GmK5_lnQUbE',
+      originalAudio: '/audio/Sweet-Caroline_original.mp3',
+      instrumentalAudio: '/audio/Sweet-Caroline_instrumentals.mp3',
+      vocalAudio: '/audio/Sweet-Caroline_vocals.mp3',
+      lyrics: `[ar:Neil Diamond]
 [ti:Sweet Caroline]
         [00:00.00]...
         [00:14.02]Where it began, I can't begin to know when
@@ -204,15 +209,15 @@ async function seed() {
 [03:12.80]Sweet Caroline
 [03:17.58]Good times never seemed so good
 [03:23.00]...`,
-        artistId: neilDiamond.id,
-      }),
-      Song.create({
-        name: 'A Thousand Miles',
-        videoURL: 'https://www.youtube.com/embed/Cwkej79U3ek',
-        originalAudio: '/audio/A-Thousand-Miles_original.mp3',
-        instrumentalAudio: '/audio/A-Thousand-Miles_instrumentals.mp3',
-        vocalAudio: '/audio/A-Thousand-Miles_vocal.mp3',
-        lyrics: `
+      artistId: neilDiamond.id,
+    }),
+    Song.create({
+      name: 'A Thousand Miles',
+      videoURL: 'https://www.youtube.com/embed/Cwkej79U3ek',
+      originalAudio: '/audio/A-Thousand-Miles_original.mp3',
+      instrumentalAudio: '/audio/A-Thousand-Miles_instrumentals.mp3',
+      vocalAudio: '/audio/A-Thousand-Miles_vocal.mp3',
+      lyrics: `
 
         [ti:A Thousand Miles]
         [ar:Vanessa Carlton]
@@ -272,10 +277,9 @@ async function seed() {
         [03:32.64]If I could just see you
         [03:38.25]If I could just hold you tonight
         [03:57.00]...`,
-        artistId: vanessaCarlton.id,
-      }),
-    ]);
-
+      artistId: vanessaCarlton.id,
+    }),
+  ]);
 
   console.log(`seeded demo and 4 songs`);
 
