@@ -1,5 +1,26 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.header {
+  display: flex;
+  justify-content: center;
+  background-color: #1F2833;
+}
+
+.header > a {
+  display: flex;
+  justify-content: center;
+}
+
+.headerLogo {
+  width: 50%;
+  height: auto;
+}
+
 .footer {
-  background-color: #3c2e01;
+  background-color: #1F2833;
 }
 
 p {
@@ -34,4 +55,8 @@ p {
 
 .songLinks:visited {
   color: #f2f2f2;
+}
+
+.songLinks:hover {
+  color: #66FCF1;
 }

@@ -5,7 +5,6 @@ export default function Home() {
   return (
     <div className="home">
       <Box
-        // position="static"
         sx={{
           display: "flex",
           textAlign: "center",
@@ -13,20 +12,41 @@ export default function Home() {
           justifyContent: "center",
           alignItems: "center",
           bgcolor: "#3c2e01",
-          backgroundImage: "url(https://hosting.photobucket.com/images/i158/thorny_roses/music1.jpeg)",
-          minHeight: "750px",
+          backgroundImage: "url('/images/music1.jpeg')",
           width: "100%",
+          height: "100vh",
           backgroundSize: "cover",
           opacity: "0.75",
-          boxShadow: 3
+          boxShadow: 3,
         }}
       >
         <Box>
-          <Typography color="#4f3b03" fontFamily="Merienda" sx={{ marginTop: "50px", marginBottom: "40px" }} variant="h1">
-            Can you sing?
+          <Typography
+            color="#66FCF1"
+            fontFamily="Arvo"
+            fontWeight="700"
+            fontStyle={{ textShadow: "2px 2px 2px #45A29E" }}
+            sx={{ marginTop: "50px", marginBottom: "40px" }}
+            variant="h1"
+          >
+            CAN YOU SING?
           </Typography>
-          <Button href="/songs" variant="contained" sx={{ bgcolor: "#3c2e01", "&:hover": { bgcolor: "#866c20" } }} style={{ m: 1, width: "40%", padding: "10px", fontSize: "1rem" }}>
-            LET'S HEAR IT
+          <Button
+            href="/songs"
+            variant="contained"
+            sx={{
+              bgcolor: "#1F2833",
+              "&:hover": { bgcolor: "#45A29E" },
+            }}
+            style={{
+              m: 1,
+              width: "40%",
+              padding: "20px",
+              fontFamily: "Arvo",
+              fontSize: "1.5rem",
+            }}
+          >
+            LET'S HEAR IT!
           </Button>
         </Box>
       </Box>

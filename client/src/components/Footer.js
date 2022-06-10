@@ -12,9 +12,9 @@ export default function Footer() {
           padding: "20px",
         }}
       >
-        <Typography variant="body2" color="#f5ebce" align="center">
+        <Typography variant="body2" color="#C5C6C7" align="center">
           {"Copyright © "}
-          <Link color="inherit" href="https://localhost:3000">
+          <Link color="inherit" to="/">
             HARK
           </Link>{" "}
           {new Date().getFullYear()}

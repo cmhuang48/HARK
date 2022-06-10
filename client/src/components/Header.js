@@ -5,16 +5,10 @@ import { Link } from "react-router-dom";
 import { AppBar, MenuItem, Toolbar, Typography } from "@mui/material";
 
 const Header = () => (
-  <div className="navbar">
-    <AppBar elevation={0} sx={{ bgcolor: "transparent", marginTop: "20px" }}>
-      <Toolbar sx={{ justifyContent: "center" }}>
-        <MenuItem component={Link} to={"/"} sx={{ "&:hover": { bgcolor: "transparent" } }}>
-          <Typography color="#684d06" variant="h4">
-            HARK!
-          </Typography>
-        </MenuItem>
-      </Toolbar>
-    </AppBar>
+  <div className="header">
+    <Link to="/">
+      <img className="headerLogo" src="/../images/logo.jpeg" alt="logo" />
+    </Link>
   </div>
 );
 
