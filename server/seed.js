@@ -1,7 +1,7 @@
 const {
   db,
   models: { Song, Artist, PitchData },
-} = require("../server/db");
+} = require('../server/db');
 
 async function seed() {
   await db.sync({ force: true });
@@ -9,10 +9,10 @@ async function seed() {
   // Creating artists
   const [brunoMars, kellyClarkson, neilDiamond, vanessaCarlton] =
     await Promise.all([
-      Artist.create({ name: "Bruno Mars" }),
-      Artist.create({ name: "Kelly Clarkson" }),
-      Artist.create({ name: "Neil Diamond" }),
-      Artist.create({ name: "Vanessa Carlton" }),
+      Artist.create({ name: 'Bruno Mars' }),
+      Artist.create({ name: 'Kelly Clarkson' }),
+      Artist.create({ name: 'Neil Diamond' }),
+      Artist.create({ name: 'Vanessa Carlton' }),
     ]);
 
   console.log(`seeded 4 artists`);
@@ -21,20 +21,20 @@ async function seed() {
   const [justTheWayYouAre, sinceUBeenGone, sweetCaroline, aThousandMiles] =
     await Promise.all([
       Song.create({
-        name: "Just The Way You Are (DEMO)",
-        videoURL: "https://www.youtube.com/embed/LjhCEhWiKXk",
-        originalAudio: "/audio/Just-The-Way-You-Are_original.mp3",
-        instrumentalAudio: "/audio/Just-The-Way-You-Are_instrumentals.mp3",
-        vocalAudio: "/audio/Just-The-Way-You-Are_vocals.mp3",
-        lyrics: "",
+        name: 'Just The Way You Are (DEMO)',
+        videoURL: 'https://www.youtube.com/embed/LjhCEhWiKXk',
+        originalAudio: '/audio/Just-The-Way-You-Are_original.mp3',
+        instrumentalAudio: '/audio/Just-The-Way-You-Are_instrumentals.mp3',
+        vocalAudio: '/audio/Just-The-Way-You-Are_vocals.mp3',
+        lyrics: '',
         artistId: brunoMars.id,
       }),
       Song.create({
-        name: "Just The Way You Are",
-        videoURL: "https://www.youtube.com/embed/LjhCEhWiKXk",
-        originalAudio: "/audio/Just-The-Way-You-Are_original.mp3",
-        instrumentalAudio: "/audio/Just-The-Way-You-Are_instrumentals.mp3",
-        vocalAudio: "/audio/Just-The-Way-You-Are_vocals.mp3",
+        name: 'Just The Way You Are',
+        videoURL: 'https://www.youtube.com/embed/LjhCEhWiKXk',
+        originalAudio: '/audio/Just-The-Way-You-Are_original.mp3',
+        instrumentalAudio: '/audio/Just-The-Way-You-Are_instrumentals.mp3',
+        vocalAudio: '/audio/Just-The-Way-You-Are_vocals.mp3',
         lyrics: `
         [ti:Just The Way You Are]
         [ar:Bruno Mars]
@@ -93,15 +93,16 @@ async function seed() {
         [03:12.27]And when you smile,
         [03:16.52]The whole world stops and stares for a while
         [03:21.03]Cause girl you’re amazing
-        [03:24.27]Just the way you are`,
+        [03:24.27]Just the way you are
+        [03:56.00]...`,
         artistId: brunoMars.id,
       }),
       Song.create({
-        name: "Since U Been Gone",
-        videoURL: "https://www.youtube.com/embed/R7UrFYvl5TE",
-        originalAudio: "/audio/Since-U-Been-Gone_original.mp3",
-        instrumentalAudio: "/audio/Since-U-Been-Gone_instrumentals.mp3",
-        vocalAudio: "/audio/Since-U-Been-Gone_vocals.mp3",
+        name: 'Since U Been Gone',
+        videoURL: 'https://www.youtube.com/embed/R7UrFYvl5TE',
+        originalAudio: '/audio/Since-U-Been-Gone_original.mp3',
+        instrumentalAudio: '/audio/Since-U-Been-Gone_instrumentals.mp3',
+        vocalAudio: '/audio/Since-U-Been-Gone_vocals.mp3',
         lyrics: `[ar:Kelly Clarkson]
         [ti:Since U Been Gone]
         [00:03.77]Here's the thing
@@ -153,18 +154,19 @@ async function seed() {
         [02:50.96]I get what I want
         [02:56.57]Since you been gone
         [02:59.57]Since you been gone
-        [03:03.57]Since you been gone`,
+        [03:03.57]Since you been gone
+        [03:17.00]...`,
         artistId: kellyClarkson.id,
       }),
       Song.create({
-        name: "Sweet Caroline",
-        videoURL: "https://www.youtube.com/embed/GmK5_lnQUbE",
-        originalAudio: "/audio/Sweet-Caroline_original.mp3",
-        instrumentalAudio: "/audio/Sweet-Caroline_instrumentals.mp3",
-        vocalAudio: "/audio/Sweet-Caroline_vocals.mp3",
+        name: 'Sweet Caroline',
+        videoURL: 'https://www.youtube.com/embed/GmK5_lnQUbE',
+        originalAudio: '/audio/Sweet-Caroline_original.mp3',
+        instrumentalAudio: '/audio/Sweet-Caroline_instrumentals.mp3',
+        vocalAudio: '/audio/Sweet-Caroline_vocals.mp3',
         lyrics: `[ar:Neil Diamond]
 [ti:Sweet Caroline]
-[00:14.02]Where it began, I can't begin to knowing
+[00:14.02]Where it began, I can't begin to know when
 [00:21.72]But then I know it's growing strong
 [00:29.17]Was in the spring
 [00:33.14]And spring became the summer
@@ -193,15 +195,16 @@ async function seed() {
 [03:01.38]Sweet Caroline
 [03:06.16]I believe they never could
 [03:12.80]Sweet Caroline
-[03:17.58]Good times never seemed so good`,
+[03:17.58]Good times never seemed so good
+[03:23.00]...`,
         artistId: neilDiamond.id,
       }),
       Song.create({
-        name: "A Thousand Miles",
-        videoURL: "https://www.youtube.com/embed/Cwkej79U3ek",
-        originalAudio: "/audio/A-Thousand-Miles_original.mp3",
-        instrumentalAudio: "/audio/A-Thousand-Miles_instrumentals.mp3",
-        vocalAudio: "/audio/A-Thousand-Miles_vocal.mp3",
+        name: 'A Thousand Miles',
+        videoURL: 'https://www.youtube.com/embed/Cwkej79U3ek',
+        originalAudio: '/audio/A-Thousand-Miles_original.mp3',
+        instrumentalAudio: '/audio/A-Thousand-Miles_instrumentals.mp3',
+        vocalAudio: '/audio/A-Thousand-Miles_vocal.mp3',
         lyrics: `
         [ti:A Thousand Miles]
         [ar:Vanessa Carlton]
@@ -258,7 +261,8 @@ async function seed() {
         [03:23.38]Do you think time would pass me by?
         [03:28.15]'Cause you know I'd walk a thousand miles
         [03:32.64]If I could just see you
-        [03:38.25]If I could just hold you tonight`,
+        [03:38.25]If I could just hold you tonight
+        [03:57.00]...`,
         artistId: vanessaCarlton.id,
       }),
     ]);
@@ -296,7 +300,7 @@ async function seed() {
 
   console.log(`seeded ${pitchDatas.length} pitch datas`);
 
-  console.log("seeded successfully");
+  console.log('seeded successfully');
 }
 
 module.exports = seed;
