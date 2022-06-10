@@ -1,7 +1,7 @@
 const {
   db,
   models: { Song, Artist, PitchData },
-} = require("../server/db");
+} = require('../server/db');
 
 async function seed() {
   await db.sync({ force: true });
@@ -9,40 +9,37 @@ async function seed() {
   // Creating artists
   const [brunoMars, kellyClarkson, neilDiamond, vanessaCarlton] =
     await Promise.all([
-      Artist.create({ name: "Bruno Mars" }),
-      Artist.create({ name: "Kelly Clarkson" }),
-      Artist.create({ name: "Neil Diamond" }),
-      Artist.create({ name: "Vanessa Carlton" }),
+      Artist.create({ name: 'Bruno Mars' }),
+      Artist.create({ name: 'Kelly Clarkson' }),
+      Artist.create({ name: 'Neil Diamond' }),
+      Artist.create({ name: 'Vanessa Carlton' }),
     ]);
 
   console.log(`seeded 4 artists`);
 
   // Creating songs
-  const [
-    demo,
-    justTheWayYouAre,
-    sinceUBeenGone,
-    sweetCaroline,
-    aThousandMiles,
-  ] = await Promise.all([
-    Song.create({
-      name: "Just The Way You Are (DEMO)",
-      videoURL: "https://www.youtube.com/embed/LjhCEhWiKXk",
-      originalAudio: "/audio/Just-The-Way-You-Are_original.mp3",
-      instrumentalAudio: "/audio/Just-The-Way-You-Are_instrumentals.mp3",
-      vocalAudio: "/audio/Just-The-Way-You-Are_vocals.mp3",
-      lyrics: "",
-      artistId: brunoMars.id,
-    }),
-    Song.create({
-      name: "Just The Way You Are",
-      videoURL: "https://www.youtube.com/embed/LjhCEhWiKXk",
-      originalAudio: "/audio/Just-The-Way-You-Are_original.mp3",
-      instrumentalAudio: "/audio/Just-The-Way-You-Are_instrumentals.mp3",
-      vocalAudio: "/audio/Just-The-Way-You-Are_vocals.mp3",
-      lyrics: `
+  const [justTheWayYouAre, sinceUBeenGone, sweetCaroline, aThousandMiles] =
+    await Promise.all([
+      Song.create({
+        name: 'Just The Way You Are (DEMO)',
+        videoURL: 'https://www.youtube.com/embed/LjhCEhWiKXk',
+        originalAudio: '/audio/Just-The-Way-You-Are_original.mp3',
+        instrumentalAudio: '/audio/Just-The-Way-You-Are_instrumentals.mp3',
+        vocalAudio: '/audio/Just-The-Way-You-Are_vocals.mp3',
+        lyrics: '',
+        artistId: brunoMars.id,
+      }),
+      Song.create({
+        name: 'Just The Way You Are',
+        videoURL: 'https://www.youtube.com/embed/LjhCEhWiKXk',
+        originalAudio: '/audio/Just-The-Way-You-Are_original.mp3',
+        instrumentalAudio: '/audio/Just-The-Way-You-Are_instrumentals.mp3',
+        vocalAudio: '/audio/Just-The-Way-You-Are_vocals.mp3',
+        lyrics: `
+
         [ti:Just The Way You Are]
         [ar:Bruno Mars]
+        [00:00.00]...
         [00:17.35]Oh, her eyes, her eyes
         [00:19.34]Make the stars look like they’re not shining
         [00:22.10]Her hair, her hair
@@ -98,17 +95,22 @@ async function seed() {
         [03:12.27]And when you smile,
         [03:16.52]The whole world stops and stares for a while
         [03:21.03]Cause girl you’re amazing
-        [03:24.27]Just the way you are`,
-      artistId: brunoMars.id,
-    }),
-    Song.create({
-      name: "Since U Been Gone",
-      videoURL: "https://www.youtube.com/embed/R7UrFYvl5TE",
-      originalAudio: "/audio/Since-U-Been-Gone_original.mp3",
-      instrumentalAudio: "/audio/Since-U-Been-Gone_instrumentals.mp3",
-      vocalAudio: "/audio/Since-U-Been-Gone_vocals.mp3",
-      lyrics: `[ar:Kelly Clarkson]
+        [03:24.27]Just the way you are
+        [03:56.00]...`,
+        artistId: brunoMars.id,
+      }),
+      //lyric timestamps are wrong for since U...
+      Song.create({
+        name: 'Since U Been Gone',
+        videoURL: 'https://www.youtube.com/embed/R7UrFYvl5TE',
+        originalAudio: '/audio/Since-U-Been-Gone_original.mp3',
+        instrumentalAudio: '/audio/Since-U-Been-Gone_instrumentals.mp3',
+        vocalAudio: '/audio/Since-U-Been-Gone_vocals.mp3',
+        lyrics: `[ar:Kelly Clarkson]
+
         [ti:Since U Been Gone]
+        
+        [00:00.00]...
         [00:03.77]Here's the thing
         [00:05.01]We started out friends
         [00:07.51]It was cool, but it was all pretend
@@ -158,60 +160,65 @@ async function seed() {
         [02:50.96]I get what I want
         [02:56.57]Since you been gone
         [02:59.57]Since you been gone
-        [03:03.57]Since you been gone`,
-      artistId: kellyClarkson.id,
-    }),
-    Song.create({
-      name: "Sweet Caroline",
-      videoURL: "https://www.youtube.com/embed/GmK5_lnQUbE",
-      originalAudio: "/audio/Sweet-Caroline_original.mp3",
-      instrumentalAudio: "/audio/Sweet-Caroline_instrumentals.mp3",
-      vocalAudio: "/audio/Sweet-Caroline_vocals.mp3",
-      lyrics: `[ar:Neil Diamond]
-        [ti:Sweet Caroline]
-        [00:14.02]Where it began, I can't begin to knowing
-        [00:21.72]But then I know it's growing strong
-        [00:29.17]Was in the spring
-        [00:33.14]And spring became the summer
-        [00:36.86]Who'd have believed you'd come along
-        [00:43.51]Hands, touching hands
-        [00:51.77]Reaching out, touching me, touching you
-        [01:02.38]Sweet Caroline
-        [01:07.16]Good times never seemed so good
-        [01:13.81]I've been inclined
-        [01:18.32]To believe they never would
-        [01:22.57]But now I
-        [01:26.02]Look at the night and it don't seem so lonely
-        [01:33.46]We filled it up with only two
-        [01:41.16]And when I hurt
-        [01:44.88]Hurting runs off my shoulders
-        [01:48.86]How can I hurt when holding you
-        [01:55.24]Warm, touching warm
-        [02:03.22]Reaching out, touching me, touching you
-        [02:14.10]Sweet Caroline
-        [02:18.88]Good times never seemed so good
-        [02:25.52]I've been inclined
-        [02:30.04]To believe they never would
-        [02:34.55]Oh no, no
-        [02:49.96]Sweet Caroline
-        [02:54.74]Good times never seemed so good
-        [03:01.38]Sweet Caroline
-        [03:06.16]I believe they never could
-        [03:12.80]Sweet Caroline
-        [03:17.58]Good times never seemed so good`,
-      artistId: neilDiamond.id,
-    }),
-    Song.create({
-      name: "A Thousand Miles",
-      videoURL: "https://www.youtube.com/embed/Cwkej79U3ek",
-      originalAudio: "/audio/A-Thousand-Miles_original.mp3",
-      instrumentalAudio: "/audio/A-Thousand-Miles_instrumentals.mp3",
-      vocalAudio: "/audio/A-Thousand-Miles_vocal.mp3",
-      lyrics: `
+        [03:03.57]Since you been gone
+        [03:17.00]...`,
+        artistId: kellyClarkson.id,
+      }),
+      Song.create({
+        name: 'Sweet Caroline',
+        videoURL: 'https://www.youtube.com/embed/GmK5_lnQUbE',
+        originalAudio: '/audio/Sweet-Caroline_original.mp3',
+        instrumentalAudio: '/audio/Sweet-Caroline_instrumentals.mp3',
+        vocalAudio: '/audio/Sweet-Caroline_vocals.mp3',
+        lyrics: `[ar:Neil Diamond]
+[ti:Sweet Caroline]
+        [00:00.00]...
+        [00:14.02]Where it began, I can't begin to know when
+[00:21.72]But then I know it's growing strong
+[00:29.17]Was in the spring
+[00:33.14]And spring became the summer
+[00:36.86]Who'd have believed you'd come along
+[00:43.51]Hands, touching hands
+[00:51.77]Reaching out, touching me, touching you
+[01:02.38]Sweet Caroline
+[01:07.16]Good times never seemed so good
+[01:13.81]I've been inclined
+[01:18.32]To believe they never would
+[01:22.57]But now I
+[01:26.02]Look at the night and it don't seem so lonely
+[01:33.46]We filled it up with only two
+[01:41.16]And when I hurt
+[01:44.88]Hurting runs off my shoulders
+[01:48.86]How can I hurt when holding you
+[01:55.24]Warm, touching warm
+[02:03.22]Reaching out, touching me, touching you
+[02:14.10]Sweet Caroline
+[02:18.88]Good times never seemed so good
+[02:25.52]I've been inclined
+[02:30.04]To believe they never would
+[02:34.55]Oh no, no
+[02:49.96]Sweet Caroline
+[02:54.74]Good times never seemed so good
+[03:01.38]Sweet Caroline
+[03:06.16]I believe they never could
+[03:12.80]Sweet Caroline
+[03:17.58]Good times never seemed so good
+[03:23.00]...`,
+        artistId: neilDiamond.id,
+      }),
+      Song.create({
+        name: 'A Thousand Miles',
+        videoURL: 'https://www.youtube.com/embed/Cwkej79U3ek',
+        originalAudio: '/audio/A-Thousand-Miles_original.mp3',
+        instrumentalAudio: '/audio/A-Thousand-Miles_instrumentals.mp3',
+        vocalAudio: '/audio/A-Thousand-Miles_vocal.mp3',
+        lyrics: `
+
         [ti:A Thousand Miles]
         [ar:Vanessa Carlton]
         [la:af]
 
+        [00:00.00]...
         [00:10.51]Making my way downtown
         [00:12.01]Walking fast
         [00:13.25]Faces pass
@@ -263,10 +270,12 @@ async function seed() {
         [03:23.38]Do you think time would pass me by?
         [03:28.15]'Cause you know I'd walk a thousand miles
         [03:32.64]If I could just see you
-        [03:38.25]If I could just hold you tonight`,
-      artistId: vanessaCarlton.id,
-    }),
-  ]);
+        [03:38.25]If I could just hold you tonight
+        [03:57.00]...`,
+        artistId: vanessaCarlton.id,
+      }),
+    ]);
+
 
   console.log(`seeded demo and 4 songs`);
 
@@ -4393,7 +4402,7 @@ async function seed() {
 
   console.log(`seeded ${pitchDatas.length} pitch datas`);
 
-  console.log("seeded successfully");
+  console.log('seeded successfully');
 }
 
 module.exports = seed;
