@@ -7,6 +7,7 @@ import SongList from "./components/SongList";
 import SongSelect from "./components/SongSelect";
 import Preview from "./components/Preview";
 import SingAlong from "./components/SingAlong";
+import Pitch from "./components/Pitch";
 import Score from "./components/Score";
 
 function RoutesTree() {
@@ -17,6 +18,7 @@ function RoutesTree() {
         <Route path="/songs" element={<SongList />} />
         <Route path="/preview/:id" element={<Preview />} />
         <Route path="/singalong/:id" element={<SingAlong />} />
+        <Route path="/pitch/:id" element={<Pitch />} />
         <Route path="/score" element={<Score />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>

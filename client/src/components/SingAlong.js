@@ -30,6 +30,7 @@ export default function SingAlong({ score, setScore }) {
   // const startListening = () =>
   //   SpeechRecognition.startListening({ continuous: true });
 
+
   const handleScore = (num) => {
     //TBD
     setScore(score + num); //TBD
@@ -37,7 +38,7 @@ export default function SingAlong({ score, setScore }) {
 
   useEffect(() => {
     axios.get(`/api/songs/${id}`).then((res) => {
-      console.log('>>>>>>', res.data.lyrics);
+      console.log(">>>>>>", res.data.lyrics);
       setSong(res.data);
     });
   }, []);
@@ -55,7 +56,6 @@ export default function SingAlong({ score, setScore }) {
       <br />
       <br />
       <span>Score : {score}</span>
-
       <p>original song</p>
       <ReactAudioPlayer
         src={song.originalAudio}
@@ -74,7 +74,6 @@ export default function SingAlong({ score, setScore }) {
         listenInterval={500}
         onListen={onListen}
       />
-
       <Recorder />
       <Lyric currentSeconds={currentSeconds} />
 

@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import LRC from 'lrc.js';
-import axios from 'axios';
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import LRC from "lrc.js";
+import axios from "axios";
 
 const lrc_string = ``;
 
@@ -34,5 +34,6 @@ export default function Lyric({ currentSeconds }) {
       </div>
     );
   };
+
   return <div>{displayLyric()}</div>;
 }
