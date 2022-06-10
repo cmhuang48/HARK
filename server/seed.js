@@ -38,6 +38,7 @@ async function seed() {
         lyrics: `
         [ti:Just The Way You Are]
         [ar:Bruno Mars]
+        [00:00.00]...
         [00:17.35]Oh, her eyes, her eyes
         [00:19.34]Make the stars look like they’re not shining
         [00:22.10]Her hair, her hair
@@ -97,6 +98,7 @@ async function seed() {
         [03:56.00]...`,
         artistId: brunoMars.id,
       }),
+      //lyric timestamps are wrong for since U...
       Song.create({
         name: 'Since U Been Gone',
         videoURL: 'https://www.youtube.com/embed/R7UrFYvl5TE',
@@ -105,6 +107,8 @@ async function seed() {
         vocalAudio: '/audio/Since-U-Been-Gone_vocals.mp3',
         lyrics: `[ar:Kelly Clarkson]
         [ti:Since U Been Gone]
+        
+        [00:00.00]...
         [00:03.77]Here's the thing
         [00:05.01]We started out friends
         [00:07.51]It was cool, but it was all pretend
@@ -166,7 +170,8 @@ async function seed() {
         vocalAudio: '/audio/Sweet-Caroline_vocals.mp3',
         lyrics: `[ar:Neil Diamond]
 [ti:Sweet Caroline]
-[00:14.02]Where it began, I can't begin to know when
+        [00:00.00]...
+        [00:14.02]Where it began, I can't begin to know when
 [00:21.72]But then I know it's growing strong
 [00:29.17]Was in the spring
 [00:33.14]And spring became the summer
@@ -210,6 +215,7 @@ async function seed() {
         [ar:Vanessa Carlton]
         [la:af]
 
+        [00:00.00]...
         [00:10.51]Making my way downtown
         [00:12.01]Walking fast
         [00:13.25]Faces pass
