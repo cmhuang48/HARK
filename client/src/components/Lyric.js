@@ -20,7 +20,9 @@ export default function Lyric({ currentSeconds }) {
 
   const displayLyric = () => {
     const currentIndex =
-      lrc.lines.findIndex((item) => item.time >= currentSeconds) - 1;
+      lrc.ti === 'Since U Been Gone'
+        ? lrc.lines.findIndex((item) => item.time >= currentSeconds - 4) - 1
+        : lrc.lines.findIndex((item) => item.time >= currentSeconds) - 1;
     const futureLyric = lrc.lines[currentIndex === 0 ? 2 : currentIndex + 1];
     const prevLyric = lrc.lines[currentIndex === 0 ? 0 : currentIndex - 1];
     const lyric = lrc.lines[currentIndex === 0 ? 1 : currentIndex];
