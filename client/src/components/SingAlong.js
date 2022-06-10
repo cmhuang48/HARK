@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Button } from '@mui/material';
 import ReactAudioPlayer from 'react-audio-player';
-import { createSpeechlySpeechRecognition } from '@speechly/speech-recognition-polyfill';
+// import { createSpeechlySpeechRecognition } from '@speechly/speech-recognition-polyfill';
 import axios from 'axios';
 import Recorder from './Recorder';
 import Lyric from './Lyric'
