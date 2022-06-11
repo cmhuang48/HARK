@@ -36,12 +36,6 @@ export default function AboutUs() {
           <Grid container spacing={5}>
             <Grid item xs={12} md={3}>
               <Box sx={item}>
-                <Box
-                  component="img"
-                  src="/"
-                  alt="suitcase"
-                  sx={{ height: 55 }}
-                />
                 <Typography
                   variant="h5"
                   sx={{ my: 5 }}
@@ -55,12 +49,6 @@ export default function AboutUs() {
             </Grid>
             <Grid item xs={12} md={3}>
               <Box sx={item}>
-                <Box
-                  component="img"
-                  src="/"
-                  alt="suitcase"
-                  sx={{ height: 55 }}
-                />
                 <Typography
                   variant="h5"
                   sx={{ my: 5 }}
@@ -74,7 +62,6 @@ export default function AboutUs() {
             </Grid>
             <Grid item xs={12} md={3}>
               <Box sx={item}>
-                <Box component="img" src="/" alt="graph" sx={{ height: 55 }} />
                 <Typography
                   variant="h5"
                   sx={{ my: 5 }}
@@ -88,7 +75,6 @@ export default function AboutUs() {
             </Grid>
             <Grid item xs={12} md={3}>
               <Box sx={item}>
-                <Box component="img" src="/" alt="clock" sx={{ height: 55 }} />
                 <Typography
                   variant="h5"
                   sx={{ my: 5 }}
