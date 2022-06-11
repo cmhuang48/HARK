@@ -37,11 +37,7 @@ function SongList({ songs, artists }) {
                 (artist) => artist.id === song.artistId
               );
               return (
-                <div
-                  key={song.id}
-                  style={{ margin: "1rem" }}
-                  // onClick={() => this.handleSelect(song)}
-                >
+                <div key={song.id} style={{ margin: "1rem" }}>
                   <Typography
                     color="#f2f2f2"
                     sx={{
