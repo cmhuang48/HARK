@@ -1,7 +1,7 @@
 import React from "react";
 import { Button } from "@mui/material";
 
-export default function Score({score}) {
+export default function Score({ score }) {
   return (
     <div className="score">
       <span className="title">Final Score : {score}</span>

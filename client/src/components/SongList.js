@@ -14,18 +14,18 @@ function SongList({ songs, artists }) {
           flexDirection: "column",
           justifyContent: "center",
           alignItems: "center",
-          bgcolor: "#21130d",
+          bgcolor: "#0B0C10",
         }}
       >
-        <Box sx={{ marginTop: "100px", marginBottom: "30px" }}>
+        <Box sx={{ marginTop: "70px", marginBottom: "30px" }}>
           <Typography
             color="#f2f2f2"
-            variant="h6"
+            variant="h5"
             sx={{
-              fontFamily: "Merienda",
-              marginBottom: "8px",
+              fontFamily: "Arvo",
+              fontWeight: "700",
               fontStyle: "italic",
-              lineHeight: "normal",
+              marginBottom: "20px",
             }}
           >
             Choose Your Song

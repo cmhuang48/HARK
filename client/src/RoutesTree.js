@@ -4,11 +4,11 @@ import { connect } from "react-redux";
 
 import Home from "./components/Home";
 import SongList from "./components/SongList";
-import SongSelect from "./components/SongSelect";
 import Preview from "./components/Preview";
 import SingAlong from "./components/SingAlong";
 import Pitch from "./components/Pitch";
 import Score from "./components/Score";
+import AboutUs from "./components/AboutUs";
 
 function RoutesTree() {
   return (
@@ -20,6 +20,7 @@ function RoutesTree() {
         <Route path="/singalong/:id" element={<SingAlong />} />
         <Route path="/pitch/:id" element={<Pitch />} />
         <Route path="/score" element={<Score />} />
+        <Route path="/aboutus" element={<AboutUs />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </div>
