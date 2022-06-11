@@ -1,10 +1,13 @@
 import React, { useCallback, useEffect, useState } from "react";
+import { connect } from "react-redux";
 import { useParams } from "react-router-dom";
 import ReactAudioPlayer from "react-audio-player";
 import axios from "axios";
 import LRC from "lrc.js";
 import { useModel } from "react-tensorflow";
 import * as tf from "@tensorflow/tfjs";
+
+import { createPitchData } from "../store/PitchDatas";
 
 const lrc_string = ``;
 const NUM_INPUT_SAMPLES = 1024;
@@ -20,7 +23,7 @@ function getPitchHz(modelPitch) {
   return fmin * Math.pow(2.0, (1.0 * cqt_bin) / bins_per_octave);
 }
 
-export default function Pitch({ score, setScore }) {
+function Pitch({ score, setScore }) {
   const { id } = useParams();
   const [currentSeconds, setSeconds] = useState(0);
   const [song, setSong] = useState("/audio/Never-Give-You-Up.mp3");
@@ -95,14 +98,6 @@ export default function Pitch({ score, setScore }) {
 
   //console.log(song, currentSeconds, lrc)
 
-  /*(Chanelle: calculating score)
-  Given result pitches []:
-  const originalPitchData = axios.get(`/api/pitchdatas/${id}`);
-  const errorRates = originalPitchData.map((pitch, idx) => Math.abs(pitch - pitches[idx]) / pitch);
-  const averageErrorRate = errorRates.reduce((accum, rate) => accum + rate, 0) / ; 
-  const score = (1 - averageErrorRate / errorRates.length) * 100;
-  */
-
   const onListen = (seconds) => {
     setSeconds(seconds);
   };
@@ -126,3 +121,13 @@ export default function Pitch({ score, setScore }) {
     </div>
   );
 }
+
+const mapState = (state) => state;
+
+const mapDispatch = (dispatch) => {
+  return {
+    createPitchData: (pitches, id) => dispatch(createPitchData(pitches, id)),
+  };
+};
+
+export default connect(mapState, mapDispatch)(Pitch);
