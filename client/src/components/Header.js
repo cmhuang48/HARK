@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 // import { connect } from "react-redux";
 //import { logout } from "../server/store";
-import { AppBar, MenuItem, Toolbar, Typography } from "@mui/material";
 
 const Header = () => (
   <div className="header">

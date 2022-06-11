@@ -4,6 +4,11 @@
 
 Hannah Abbasi, Chanelle Huang, Lisa Knox, and Joshua Reyes built this Karaoke app. Users can select a song, listen to the original artist, sing along with the instrumental tracks and lyrics, and receive a score on how accurate their pitch is compared to the original vocal track. Try it out!
 
+## Technologies Used
+
+LALAL.AI - AI-powered vocal and instrumental splitter
+TensorFlow - SPICE model for pitch detection
+
 ## Set Up
 
 Clone the repo to your local environment.
