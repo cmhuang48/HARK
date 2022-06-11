@@ -1,34 +1,37 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Typography, Container } from "@mui/material";
+import { Box, Container, Typography } from "@mui/material";
 
 export default function Footer() {
   return (
     <div className="footer">
-      {" "}
-      <Link className="aboutLink" to="/aboutus">
-        <Typography
-          variant="h5"
-          fontFamily="Arvo"
-          color="#C5C6C7"
-          textAlign="center"
-        >
-          About Us
-        </Typography>
-      </Link>
       <Container
         style={{
           display: "flex",
+          flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
-          padding: "20px",
+          padding: "10px"
         }}
       >
-        <Typography variant="body2" color="#C5C6C7" align="center">
+        <Link className="aboutLink" to="/aboutus">
+          <Typography
+            variant="h6"
+            fontFamily="Arvo"
+            color="#66FCF1"
+            textAlign="center"
+            fontStyle={{
+              textShadow: "1px 1px 1px #000404"
+            }}
+          >
+            About Us
+          </Typography>
+        </Link>
+        <Typography variant="body2" color="#C5C6C7" align="center" style={{ marginTop: "4px", marginBottom: "10px" }}>
           {"Copyright © "}
           <Link className="homeLink" to="/">
             HARK
-          </Link>{" "}
+          </Link>
           {new Date().getFullYear()}
           {"."}
         </Typography>

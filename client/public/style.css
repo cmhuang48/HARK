@@ -6,7 +6,7 @@
 .header {
   display: flex;
   justify-content: center;
-  background-color: #1F2833;
+  background-color: #1f2833;
 }
 
 .header > a {
@@ -15,12 +15,12 @@
 }
 
 .headerLogo {
-  width: 50%;
+  width: 30%;
   height: auto;
 }
 
 .footer {
-  background-color: #1F2833;
+  background-color: #1f2833;
 }
 
 p {
@@ -31,9 +31,17 @@ p {
 }
 
 .active {
-  color: rgb(153, 51, 255);
-  font-size: 26px;
-  margin: 1.25rem 0;
+  color: #4bfff3;
+  font-size: 28px;
+  margin: 1rem 0;
+  /* fontStyle={{  */
+  text-shadow: 2px 2px 2px #000000;
+}
+
+.inActive {
+  color: #a5fdf7e4;
+  font-size: 18px;
+  text-shadow: 1px 1px 1px #000404;
 }
 
 .singLink {
@@ -58,7 +66,7 @@ p {
 }
 
 .songLinks:hover {
-  color: #66FCF1;
+  color: #66fcf1;
 }
 
 .aboutLink {
