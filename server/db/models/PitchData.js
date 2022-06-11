@@ -9,6 +9,9 @@ const PitchData = db.define("pitch data", {
   original: {
     type: BOOLEAN,
   },
+  score: {
+    type: DECIMAL(10, 2),
+  },
 });
 
 module.exports = PitchData;

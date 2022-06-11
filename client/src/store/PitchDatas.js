@@ -1,5 +1,4 @@
 import axios from "axios";
-import * as tf from "@tensorflow/tfjs";
 
 // ACTION TYPE
 const LOAD_PITCH_DATAS = "LOAD_PITCH_DATAS";
@@ -13,8 +12,20 @@ export const loadPitchDatas = () => {
   };
 };
 
-export const createPitchData = (pitchData) => {
+export const createPitchData = (pitches, id) => {
   return async (dispatch) => {
+    const originalPitchData = axios.get(`/api/pitchdatas/${id}`);
+    const errorRates = originalPitchData.map(
+      (pitch, idx) => Math.abs(pitch - pitches[idx]) / pitch
+    );
+    const averageErrorRate =
+      errorRates.reduce((accum, rate) => accum + rate, 0) / errorRates.length;
+    const score = (1 - averageErrorRate / errorRates.length) * 100;
+    const pitchData = {
+      pitches,
+      original: false,
+      score,
+    };
     const response = await axios.post("/api/pitchdatas", pitchData);
     dispatch({ type: CREATE_PITCH_DATA, payload: response.data });
   };
