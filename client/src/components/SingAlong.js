@@ -1,18 +1,18 @@
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { Button } from "@mui/material";
-import ReactAudioPlayer from "react-audio-player";
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { Button } from '@mui/material';
+import ReactAudioPlayer from 'react-audio-player';
 // import { createSpeechlySpeechRecognition } from '@speechly/speech-recognition-polyfill';
-import axios from "axios";
-import Recorder from "./Recorder";
-import Lyric from "./Lyric";
+import axios from 'axios';
+import Lyric from './Lyric';
+import Pitch from './Pitch';
 // import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
 
 export default function SingAlong({ score, setScore }) {
   const { id } = useParams();
   const [currentSeconds, setSeconds] = useState(0);
-  const [song, setSong] = useState("/audio/Never-Give-You-Up.mp3");
-  const [userTranscript, setUserTranscript] = useState("");
+  const [song, setSong] = useState('/audio/Never-Give-You-Up.mp3');
+  const [userTranscript, setUserTranscript] = useState('');
 
   // const {
   //   transcript,
@@ -37,7 +37,7 @@ export default function SingAlong({ score, setScore }) {
 
   useEffect(() => {
     axios.get(`/api/songs/${id}`).then((res) => {
-      console.log(">>>>>>", res.data.lyrics);
+      console.log('>>>>>>', res.data.lyrics);
       setSong(res.data);
     });
   }, []);
@@ -74,9 +74,8 @@ export default function SingAlong({ score, setScore }) {
           listenInterval={500}
           onListen={onListen}
         />
-        {/* <Recorder /> */}
         <Lyric currentSeconds={currentSeconds} />
-
+        <Pitch />
         {/* <div>
               <p>Microphone: {listening ? 'on' : 'off'}</p>
               <button onClick={startListening}>Start</button>
