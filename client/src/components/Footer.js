@@ -27,7 +27,6 @@ export default function Footer() {
             About Us
           </Typography>
         </Link>
-
         <Typography variant="body2" color="#C5C6C7" align="center" style={{ marginTop: "4px", marginBottom: "10px" }}>
           {"Copyright © "}
           <Link className="homeLink" to="/">
