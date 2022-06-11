@@ -14,7 +14,7 @@ export default function Home() {
           bgcolor: "#3c2e01",
           backgroundImage: "url('/images/music1.jpeg')",
           width: "100%",
-          height: "100vh",
+          height: "80vh",
           backgroundSize: "cover",
           opacity: "0.75",
           boxShadow: 3,

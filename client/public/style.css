@@ -86,3 +86,7 @@ p {
   position: relative;
   z-index: 10;
 }
+
+.icons {
+  display: flex;
+}

@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Container, Typography } from "@mui/material";
+import { Typography, Container } from "@mui/material";
 
 export default function Footer() {
   return (
@@ -8,9 +8,9 @@ export default function Footer() {
       {" "}
       <Link className="aboutLink" to="/aboutus">
         <Typography
-          variant="h4"
+          variant="h5"
           fontFamily="Arvo"
-          color="#66FCF1"
+          color="#C5C6C7"
           textAlign="center"
         >
           About Us
