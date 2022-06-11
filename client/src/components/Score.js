@@ -10,9 +10,18 @@ export default function Score({ score }) {
         color="secondary"
         size="large"
         style={{ alignSelf: "center", marginTop: 20 }}
+        href="/songs"
+      >
+        Sing Another Song?
+      </Button>
+      <Button
+        variant="contained"
+        color="secondary"
+        size="large"
+        style={{ alignSelf: "center", marginTop: 20 }}
         href="/"
       >
-        Go to homepage
+        Return to Home
       </Button>
     </div>
   );

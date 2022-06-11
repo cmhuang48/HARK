@@ -6,10 +6,6 @@ import {
   loadArtists,
   loadPitchDatas,
   loadCurrentSong,
-  updateJustTheWayYouArePitchData,
-  updateSinceUBeenGonePitchData,
-  updateSweetCarolinePitchData,
-  updateAThousandMilesPitchData,
 } from "./store";
 
 import Header from "./components/Header";
@@ -23,10 +19,6 @@ class App extends React.Component {
     this.props.loadPitchDatas();
     //just for testing----------
     this.props.loadCurrentSong(1);
-    // this.props.updateJustTheWayYouArePitchData();
-    this.props.updateSinceUBeenGonePitchData();
-    this.props.updateSweetCarolinePitchData();
-    this.props.updateAThousandMilesPitchData();
   }
 
   render() {
@@ -48,14 +40,6 @@ const mapDispatch = (dispatch) => {
     loadArtists: () => dispatch(loadArtists()),
     loadPitchDatas: () => dispatch(loadPitchDatas()),
     loadCurrentSong: (id) => dispatch(loadCurrentSong(id)),
-    updateJustTheWayYouArePitchData: () =>
-      dispatch(updateJustTheWayYouArePitchData()),
-    updateSinceUBeenGonePitchData: () =>
-      dispatch(updateSinceUBeenGonePitchData()),
-    updateSweetCarolinePitchData: () =>
-      dispatch(updateSweetCarolinePitchData()),
-    updateAThousandMilesPitchData: () =>
-      dispatch(updateAThousandMilesPitchData()),
   };
 };
 

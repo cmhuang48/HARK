@@ -33,14 +33,3 @@ router.post("/", async (req, res, next) => {
     next(err);
   }
 });
-
-// PUT / update pitch data
-router.put("/:id", async (req, res, next) => {
-  try {
-    const pitchData = await PitchData.findByPk(req.params.id);
-    const updated = await pitchData.update(req.body);
-    res.json(updated);
-  } catch (err) {
-    next(err);
-  }
-});
