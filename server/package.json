@@ -1,11 +1,12 @@
 {
-  "name": "server",
+  "name": "hark-server",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start:dev": "nodemon server"
+    "start": "node index",
+    "start:dev": "nodemon index"
   },
   "keywords": [],
   "author": "",
