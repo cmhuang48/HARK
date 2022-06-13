@@ -1,24 +1,24 @@
 const path = require("path");
 const express = require("express");
-const morgan = require('morgan');
+const morgan = require("morgan");
 
 const app = express();
 
 // logging middleware
-app.use(morgan('dev'));
+app.use(morgan("dev"));
 
 // body parsing middleware
 app.use(express.json());
 
 // api route
-app.use('/api', require('./api'));
+app.use("/api", require("./api"));
 
-app.get("/", (req, res) =>
-  res.sendFile(path.join(__dirname, "..", "/client/public/index.html"))
-);
+// app.get("/", (req, res) =>
+//   res.sendFile(path.join(__dirname, "..", "/client/public/index.html"))
+// );
 
 // static file-serving middleware
-app.use(express.static(path.join(__dirname, "..", "/client/public")));
+// app.use(express.static(path.join(__dirname, "..", "/client/public")));
 
 // any remaining requests with an extension (.js, .css, etc.) send 404
 app.use((req, res, next) => {
@@ -31,10 +31,10 @@ app.use((req, res, next) => {
   }
 });
 
-// sends index.html
-app.use("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "..", "/client/public/index.html"));
-});
+// // sends index.html
+// app.use("*", (req, res) => {
+//   res.sendFile(path.join(__dirname, "..", "/client/public/index.html"));
+// });
 
 // error handling endware
 app.use((err, req, res, next) => {
