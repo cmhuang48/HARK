@@ -1,13 +1,13 @@
-import React, { useCallback, useEffect, useState } from "react";
-import { connect } from "react-redux";
-import { useParams } from "react-router-dom";
-import ReactAudioPlayer from "react-audio-player";
-import axios from "axios";
-import LRC from "lrc.js";
-import { useModel } from "react-tensorflow";
-import * as tf from "@tensorflow/tfjs";
+import React, { useCallback, useEffect, useState, useRef } from 'react';
+import { connect } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import ReactAudioPlayer from 'react-audio-player';
+import axios from 'axios';
+import LRC from 'lrc.js';
+import { useModel } from 'react-tensorflow';
+import * as tf from '@tensorflow/tfjs';
 
-import { createPitchData } from "../store/PitchDatas";
+import { createPitchData } from '../store/PitchDatas';
 
 const lrc_string = ``;
 const NUM_INPUT_SAMPLES = 1024;
@@ -26,13 +26,19 @@ function getPitchHz(modelPitch) {
 function Pitch({ score, setScore }) {
   const { id } = useParams();
   const [currentSeconds, setSeconds] = useState(0);
-  const [song, setSong] = useState("/audio/Never-Give-You-Up.mp3");
+  const [song, setSong] = useState('/audio/Never-Give-You-Up.mp3');
   const [pitches, setPitches] = useState([]);
 
   const handleSuccess = useCallback((stream, model) => {
     let context = new AudioContext({
-      latencyHint: "playback",
+      latencyHint: 'playback',
       sampleRate: MODEL_SAMPLE_RATE,
+    });
+
+    const stopButton = document.getElementById('stopButton');
+    stopButton.addEventListener('click', () => {
+      context.close();
+      console.log('closed manually');
     });
 
     let source = context.createMediaStreamSource(stream);
@@ -43,12 +49,17 @@ function Pitch({ score, setScore }) {
     );
 
     // Converts audio to mono.
-    processor.channelInterpretation = "speakers";
+    processor.channelInterpretation = 'speakers';
     processor.channelCount = 1;
 
     // Runs processor on audio source.
     source.connect(processor);
     processor.connect(context.destination);
+
+    setTimeout(() => {
+      context.close();
+      console.log('closed automatically');
+    }, 10000);
 
     processor.onaudioprocess = function (e) {
       const inputData = e.inputBuffer.getChannelData(0);
@@ -63,7 +74,7 @@ function Pitch({ score, setScore }) {
           continue;
         }
         const pitch = getPitchHz(pitches[i]);
-        // console.log(pitch);
+        console.log(pitch);
         setPitches((state) => [...state, pitch]);
       }
     };
@@ -94,6 +105,13 @@ function Pitch({ score, setScore }) {
     });
   }, []);
 
+  // useEffect(() => {
+  // const stopButton = document.getElementById('stopButton');
+  // stopButton.addEventListener('click', () => {
+  //   console.log(AudioContext);
+  // });
+  // }, []);
+
   //Note:score temporarily displayed
 
   //console.log(song, currentSeconds, lrc)
@@ -118,6 +136,7 @@ function Pitch({ score, setScore }) {
         listenInterval={3000}
         onListen={onListen}
       />
+      <button id="stopButton">stop</button>
     </div>
   );
 }
