@@ -29,56 +29,67 @@ function Pitch({ score, setScore }) {
   const [song, setSong] = useState('/audio/Never-Give-You-Up.mp3');
   const [pitches, setPitches] = useState([]);
 
-  const handleSuccess = useCallback((stream, model) => {
-    let context = new AudioContext({
-      latencyHint: 'playback',
-      sampleRate: MODEL_SAMPLE_RATE,
-    });
+  setInterval(() => {
+    setSeconds((currentSeconds) => currentSeconds++);
+  }, 1000);
 
-    const stopButton = document.getElementById('stopButton');
-    const recordingStatus = document.getElementById('recordingStatus');
-    recordingStatus.innerHTML = 'recording';
+  const handleSuccess = useCallback(
+    (stream, model) => {
+      let context = new AudioContext({
+        latencyHint: 'playback',
+        sampleRate: MODEL_SAMPLE_RATE,
+      });
 
-    stopButton.addEventListener('click', () => {
-      context.close();
-      recordingStatus.innerHTML = 'processing score...';
-      console.log('closed manually');
-      if (pitches.length) console.log(pitches);
-    });
+      setPitches([]);
 
-    let source = context.createMediaStreamSource(stream);
-    let processor = context.createScriptProcessor(
-      NUM_INPUT_SAMPLES,
-      /*num_inp_channels=*/ 1,
-      /*num_out_channels=*/ 1
-    );
+      const stopButton = document.getElementById('stopButton');
+      const recordingStatus = document.getElementById('recordingStatus');
+      recordingStatus.innerHTML = 'recording';
 
-    // Converts audio to mono.
-    processor.channelInterpretation = 'speakers';
-    processor.channelCount = 1;
+      stopButton.addEventListener('click', (ev) => {
+        console.log(ev);
+        context.close();
+        recordingStatus.innerHTML = 'processing score...';
+        console.log('closed manually');
+        console.log(pitches);
+      });
 
-    // Runs processor on audio source.
-    source.connect(processor);
-    processor.connect(context.destination);
+      let source = context.createMediaStreamSource(stream);
+      let processor = context.createScriptProcessor(
+        NUM_INPUT_SAMPLES,
+        /*num_inp_channels=*/ 1,
+        /*num_out_channels=*/ 1
+      );
 
-    processor.onaudioprocess = function (e) {
-      const inputData = e.inputBuffer.getChannelData(0);
-      const input = tf.reshape(tf.tensor(inputData), [NUM_INPUT_SAMPLES]);
-      const output = model.execute({ input_audio_samples: input });
-      const uncertainties = output[0].dataSync();
-      const pitches = output[1].dataSync();
+      // Converts audio to mono.
+      processor.channelInterpretation = 'speakers';
+      processor.channelCount = 1;
 
-      for (let i = 0; i < pitches.length; ++i) {
-        let confidence = 1.0 - uncertainties[i];
-        if (confidence < CONF_THRESHOLD) {
-          continue;
+      // Runs processor on audio source.
+      source.connect(processor);
+      processor.connect(context.destination);
+
+      processor.onaudioprocess = function (e) {
+        const inputData = e.inputBuffer.getChannelData(0);
+        const input = tf.reshape(tf.tensor(inputData), [NUM_INPUT_SAMPLES]);
+        const output = model.execute({ input_audio_samples: input });
+        const uncertainties = output[0].dataSync();
+        const pitches = output[1].dataSync();
+
+        for (let i = 0; i < pitches.length; ++i) {
+          let confidence = 1.0 - uncertainties[i];
+          if (confidence < CONF_THRESHOLD) {
+            continue;
+          }
+          const pitch = getPitchHz(pitches[i]);
+          // console.log(pitch);
+          console.log(currentSeconds);
+          setPitches((state) => [...state, pitch]);
         }
-        const pitch = getPitchHz(pitches[i]);
-        console.log(pitch);
-        setPitches((state) => [...state, pitch]);
-      }
-    };
-  }, []);
+      };
+    },
+    [currentSeconds]
+  );
 
   console.log(pitches);
 
