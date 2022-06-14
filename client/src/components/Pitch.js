@@ -36,9 +36,14 @@ function Pitch({ score, setScore }) {
     });
 
     const stopButton = document.getElementById('stopButton');
+    const recordingStatus = document.getElementById('recordingStatus');
+    recordingStatus.innerHTML = 'recording';
+
     stopButton.addEventListener('click', () => {
       context.close();
+      recordingStatus.innerHTML = 'processing score...';
       console.log('closed manually');
+      if (pitches.length) console.log(pitches);
     });
 
     let source = context.createMediaStreamSource(stream);
@@ -55,11 +60,6 @@ function Pitch({ score, setScore }) {
     // Runs processor on audio source.
     source.connect(processor);
     processor.connect(context.destination);
-
-    setTimeout(() => {
-      context.close();
-      console.log('closed automatically');
-    }, 10000);
 
     processor.onaudioprocess = function (e) {
       const inputData = e.inputBuffer.getChannelData(0);
@@ -105,13 +105,6 @@ function Pitch({ score, setScore }) {
     });
   }, []);
 
-  // useEffect(() => {
-  // const stopButton = document.getElementById('stopButton');
-  // stopButton.addEventListener('click', () => {
-  //   console.log(AudioContext);
-  // });
-  // }, []);
-
   //Note:score temporarily displayed
 
   //console.log(song, currentSeconds, lrc)
@@ -136,6 +129,7 @@ function Pitch({ score, setScore }) {
         listenInterval={3000}
         onListen={onListen}
       />
+      <div id="recordingStatus"></div>
       <button id="stopButton">stop</button>
     </div>
   );
