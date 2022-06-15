@@ -11,7 +11,6 @@ Artist.hasMany(Song);
 PitchData.belongsTo(Song);
 Song.hasMany(PitchData);
 
-
 module.exports = {
   db,
   models: {

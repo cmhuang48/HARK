@@ -14,9 +14,11 @@ export const loadPitchDatas = () => {
 
 export const createPitchData = (pitches, id) => {
   return async (dispatch) => {
-    const originalPitchData = axios.get(`/api/pitchdatas/${id}`);
-    const errorRates = originalPitchData.map(
-      (pitch, idx) => Math.abs(pitch - pitches[idx]) / pitch
+    const song = axios.get(`/api/songs/${id}`).data;
+    const duration = song.duration;
+    const originalPitchData = axios.get(`/api/pitchdatas/${id}`).data;
+    const errorRates = originalPitchData.map((pitch, idx) =>
+      pitch[idx] ? Math.abs(pitch - pitches[idx]) / pitch : 0
     );
     const averageErrorRate =
       errorRates.reduce((accum, rate) => accum + rate, 0) / errorRates.length;
