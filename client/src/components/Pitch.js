@@ -1,13 +1,13 @@
-import React, { useCallback, useEffect, useState, useRef } from 'react';
-import { connect } from 'react-redux';
-import { useParams } from 'react-router-dom';
-import ReactAudioPlayer from 'react-audio-player';
-import axios from 'axios';
-import LRC from 'lrc.js';
-import { useModel } from 'react-tensorflow';
-import * as tf from '@tensorflow/tfjs';
+import React, { useCallback, useEffect, useState, useRef } from "react";
+import { connect } from "react-redux";
+import { useParams } from "react-router-dom";
+import ReactAudioPlayer from "react-audio-player";
+import axios from "axios";
+import LRC from "lrc.js";
+import { useModel } from "react-tensorflow";
+import * as tf from "@tensorflow/tfjs";
 
-import { createPitchData } from '../store/PitchDatas';
+import { createPitchData } from "../store/PitchDatas";
 
 const lrc_string = ``;
 const NUM_INPUT_SAMPLES = 1024;
@@ -23,11 +23,12 @@ function getPitchHz(modelPitch) {
   return fmin * Math.pow(2.0, (1.0 * cqt_bin) / bins_per_octave);
 }
 
-function Pitch({ score, setScore }) {
+function Pitch({ score, setScore, songs, pitchDatas }) {
   const { id } = useParams();
   const [currentSeconds, setSeconds] = useState(0);
-  const [song, setSong] = useState('/audio/Never-Give-You-Up.mp3');
   const [pitches, setPitches] = useState([]);
+
+  const song = songs.find((song) => song.id === id);
 
   setInterval(() => {
     setSeconds((currentSeconds) => currentSeconds++);
@@ -43,6 +44,7 @@ function Pitch({ score, setScore }) {
       context.close();
       console.log('recording timed out');
     }, 10000);
+
 
     const retryButton = document.getElementById('retryButton');
     retryButton.addEventListener('click', async () => {
@@ -77,6 +79,7 @@ function Pitch({ score, setScore }) {
         let confidence = 1.0 - uncertainties[i];
         if (confidence < CONF_THRESHOLD) {
           continue;
+
         }
         const pitch = getPitchHz(pitches[i]);
         // console.log(pitch);
@@ -105,12 +108,6 @@ function Pitch({ score, setScore }) {
     onLoadCallback,
   });
 
-  useEffect(() => {
-    axios.get(`/api/songs/${id}`).then((res) => {
-      setSong(res.data.originalAudio);
-    });
-  }, []);
-
   //Note:score temporarily displayed
 
   //console.log(song, currentSeconds, lrc)
@@ -127,8 +124,9 @@ function Pitch({ score, setScore }) {
       <br />
       <br />
 
-      {/* <ReactAudioPlayer
-        src={song}
+
+      <ReactAudioPlayer
+        src={song.originalAudio}
         autoPlay
         controls
         muted
@@ -142,7 +140,7 @@ function Pitch({ score, setScore }) {
   );
 }
 
-const mapState = (state) => state;
+const mapState = ({ songs, pitchDatas }) => ({ songs, pitchDatas });
 
 const mapDispatch = (dispatch) => {
   return {
