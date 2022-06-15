@@ -1,18 +1,21 @@
-import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { Button } from '@mui/material';
-import ReactAudioPlayer from 'react-audio-player';
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { Button } from "@mui/material";
+import ReactAudioPlayer from "react-audio-player";
 // import { createSpeechlySpeechRecognition } from '@speechly/speech-recognition-polyfill';
-import axios from 'axios';
-import Lyric from './Lyric';
-import Pitch from './Pitch';
+import axios from "axios";
+import Lyric from "./Lyric";
+import Pitch from "./Pitch";
+import { connect } from "react-redux";
 // import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
 
-export default function SingAlong({ score, setScore }) {
+function SingAlong({ songs, artists, score, setScore }) {
   const { id } = useParams();
   const [currentSeconds, setSeconds] = useState(0);
-  const [song, setSong] = useState('/audio/Never-Give-You-Up.mp3');
-  const [userTranscript, setUserTranscript] = useState('');
+  const [userTranscript, setUserTranscript] = useState("");
+
+  const song = songs.find((song) => song.id === id * 1);
+  const artist = artists.find((artist) => artist.id === song?.artistId);
 
   // const {
   //   transcript,
@@ -30,18 +33,6 @@ export default function SingAlong({ score, setScore }) {
   // const startListening = () =>
   //   SpeechRecognition.startListening({ continuous: true });
 
-  const handleScore = (num) => {
-    //TBD
-    setScore(score + num); //TBD
-  };
-
-  useEffect(() => {
-    axios.get(`/api/songs/${id}`).then((res) => {
-      console.log('>>>>>>', res.data.lyrics);
-      setSong(res.data);
-    });
-  }, []);
-
   //Note:score temporarily displayed
   const onListen = (seconds) => {
     setSeconds(seconds);
@@ -55,7 +46,9 @@ export default function SingAlong({ score, setScore }) {
         <br />
         <br />
         <br />
-        <span>Score : {score}</span>
+        <h1>
+          {song?.name} by {artist?.name}
+        </h1>
         <p>original song</p>
         {/* <ReactAudioPlayer
           src={song.originalAudio}
@@ -98,3 +91,7 @@ export default function SingAlong({ score, setScore }) {
     </div>
   );
 }
+
+const mapState = ({ songs, artists }) => ({ songs, artists });
+
+export default connect(mapState)(SingAlong);

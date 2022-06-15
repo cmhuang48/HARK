@@ -14,19 +14,18 @@ export const loadPitchDatas = () => {
 
 export const createPitchData = (pitches, id) => {
   return async (dispatch) => {
-    const song = axios.get(`/api/songs/${id}`).data;
-    const duration = song.duration;
     const originalPitchData = axios.get(`/api/pitchdatas/${id}`).data;
     const errorRates = originalPitchData.map((pitch, idx) =>
-      pitch[idx] ? Math.abs(pitch - pitches[idx]) / pitch : 0
+      pitches[idx] ? Math.abs(pitch - pitches[idx]) / pitch : 0
     );
     const averageErrorRate =
       errorRates.reduce((accum, rate) => accum + rate, 0) / errorRates.length;
-    const score = (1 - averageErrorRate / errorRates.length) * 100;
+    const score = (1 - averageErrorRate) * 100;
     const pitchData = {
       pitches,
       original: false,
       score,
+      songId: id,
     };
     const response = await axios.post("/api/pitchdatas", pitchData);
     dispatch({ type: CREATE_PITCH_DATA, payload: response.data });
