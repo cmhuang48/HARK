@@ -28,7 +28,7 @@ function Pitch({ score, setScore, songs, pitchDatas }) {
   const [currentSeconds, setSeconds] = useState(0);
   const [pitches, setPitches] = useState([]);
 
-  const song = songs.find((song) => song.id === id);
+  const song = songs.find((song) => song.id === id * 1);
 
   setInterval(() => {
     setSeconds((currentSeconds) => currentSeconds++);
@@ -39,7 +39,7 @@ function Pitch({ score, setScore, songs, pitchDatas }) {
       latencyHint: 'playback',
       sampleRate: MODEL_SAMPLE_RATE,
     });
-
+    console.log(song);
     setTimeout(() => {
       context.close();
       console.log('recording timed out');
