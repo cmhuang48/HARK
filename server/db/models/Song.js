@@ -1,6 +1,5 @@
-const { INTEGER } = require("sequelize");
 const Sequelize = require("sequelize");
-const { STRING, TEXT } = Sequelize;
+const { STRING, DECIMAL, TEXT } = Sequelize;
 const db = require("../db");
 
 const Song = db.define("song", {
@@ -28,7 +27,7 @@ const Song = db.define("song", {
     allowNull: false,
   },
   duration: {
-    type: INTEGER,
+    type: DECIMAL(10, 2),
   },
   lyrics: {
     type: TEXT,
