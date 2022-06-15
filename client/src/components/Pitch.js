@@ -1,13 +1,13 @@
-import React, { useCallback, useEffect, useState, useRef } from "react";
-import { connect } from "react-redux";
-import { useParams } from "react-router-dom";
-import ReactAudioPlayer from "react-audio-player";
-import axios from "axios";
-import LRC from "lrc.js";
-import { useModel } from "react-tensorflow";
-import * as tf from "@tensorflow/tfjs";
+import React, { useCallback, useEffect, useState, useRef } from 'react';
+import { connect } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import ReactAudioPlayer from 'react-audio-player';
+import axios from 'axios';
+import LRC from 'lrc.js';
+import { useModel } from 'react-tensorflow';
+import * as tf from '@tensorflow/tfjs';
 
-import { createPitchData } from "../store/PitchDatas";
+import { createPitchData } from '../store/PitchDatas';
 
 const lrc_string = ``;
 const NUM_INPUT_SAMPLES = 1024;
@@ -45,7 +45,6 @@ function Pitch({ score, setScore, songs, pitchDatas }) {
       console.log('recording timed out');
     }, 10000);
 
-
     const retryButton = document.getElementById('retryButton');
     retryButton.addEventListener('click', async () => {
       context.close();
@@ -79,7 +78,6 @@ function Pitch({ score, setScore, songs, pitchDatas }) {
         let confidence = 1.0 - uncertainties[i];
         if (confidence < CONF_THRESHOLD) {
           continue;
-
         }
         const pitch = getPitchHz(pitches[i]);
         // console.log(pitch);
@@ -124,15 +122,14 @@ function Pitch({ score, setScore, songs, pitchDatas }) {
       <br />
       <br />
 
-
-      <ReactAudioPlayer
+      {/* <ReactAudioPlayer
         src={song.originalAudio}
         autoPlay
         controls
         muted
         listenInterval={3000}
         onListen={onListen}
-      /> */}
+      />  */}
       <div id="recordingStatus"></div>
       {/* <button id="stopButton">stop</button> */}
       <button id="retryButton">retry</button>
