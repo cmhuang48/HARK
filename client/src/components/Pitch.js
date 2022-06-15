@@ -1,13 +1,13 @@
-import React, { useCallback, useEffect, useState } from "react";
-import { connect } from "react-redux";
-import { useParams } from "react-router-dom";
-import ReactAudioPlayer from "react-audio-player";
-import axios from "axios";
-import LRC from "lrc.js";
-import { useModel } from "react-tensorflow";
-import * as tf from "@tensorflow/tfjs";
+import React, { useCallback, useEffect, useState, useRef } from 'react';
+import { connect } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import ReactAudioPlayer from 'react-audio-player';
+import axios from 'axios';
+import LRC from 'lrc.js';
+import { useModel } from 'react-tensorflow';
+import * as tf from '@tensorflow/tfjs';
 
-import { createPitchData } from "../store/PitchDatas";
+import { createPitchData } from '../store/PitchDatas';
 
 const lrc_string = ``;
 const NUM_INPUT_SAMPLES = 1024;
@@ -26,48 +26,72 @@ function getPitchHz(modelPitch) {
 function Pitch({ score, setScore }) {
   const { id } = useParams();
   const [currentSeconds, setSeconds] = useState(0);
-  const [song, setSong] = useState("/audio/Never-Give-You-Up.mp3");
+  const [song, setSong] = useState('/audio/Never-Give-You-Up.mp3');
   const [pitches, setPitches] = useState([]);
 
-  const handleSuccess = useCallback((stream, model) => {
-    let context = new AudioContext({
-      latencyHint: "playback",
-      sampleRate: MODEL_SAMPLE_RATE,
-    });
+  setInterval(() => {
+    setSeconds((currentSeconds) => currentSeconds++);
+  }, 1000);
 
-    let source = context.createMediaStreamSource(stream);
-    let processor = context.createScriptProcessor(
-      NUM_INPUT_SAMPLES,
-      /*num_inp_channels=*/ 1,
-      /*num_out_channels=*/ 1
-    );
+  const handleSuccess = useCallback(
+    (stream, model) => {
+      let context = new AudioContext({
+        latencyHint: 'playback',
+        sampleRate: MODEL_SAMPLE_RATE,
+      });
 
-    // Converts audio to mono.
-    processor.channelInterpretation = "speakers";
-    processor.channelCount = 1;
+      setPitches([]);
+      setTimeout(() => {
+        context.close();
+        console.log('timed out');
+      }, 10000);
 
-    // Runs processor on audio source.
-    source.connect(processor);
-    processor.connect(context.destination);
+      const stopButton = document.getElementById('stopButton');
+      const recordingStatus = document.getElementById('recordingStatus');
+      recordingStatus.innerHTML = 'recording';
 
-    processor.onaudioprocess = function (e) {
-      const inputData = e.inputBuffer.getChannelData(0);
-      const input = tf.reshape(tf.tensor(inputData), [NUM_INPUT_SAMPLES]);
-      const output = model.execute({ input_audio_samples: input });
-      const uncertainties = output[0].dataSync();
-      const pitches = output[1].dataSync();
+      stopButton.addEventListener('click', (ev) => {
+        context.close();
+        recordingStatus.innerHTML = 'processing score...';
+        console.log('closed manually');
+        console.log(pitches);
+      });
 
-      for (let i = 0; i < pitches.length; ++i) {
-        let confidence = 1.0 - uncertainties[i];
-        if (confidence < CONF_THRESHOLD) {
-          continue;
+      let source = context.createMediaStreamSource(stream);
+      let processor = context.createScriptProcessor(
+        NUM_INPUT_SAMPLES,
+        /*num_inp_channels=*/ 1,
+        /*num_out_channels=*/ 1
+      );
+
+      // Converts audio to mono.
+      processor.channelInterpretation = 'speakers';
+      processor.channelCount = 1;
+
+      // Runs processor on audio source.
+      source.connect(processor);
+      processor.connect(context.destination);
+
+      processor.onaudioprocess = function (e) {
+        const inputData = e.inputBuffer.getChannelData(0);
+        const input = tf.reshape(tf.tensor(inputData), [NUM_INPUT_SAMPLES]);
+        const output = model.execute({ input_audio_samples: input });
+        const uncertainties = output[0].dataSync();
+        const pitches = output[1].dataSync();
+
+        for (let i = 0; i < pitches.length; ++i) {
+          let confidence = 1.0 - uncertainties[i];
+          if (confidence < CONF_THRESHOLD) {
+            continue;
+          }
+          const pitch = getPitchHz(pitches[i]);
+          // console.log(pitch);
+          setPitches((state) => [...state, pitch]);
         }
-        const pitch = getPitchHz(pitches[i]);
-        // console.log(pitch);
-        setPitches((state) => [...state, pitch]);
-      }
-    };
-  }, []);
+      };
+    },
+    [currentSeconds]
+  );
 
   console.log(pitches);
 
@@ -118,6 +142,8 @@ function Pitch({ score, setScore }) {
         listenInterval={3000}
         onListen={onListen}
       />
+      <div id="recordingStatus"></div>
+      <button id="stopButton">stop</button>
     </div>
   );
 }
