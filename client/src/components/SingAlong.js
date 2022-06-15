@@ -57,7 +57,7 @@ export default function SingAlong({ score, setScore }) {
         <br />
         <span>Score : {score}</span>
         <p>original song</p>
-        <ReactAudioPlayer
+        {/* <ReactAudioPlayer
           src={song.originalAudio}
           // autoPlay
           controls
@@ -73,7 +73,7 @@ export default function SingAlong({ score, setScore }) {
           // muted
           listenInterval={500}
           onListen={onListen}
-        />
+        /> */}
         <Lyric currentSeconds={currentSeconds} />
         <Pitch />
         {/* <div>

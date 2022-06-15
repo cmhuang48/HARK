@@ -41,21 +41,25 @@ function Pitch({ score, setScore }) {
       });
 
       setPitches([]);
+
       setTimeout(() => {
         context.close();
-        console.log('timed out');
+        console.log('recording timed out');
       }, 10000);
+
+      console.log('>>>', song);
 
       const stopButton = document.getElementById('stopButton');
       const recordingStatus = document.getElementById('recordingStatus');
       recordingStatus.innerHTML = 'recording';
 
-      stopButton.addEventListener('click', (ev) => {
-        context.close();
-        recordingStatus.innerHTML = 'processing score...';
-        console.log('closed manually');
-        console.log(pitches);
-      });
+      // stopButton.addEventListener('click', (ev) => {
+      //   console.log(ev);
+      //   context.close();
+      //   recordingStatus.innerHTML = 'processing score...';
+      //   console.log('closed manually');
+      //   console.log(pitches);
+      // });
 
       let source = context.createMediaStreamSource(stream);
       let processor = context.createScriptProcessor(
@@ -86,6 +90,7 @@ function Pitch({ score, setScore }) {
           }
           const pitch = getPitchHz(pitches[i]);
           // console.log(pitch);
+          console.log(currentSeconds);
           setPitches((state) => [...state, pitch]);
         }
       };
@@ -134,16 +139,19 @@ function Pitch({ score, setScore }) {
       <br />
       <br />
 
-      <ReactAudioPlayer
+      {/* <ReactAudioPlayer
         src={song}
         autoPlay
         controls
         muted
         listenInterval={3000}
         onListen={onListen}
-      />
+      /> */}
       <div id="recordingStatus"></div>
-      <button id="stopButton">stop</button>
+      {/* <button id="stopButton">stop</button> */}
+      <button id="retryButton" onClick={() => window.location.reload()}>
+        retry
+      </button>
     </div>
   );
 }
