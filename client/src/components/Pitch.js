@@ -41,13 +41,16 @@ function Pitch({ score, setScore }) {
       });
 
       setPitches([]);
+      setTimeout(() => {
+        context.close();
+        console.log('timed out');
+      }, 10000);
 
       const stopButton = document.getElementById('stopButton');
       const recordingStatus = document.getElementById('recordingStatus');
       recordingStatus.innerHTML = 'recording';
 
       stopButton.addEventListener('click', (ev) => {
-        console.log(ev);
         context.close();
         recordingStatus.innerHTML = 'processing score...';
         console.log('closed manually');
@@ -83,7 +86,6 @@ function Pitch({ score, setScore }) {
           }
           const pitch = getPitchHz(pitches[i]);
           // console.log(pitch);
-          console.log(currentSeconds);
           setPitches((state) => [...state, pitch]);
         }
       };
