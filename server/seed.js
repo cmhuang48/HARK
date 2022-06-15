@@ -1,7 +1,7 @@
 const {
   db,
   models: { Song, Artist, PitchData },
-} = require('../server/db');
+} = require("../server/db");
 
 async function seed() {
   await db.sync({ force: true });
@@ -9,10 +9,10 @@ async function seed() {
   // Creating artists
   const [brunoMars, kellyClarkson, neilDiamond, vanessaCarlton] =
     await Promise.all([
-      Artist.create({ name: 'Bruno Mars' }),
-      Artist.create({ name: 'Kelly Clarkson' }),
-      Artist.create({ name: 'Neil Diamond' }),
-      Artist.create({ name: 'Vanessa Carlton' }),
+      Artist.create({ name: "Bruno Mars" }),
+      Artist.create({ name: "Kelly Clarkson" }),
+      Artist.create({ name: "Neil Diamond" }),
+      Artist.create({ name: "Vanessa Carlton" }),
     ]);
 
   console.log(`seeded 4 artists`);
@@ -26,22 +26,12 @@ async function seed() {
     aThousandMiles,
   ] = await Promise.all([
     Song.create({
-      name: 'Just The Way You Are (DEMO)',
-      videoURL: 'https://www.youtube.com/embed/LjhCEhWiKXk',
-      originalAudio: '/audio/Just-The-Way-You-Are_original.mp3',
-      instrumentalAudio: '/audio/Just-The-Way-You-Are_instrumentals.mp3',
-      vocalAudio: '/audio/Just-The-Way-You-Are_vocals.mp3',
-      lyrics: '',
-      artistId: brunoMars.id,
-    }),
-    Song.create({
-      name: 'Just The Way You Are',
-      videoURL: 'https://www.youtube.com/embed/LjhCEhWiKXk',
-      originalAudio: '/audio/Just-The-Way-You-Are_original.mp3',
-      instrumentalAudio: '/audio/Just-The-Way-You-Are_instrumentals.mp3',
-      vocalAudio: '/audio/Just-The-Way-You-Are_vocals.mp3',
-      lyrics: `
-
+      name: "Just The Way You Are (DEMO)",
+      videoURL: "https://www.youtube.com/embed/LjhCEhWiKXk",
+      originalAudio: "/audio/Just-The-Way-You-Are_original.mp3",
+      instrumentalAudio: "/audio/Just-The-Way-You-Are_instrumentals.mp3",
+      vocalAudio: "/audio/Just-The-Way-You-Are_vocals.mp3",
+      lyrics: `        
         [ti:Just The Way You Are]
         [ar:Bruno Mars]
         [00:00.00]...
@@ -102,15 +92,86 @@ async function seed() {
         [03:21.03]Cause girl you’re amazing
         [03:24.27]Just the way you are
         [03:56.00]...`,
+      duration: 69.13,
+      artistId: brunoMars.id,
+    }),
+    Song.create({
+      name: "Just The Way You Are",
+      videoURL: "https://www.youtube.com/embed/LjhCEhWiKXk",
+      originalAudio: "/audio/Just-The-Way-You-Are_original.mp3",
+      instrumentalAudio: "/audio/Just-The-Way-You-Are_instrumentals.mp3",
+      vocalAudio: "/audio/Just-The-Way-You-Are_vocals.mp3",
+      lyrics: `
+        [ti:Just The Way You Are]
+        [ar:Bruno Mars]
+        [00:00.00]...
+        [00:17.35]Oh, her eyes, her eyes
+        [00:19.34]Make the stars look like they’re not shining
+        [00:22.10]Her hair, her hair
+        [00:23.86]Falls perfectly without her trying
+        [00:26.59]She’s so beautiful
+        [00:28.84]And I tell her every day
+        [00:34.34]Yeah
+        [00:35.36]I know, I know
+        [00:37.10]When I compliment her
+        [00:38.62]She won't believe me
+        [00:39.84]And it's so, it's so
+        [00:41.59]Sad to think that she don’t see what I see
+        [00:44.36]But every time she asks me do I look okay
+        [00:47.85]I say
+        [00:51.59]When I see your face
+        [00:55.86]There’s not a thing that I would change
+        [01:00.09]Cause you’re amazing
+        [01:03.59]Just the way you are
+        [01:08.89]And when you smile,
+        [01:13.34]The whole world stops and stares for a while
+        [01:17.85]Cause girl you’re amazing
+        [01:21.09]Just the way you are
+        [01:28.09]Her lips, her lips
+        [01:29.87]I could kiss them all day if she’d let me
+        [01:32.63]Her laugh, her laugh
+        [01:34.38]She hates but I think its so sexy
+        [01:37.09]She’s so beautiful
+        [01:39.60]And I tell her every day
+        [01:44.84]Oh,
+        [01:45.60]You know, you know, you know
+        [01:47.09]I'd never ask you to change
+        [01:49.59]If perfect's what you’re searching for
+        [01:52.09]Then just stay the same
+        [01:54.34]So don’t even bother asking
+        [01:56.60]If you look okay
+        [01:58.11]You know I'll say
+        [02:01.85]When I see your face
+        [02:06.10]There’s not a thing that I would change
+        [02:10.59]Cause you’re amazing
+        [02:13.85]Just the way you are
+        [02:19.34]And when you smile,
+        [02:23.84]The whole world stops and stares for a while
+        [02:28.34]Cause girl you’re amazing
+        [02:31.61]Just the way you are
+        [02:37.02]The way you are
+        [02:41.03]The way you are
+        [02:45.78]Girl you’re amazing
+        [02:49.06]Just the way you are
+        [02:54.54]When I see your face
+        [02:59.03]There’s not a thing that I would change
+        [03:03.52]Cause you’re amazing
+        [03:06.78]Just the way you are
+        [03:12.27]And when you smile,
+        [03:16.52]The whole world stops and stares for a while
+        [03:21.03]Cause girl you’re amazing
+        [03:24.27]Just the way you are
+        [03:56.00]...`,
+      duration: 236.61,
       artistId: brunoMars.id,
     }),
     //lyric timestamps are wrong for since U...
     Song.create({
-      name: 'Since U Been Gone',
-      videoURL: 'https://www.youtube.com/embed/R7UrFYvl5TE',
-      originalAudio: '/audio/Since-U-Been-Gone_original.mp3',
-      instrumentalAudio: '/audio/Since-U-Been-Gone_instrumentals.mp3',
-      vocalAudio: '/audio/Since-U-Been-Gone_vocals.mp3',
+      name: "Since U Been Gone",
+      videoURL: "https://www.youtube.com/embed/R7UrFYvl5TE",
+      originalAudio: "/audio/Since-U-Been-Gone_original.mp3",
+      instrumentalAudio: "/audio/Since-U-Been-Gone_instrumentals.mp3",
+      vocalAudio: "/audio/Since-U-Been-Gone_vocals.mp3",
       lyrics: `[ar:Kelly Clarkson]
 
         [ti:Since U Been Gone]
@@ -167,14 +228,15 @@ async function seed() {
         [02:59.57]Since you been gone
         [03:03.57]Since you been gone
         [03:17.00]...`,
+      duration: 197.72,
       artistId: kellyClarkson.id,
     }),
     Song.create({
-      name: 'Sweet Caroline',
-      videoURL: 'https://www.youtube.com/embed/GmK5_lnQUbE',
-      originalAudio: '/audio/Sweet-Caroline_original.mp3',
-      instrumentalAudio: '/audio/Sweet-Caroline_instrumentals.mp3',
-      vocalAudio: '/audio/Sweet-Caroline_vocals.mp3',
+      name: "Sweet Caroline",
+      videoURL: "https://www.youtube.com/embed/GmK5_lnQUbE",
+      originalAudio: "/audio/Sweet-Caroline_original.mp3",
+      instrumentalAudio: "/audio/Sweet-Caroline_instrumentals.mp3",
+      vocalAudio: "/audio/Sweet-Caroline_vocals.mp3",
       lyrics: `[ar:Neil Diamond]
 [ti:Sweet Caroline]
         [00:00.00]...
@@ -209,14 +271,15 @@ async function seed() {
 [03:12.80]Sweet Caroline
 [03:17.58]Good times never seemed so good
 [03:23.00]...`,
+      duration: 203.59,
       artistId: neilDiamond.id,
     }),
     Song.create({
-      name: 'A Thousand Miles',
-      videoURL: 'https://www.youtube.com/embed/Cwkej79U3ek',
-      originalAudio: '/audio/A-Thousand-Miles_original.mp3',
-      instrumentalAudio: '/audio/A-Thousand-Miles_instrumentals.mp3',
-      vocalAudio: '/audio/A-Thousand-Miles_vocal.mp3',
+      name: "A Thousand Miles",
+      videoURL: "https://www.youtube.com/embed/Cwkej79U3ek",
+      originalAudio: "/audio/A-Thousand-Miles_original.mp3",
+      instrumentalAudio: "/audio/A-Thousand-Miles_instrumentals.mp3",
+      vocalAudio: "/audio/A-Thousand-Miles_vocal.mp3",
       lyrics: `
 
         [ti:A Thousand Miles]
@@ -277,6 +340,7 @@ async function seed() {
         [03:32.64]If I could just see you
         [03:38.25]If I could just hold you tonight
         [03:57.00]...`,
+      duration: 237.8,
       artistId: vanessaCarlton.id,
     }),
   ]);
@@ -4406,7 +4470,7 @@ async function seed() {
 
   console.log(`seeded ${pitchDatas.length} pitch datas`);
 
-  console.log('seeded successfully');
+  console.log("seeded successfully");
 }
 
 module.exports = seed;
