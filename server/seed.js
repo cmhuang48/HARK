@@ -31,6 +31,7 @@ async function seed() {
       originalAudio: '/audio/Just-The-Way-You-Are_original.mp3',
       instrumentalAudio: '/audio/Just-The-Way-You-Are_instrumentals.mp3',
       vocalAudio: '/audio/Just-The-Way-You-Are_vocals.mp3',
+      duration: '236',
       lyrics: '',
       artistId: brunoMars.id,
     }),
@@ -40,6 +41,7 @@ async function seed() {
       originalAudio: '/audio/Just-The-Way-You-Are_original.mp3',
       instrumentalAudio: '/audio/Just-The-Way-You-Are_instrumentals.mp3',
       vocalAudio: '/audio/Just-The-Way-You-Are_vocals.mp3',
+      duration: '236',
       lyrics: `
 
         [ti:Just The Way You Are]
@@ -111,6 +113,7 @@ async function seed() {
       originalAudio: '/audio/Since-U-Been-Gone_original.mp3',
       instrumentalAudio: '/audio/Since-U-Been-Gone_instrumentals.mp3',
       vocalAudio: '/audio/Since-U-Been-Gone_vocals.mp3',
+      duration: '197',
       lyrics: `[ar:Kelly Clarkson]
 
         [ti:Since U Been Gone]
@@ -175,6 +178,7 @@ async function seed() {
       originalAudio: '/audio/Sweet-Caroline_original.mp3',
       instrumentalAudio: '/audio/Sweet-Caroline_instrumentals.mp3',
       vocalAudio: '/audio/Sweet-Caroline_vocals.mp3',
+      duration: '203',
       lyrics: `[ar:Neil Diamond]
 [ti:Sweet Caroline]
         [00:00.00]...
@@ -217,6 +221,7 @@ async function seed() {
       originalAudio: '/audio/A-Thousand-Miles_original.mp3',
       instrumentalAudio: '/audio/A-Thousand-Miles_instrumentals.mp3',
       vocalAudio: '/audio/A-Thousand-Miles_vocal.mp3',
+      duration: '237',
       lyrics: `
 
         [ti:A Thousand Miles]
