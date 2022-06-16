@@ -1,7 +1,7 @@
 const {
   db,
   models: { Song, Artist, PitchData },
-} = require("../server/db");
+} = require("./db");
 
 async function seed() {
   await db.sync({ force: true });

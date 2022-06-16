@@ -1,12 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 
-import {
-  loadSongs,
-  loadArtists,
-  loadPitchDatas,
-  loadCurrentSong,
-} from "./store";
+import { loadSongs, loadArtists, loadPitchDatas } from "./store";
 
 import Header from "./components/Header";
 import RoutesTree from "./RoutesTree";
@@ -17,8 +12,6 @@ class App extends React.Component {
     this.props.loadSongs();
     this.props.loadArtists();
     this.props.loadPitchDatas();
-    //just for testing----------
-    this.props.loadCurrentSong(1);
   }
 
   render() {
@@ -39,7 +32,6 @@ const mapDispatch = (dispatch) => {
     loadSongs: () => dispatch(loadSongs()),
     loadArtists: () => dispatch(loadArtists()),
     loadPitchDatas: () => dispatch(loadPitchDatas()),
-    loadCurrentSong: (id) => dispatch(loadCurrentSong(id)),
   };
 };
 
