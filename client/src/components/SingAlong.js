@@ -9,10 +9,9 @@ import Pitch from "./Pitch";
 import { connect } from "react-redux";
 // import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
 
-function SingAlong({ songs, artists, score, setScore }) {
+function SingAlong({ songs, artists }) {
   const { id } = useParams();
-  const [currentSeconds, setSeconds] = useState(0);
-  const [userTranscript, setUserTranscript] = useState("");
+  // const [userTranscript, setUserTranscript] = useState("");
 
   const song = songs.find((song) => song.id === id * 1);
   const artist = artists.find((artist) => artist.id === song?.artistId);
@@ -34,9 +33,6 @@ function SingAlong({ songs, artists, score, setScore }) {
   //   SpeechRecognition.startListening({ continuous: true });
 
   //Note:score temporarily displayed
-  const onListen = (seconds) => {
-    setSeconds(seconds);
-  };
 
   return (
     <div className="singAlong">
@@ -49,25 +45,7 @@ function SingAlong({ songs, artists, score, setScore }) {
         <h1>
           {song?.name} by {artist?.name}
         </h1>
-        <p>original song</p>
-        {/* <ReactAudioPlayer
-          src={song.originalAudio}
-          // autoPlay
-          controls
-          // muted
-          listenInterval={500}
-          onListen={onListen}
-        />
-        <p>instrumental</p>
-        <ReactAudioPlayer
-          src={song.instrumentalAudio}
-          // autoPlay
-          controls
-          // muted
-          listenInterval={500}
-          onListen={onListen}
-        /> */}
-        <Lyric currentSeconds={currentSeconds} />
+        <Lyric />
         <Pitch />
         {/* <div>
               <p>Microphone: {listening ? 'on' : 'off'}</p>
