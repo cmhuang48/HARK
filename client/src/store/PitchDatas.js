@@ -7,14 +7,18 @@ const CREATE_PITCH_DATA = "CREATE_PITCH_DATA";
 // THUNK CREATOR
 export const loadPitchDatas = () => {
   return async (dispatch) => {
-    const response = await axios.get("/api/pitchdatas");
+    const response = await axios.get(
+      `${process.env.REACT_APP_BASE_URL}/api/pitchdatas`
+    );
     dispatch({ type: LOAD_PITCH_DATAS, payload: response.data });
   };
 };
 
 export const createPitchData = (pitches, id) => {
   return async (dispatch) => {
-    const originalPitchData = axios.get(`/api/pitchdatas/${id}`).data;
+    const originalPitchData = axios.get(
+      `${process.env.REACT_APP_BASE_URL}/api/pitchdatas/${id}`
+    ).data;
     const errorRates = originalPitchData.map((pitch, idx) =>
       pitches[idx] ? Math.abs(pitch - pitches[idx]) / pitch : 0
     );
@@ -27,7 +31,10 @@ export const createPitchData = (pitches, id) => {
       score,
       songId: id,
     };
-    const response = await axios.post("/api/pitchdatas", pitchData);
+    const response = await axios.post(
+      `${process.env.REACT_APP_BASE_URL}/api/pitchdatas`,
+      pitchData
+    );
     dispatch({ type: CREATE_PITCH_DATA, payload: response.data });
   };
 };

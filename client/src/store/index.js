@@ -8,6 +8,8 @@ import pitchDatas from "./PitchDatas";
 //not sure if env variable will work, necessary bc we are using a separate server file
 const PORT = process.env.port || 8080;
 
+console.log(process.env);
+
 const reducer = combineReducers({ songs, artists, pitchDatas });
 
 const store = createStore(reducer, applyMiddleware(thunk, logger));

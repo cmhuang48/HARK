@@ -13,7 +13,7 @@ app.use(express.json());
 // api route
 app.use("/api", require("./api"));
 
-app.get("/", (req, res) => res.redirect("/api/songs"));
+// app.get("/", (req, res) => res.redirect("/api/songs"));
 
 // static file-serving middleware
 // app.use(express.static(path.join(__dirname, "..", "/client/public")));
