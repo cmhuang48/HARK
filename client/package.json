@@ -32,7 +32,7 @@
     "redux-thunk": "^2.4.1"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "REACT_APP_BASE_URL=https://hark-karaoke-server.herokuapp.com react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

@@ -1,6 +1,7 @@
 const path = require("path");
 const express = require("express");
 const morgan = require("morgan");
+const cors = require("cors");
 
 const app = express();
 
@@ -9,6 +10,8 @@ app.use(morgan("dev"));
 
 // body parsing middleware
 app.use(express.json());
+
+app.use(cors());
 
 // api route
 app.use("/api", require("./api"));
