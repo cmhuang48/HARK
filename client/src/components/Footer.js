@@ -11,7 +11,7 @@ export default function Footer() {
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
-          padding: "10px"
+          padding: "10px",
         }}
       >
         <Link className="aboutLink" to="/aboutus">
@@ -21,17 +21,22 @@ export default function Footer() {
             color="#66FCF1"
             textAlign="center"
             fontStyle={{
-              textShadow: "1px 1px 1px #000404"
+              textShadow: "1px 1px 1px #000404",
             }}
           >
             About Us
           </Typography>
         </Link>
-        <Typography variant="body2" color="#C5C6C7" align="center" style={{ marginTop: "4px", marginBottom: "10px" }}>
+        <Typography
+          variant="body2"
+          color="#C5C6C7"
+          align="center"
+          style={{ marginTop: "4px", marginBottom: "10px" }}
+        >
           {"Copyright © "}
           <Link className="homeLink" to="/">
             HARK
-          </Link>
+          </Link>{" "}
           {new Date().getFullYear()}
           {"."}
         </Typography>

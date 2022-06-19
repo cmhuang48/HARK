@@ -9,10 +9,10 @@ async function seed() {
   // Creating artists
   const [brunoMars, kellyClarkson, neilDiamond, vanessaCarlton] =
     await Promise.all([
-      Artist.create({ name: "Bruno Mars" }),
-      Artist.create({ name: "Kelly Clarkson" }),
-      Artist.create({ name: "Neil Diamond" }),
-      Artist.create({ name: "Vanessa Carlton" }),
+      Artist.create({ id: 1, name: "Bruno Mars" }),
+      Artist.create({ id: 2, name: "Kelly Clarkson" }),
+      Artist.create({ id: 3, name: "Neil Diamond" }),
+      Artist.create({ id: 4, name: "Vanessa Carlton" }),
     ]);
 
   console.log(`seeded 4 artists`);
@@ -26,6 +26,7 @@ async function seed() {
     aThousandMiles,
   ] = await Promise.all([
     Song.create({
+      id: 1,
       name: "Just The Way You Are (DEMO)",
       videoURL: "https://www.youtube.com/embed/LjhCEhWiKXk",
       originalAudio: "/audio/Demo_original.mp3",
@@ -96,6 +97,7 @@ async function seed() {
       artistId: brunoMars.id,
     }),
     Song.create({
+      id: 2,
       name: "Just The Way You Are",
       videoURL: "https://www.youtube.com/embed/LjhCEhWiKXk",
       originalAudio: "/audio/Just-The-Way-You-Are_original.mp3",
@@ -167,15 +169,15 @@ async function seed() {
     }),
     //lyric timestamps are wrong for since U...
     Song.create({
+      id: 3,
       name: "Since U Been Gone",
       videoURL: "https://www.youtube.com/embed/R7UrFYvl5TE",
       originalAudio: "/audio/Since-U-Been-Gone_original.mp3",
       instrumentalAudio: "/audio/Since-U-Been-Gone_instrumentals.mp3",
       vocalAudio: "/audio/Since-U-Been-Gone_vocals.mp3",
-      lyrics: `[ar:Kelly Clarkson]
-
+      lyrics: `
         [ti:Since U Been Gone]
-        
+        [ar:Kelly Clarkson]
         [00:00.00]...
         [00:03.77]Here's the thing
         [00:05.01]We started out friends
@@ -232,60 +234,60 @@ async function seed() {
       artistId: kellyClarkson.id,
     }),
     Song.create({
+      id: 4,
       name: "Sweet Caroline",
       videoURL: "https://www.youtube.com/embed/GmK5_lnQUbE",
       originalAudio: "/audio/Sweet-Caroline_original.mp3",
       instrumentalAudio: "/audio/Sweet-Caroline_instrumentals.mp3",
       vocalAudio: "/audio/Sweet-Caroline_vocals.mp3",
-      lyrics: `[ar:Neil Diamond]
-[ti:Sweet Caroline]
+      lyrics: `
+        [ti:Sweet Caroline]
+        [ar:Neil Diamond]
         [00:00.00]...
         [00:14.02]Where it began, I can't begin to know when
-[00:21.72]But then I know it's growing strong
-[00:29.17]Was in the spring
-[00:33.14]And spring became the summer
-[00:36.86]Who'd have believed you'd come along
-[00:43.51]Hands, touching hands
-[00:51.77]Reaching out, touching me, touching you
-[01:02.38]Sweet Caroline
-[01:07.16]Good times never seemed so good
-[01:13.81]I've been inclined
-[01:18.32]To believe they never would
-[01:22.57]But now I
-[01:26.02]Look at the night and it don't seem so lonely
-[01:33.46]We filled it up with only two
-[01:41.16]And when I hurt
-[01:44.88]Hurting runs off my shoulders
-[01:48.86]How can I hurt when holding you
-[01:55.24]Warm, touching warm
-[02:03.22]Reaching out, touching me, touching you
-[02:14.10]Sweet Caroline
-[02:18.88]Good times never seemed so good
-[02:25.52]I've been inclined
-[02:30.04]To believe they never would
-[02:34.55]Oh no, no
-[02:49.96]Sweet Caroline
-[02:54.74]Good times never seemed so good
-[03:01.38]Sweet Caroline
-[03:06.16]I believe they never could
-[03:12.80]Sweet Caroline
-[03:17.58]Good times never seemed so good
-[03:23.00]...`,
+        [00:21.72]But then I know it's growing strong
+        [00:29.17]Was in the spring
+        [00:33.14]And spring became the summer
+        [00:36.86]Who'd have believed you'd come along
+        [00:43.51]Hands, touching hands
+        [00:51.77]Reaching out, touching me, touching you
+        [01:02.38]Sweet Caroline
+        [01:07.16]Good times never seemed so good
+        [01:13.81]I've been inclined
+        [01:18.32]To believe they never would
+        [01:22.57]But now I
+        [01:26.02]Look at the night and it don't seem so lonely
+        [01:33.46]We filled it up with only two
+        [01:41.16]And when I hurt
+        [01:44.88]Hurting runs off my shoulders
+        [01:48.86]How can I hurt when holding you
+        [01:55.24]Warm, touching warm
+        [02:03.22]Reaching out, touching me, touching you
+        [02:14.10]Sweet Caroline
+        [02:18.88]Good times never seemed so good
+        [02:25.52]I've been inclined
+        [02:30.04]To believe they never would
+        [02:34.55]Oh no, no
+        [02:49.96]Sweet Caroline
+        [02:54.74]Good times never seemed so good
+        [03:01.38]Sweet Caroline
+        [03:06.16]I believe they never could
+        [03:12.80]Sweet Caroline
+        [03:17.58]Good times never seemed so good
+        [03:23.00]...`,
       duration: 203.59,
       artistId: neilDiamond.id,
     }),
     Song.create({
+      id: 5,
       name: "A Thousand Miles",
       videoURL: "https://www.youtube.com/embed/Cwkej79U3ek",
       originalAudio: "/audio/A-Thousand-Miles_original.mp3",
       instrumentalAudio: "/audio/A-Thousand-Miles_instrumentals.mp3",
       vocalAudio: "/audio/A-Thousand-Miles_vocal.mp3",
       lyrics: `
-
         [ti:A Thousand Miles]
         [ar:Vanessa Carlton]
-        [la:af]
-
         [00:00.00]...
         [00:10.51]Making my way downtown
         [00:12.01]Walking fast
@@ -350,6 +352,7 @@ async function seed() {
   // Creating pitch datas
   const pitchDatas = await Promise.all([
     PitchData.create({
+      id: 1,
       pitches: [
         400.44684898173756, 403.3312070919259, 399.466508612461,
         406.4397195324492, 427.152601490805, 440.2855673357453,
@@ -657,6 +660,7 @@ async function seed() {
       songId: demo.id,
     }),
     PitchData.create({
+      id: 2,
       pitches: [
         412.712939180565, 393.4937374973176, 403.861243822031,
         408.0873440531518, 435.08311822484234, 447.1538052386075,
@@ -1685,6 +1689,7 @@ async function seed() {
       songId: justTheWayYouAre.id,
     }),
     PitchData.create({
+      id: 3,
       pitches: [
         297.8977744826393, 305.4331132027734, 294.313811562536,
         293.3054709328149, 297.7223313856588, 290.125246530548,
@@ -2269,6 +2274,7 @@ async function seed() {
       songId: sinceUBeenGone.id,
     }),
     PitchData.create({
+      id: 4,
       pitches: [
         106.37842994171507, 106.95087793473364, 107.29570081982742,
         105.74767250819791, 105.45282184303866, 119.54600313287688,
@@ -3120,6 +3126,7 @@ async function seed() {
       songId: sweetCaroline.id,
     }),
     PitchData.create({
+      id: 5,
       pitches: [
         290.69083386152977, 377.89012250685494, 372.4948206401316,
         371.47464407355244, 368.6017727518821, 373.40767180908256,
