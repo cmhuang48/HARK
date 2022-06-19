@@ -28,9 +28,9 @@ async function seed() {
     Song.create({
       name: "Just The Way You Are (DEMO)",
       videoURL: "https://www.youtube.com/embed/LjhCEhWiKXk",
-      originalAudio: "/audio/Just-The-Way-You-Are_original.mp3",
-      instrumentalAudio: "/audio/Just-The-Way-You-Are_instrumentals.mp3",
-      vocalAudio: "/audio/Just-The-Way-You-Are_vocals.mp3",
+      originalAudio: "/audio/Demo_original.mp3",
+      instrumentalAudio: "/audio/Demo_instrumentals.mp3",
+      vocalAudio: "/audio/Demo_vocals.mp3",
       lyrics: `        
         [ti:Just The Way You Are]
         [ar:Bruno Mars]
