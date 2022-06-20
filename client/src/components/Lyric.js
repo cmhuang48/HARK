@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import { useParams } from "react-router-dom";
 import LRC from "lrc.js";
-import axios from "axios";
 import { Box } from "@mui/material";
 
 // const lrc_string = ``;
