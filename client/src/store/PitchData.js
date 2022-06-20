@@ -16,15 +16,16 @@ export const loadPitchData = () => {
 
 export const createPitchData = (pitches, id) => {
   return async (dispatch) => {
-    const originalPitchData = axios.get(
-      `${process.env.REACT_APP_BASE_URL}/api/pitchdata/${id}`
+    const originalPitchData = (
+      await axios.get(`${process.env.REACT_APP_BASE_URL}/api/pitchdata/${id}`)
     ).data;
-    const errorRates = originalPitchData.map((pitch, idx) =>
-      pitches[idx] ? Math.abs(pitch - pitches[idx]) / pitch : 0
-    );
+    const errorRates = originalPitchData.pitches.map((pitch, idx) => {
+      return pitches[idx] ? Math.abs(pitch - pitches[idx]) / pitch : 0;
+    });
     const averageErrorRate =
       errorRates.reduce((accum, rate) => accum + rate, 0) / errorRates.length;
     const score = (1 - averageErrorRate) * 100;
+    console.log("score is", score);
     const pitchData = {
       pitches,
       original: false,
@@ -35,6 +36,7 @@ export const createPitchData = (pitches, id) => {
       `${process.env.REACT_APP_BASE_URL}/api/pitchdata`,
       pitchData
     );
+    console.log("response is", response);
     dispatch({ type: CREATE_PITCH_DATA, newPitchData: response.data });
   };
 };

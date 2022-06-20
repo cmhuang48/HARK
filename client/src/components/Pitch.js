@@ -1,13 +1,12 @@
 import React, { useCallback, useState } from "react";
 import { connect } from "react-redux";
 import { useParams } from "react-router-dom";
-import ReactAudioPlayer from "react-audio-player";
 import { useModel } from "react-tensorflow";
 import * as tf from "@tensorflow/tfjs";
+import { Button } from "@mui/material";
 
 import { createPitchData } from "../store/PitchData";
 
-const lrc_string = ``;
 const NUM_INPUT_SAMPLES = 1024;
 const MODEL_SAMPLE_RATE = 16000;
 const PT_OFFSET = 25.58;
@@ -21,16 +20,16 @@ function getPitchHz(modelPitch) {
   return fmin * Math.pow(2.0, (1.0 * cqt_bin) / bins_per_octave);
 }
 
-function Pitch({ score, setScore, songs, pitchData }) {
+function Pitch({ songs, newPitchData, createPitchData }) {
   const { id } = useParams();
-  const [currentSeconds, setSeconds] = useState(0);
+  // const [currentSeconds, setSeconds] = useState(0);
   const [pitches, setPitches] = useState([]);
 
   const song = songs.find((song) => song.id === id * 1);
 
-  setInterval(() => {
-    setSeconds((currentSeconds) => currentSeconds++);
-  }, 1000);
+  // setInterval(() => {
+  //   setSeconds((currentSeconds) => currentSeconds++);
+  // }, 1000);
 
   const handleSuccess = useCallback((stream, model) => {
     let context = new AudioContext({
@@ -38,10 +37,14 @@ function Pitch({ score, setScore, songs, pitchData }) {
       sampleRate: MODEL_SAMPLE_RATE,
     });
     console.log(song);
-    setTimeout(() => {
-      context.close();
-      console.log("recording timed out");
-    }, 10000);
+
+    // setTimeout(() => {
+    //   context.close();
+    //   console.log("PITCHES ARE", pitches);
+    //   console.log("recording timed out");
+    //   createPitchData(pitches, id);
+    //   console.log("created pitch data");
+    // }, 10000);
 
     const retryButton = document.getElementById("retryButton");
     retryButton.addEventListener("click", async () => {
@@ -79,13 +82,18 @@ function Pitch({ score, setScore, songs, pitchData }) {
         }
         const pitch = getPitchHz(pitches[i]);
         // console.log(pitch);
-        console.log(currentSeconds);
+        // console.log(currentSeconds);
         setPitches((state) => [...state, pitch]);
       }
     };
   }, []);
 
-  console.log(pitches);
+  // console.log(pitches);
+
+  setTimeout(() => {
+    console.log("recording timed out");
+    createPitchData(pitches, id);
+  }, 10000);
 
   const onLoadCallback = useCallback(
     (model) => {
@@ -104,22 +112,14 @@ function Pitch({ score, setScore, songs, pitchData }) {
     onLoadCallback,
   });
 
-  //Note:score temporarily displayed
-
   //console.log(song, currentSeconds, lrc)
 
-  const onListen = (seconds) => {
-    setSeconds(seconds);
-  };
+  // const onListen = (seconds) => {
+  //   setSeconds(seconds);
+  // };
 
   return (
     <div className="singAlong">
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-
       {/* <ReactAudioPlayer
         src={song.originalAudio}
         autoPlay
@@ -128,14 +128,49 @@ function Pitch({ score, setScore, songs, pitchData }) {
         listenInterval={3000}
         onListen={onListen}
       />  */}
-      <div id="recordingStatus"></div>
+      {/* <div id="recordingStatus"></div> */}
       {/* <button id="stopButton">stop</button> */}
-      <button id="retryButton">retry</button>
+      <Button
+        id="retryButton"
+        variant="contained"
+        sx={{
+          bgcolor: "#1F2833",
+          "&:hover": { bgcolor: "#45A29E" },
+        }}
+        style={{
+          m: 1,
+          width: "40%",
+          padding: "10px",
+          fontFamily: "Arvo",
+          fontSize: "1.5rem",
+        }}
+      >
+        Restart
+      </Button>
+      <br />
+      <br />
+      <Button
+        href={`/score/${newPitchData?.id}`}
+        variant="contained"
+        sx={{
+          bgcolor: "#1F2833",
+          "&:hover": { bgcolor: "#45A29E" },
+        }}
+        style={{
+          m: 1,
+          width: "40%",
+          padding: "10px",
+          fontFamily: "Arvo",
+          fontSize: "1.5rem",
+        }}
+      >
+        View Score
+      </Button>
     </div>
   );
 }
 
-const mapState = ({ songs, pitchData }) => ({ songs, pitchData });
+const mapState = ({ songs, newPitchData }) => ({ songs, newPitchData });
 
 const mapDispatch = (dispatch) => {
   return {

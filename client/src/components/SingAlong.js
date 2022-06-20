@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import { useParams } from "react-router-dom";
-import { Button } from "@mui/material";
 import ReactAudioPlayer from "react-audio-player";
 // import { createSpeechlySpeechRecognition } from '@speechly/speech-recognition-polyfill';
 import Lyric from "./Lyric";
@@ -42,15 +41,9 @@ function SingAlong({ songs, artists, newPitchData }) {
     <div className="singAlong">
       <video src="/../images/spotlight.mp4" muted loop autoPlay></video>
       <div className="content">
-        <br />
-        <br />
-        <br />
-        <br />
         <h1>
           {song?.name} by {artist?.name}
         </h1>
-        <p>original song</p>
-        <p>instrumental</p>
         <ReactAudioPlayer
           src={song?.instrumentalAudio}
           autoPlay
@@ -68,23 +61,6 @@ function SingAlong({ songs, artists, newPitchData }) {
               <button onClick={resetTranscript}>Reset</button>
               <p>{transcript}</p>
             </div> */}
-        <Button
-          href={`/score/${newPitchData?.id}`}
-          variant="contained"
-          sx={{
-            bgcolor: "#1F2833",
-            "&:hover": { bgcolor: "#45A29E" },
-          }}
-          style={{
-            m: 1,
-            width: "40%",
-            padding: "10px",
-            fontFamily: "Arvo",
-            fontSize: "1.5rem",
-          }}
-        >
-          View Score
-        </Button>
       </div>
     </div>
   );
