@@ -1,13 +1,11 @@
-import React, { useCallback, useEffect, useState, useRef } from 'react';
-import { connect } from 'react-redux';
-import { useParams } from 'react-router-dom';
-import ReactAudioPlayer from 'react-audio-player';
-import axios from 'axios';
-import LRC from 'lrc.js';
-import { useModel } from 'react-tensorflow';
-import * as tf from '@tensorflow/tfjs';
+import React, { useCallback, useState } from "react";
+import { connect } from "react-redux";
+import { useParams } from "react-router-dom";
+import ReactAudioPlayer from "react-audio-player";
+import { useModel } from "react-tensorflow";
+import * as tf from "@tensorflow/tfjs";
 
-import { createPitchData } from '../store/PitchDatas';
+import { createPitchData } from "../store/PitchData";
 
 const lrc_string = ``;
 const NUM_INPUT_SAMPLES = 1024;
@@ -23,7 +21,7 @@ function getPitchHz(modelPitch) {
   return fmin * Math.pow(2.0, (1.0 * cqt_bin) / bins_per_octave);
 }
 
-function Pitch({ score, setScore, songs, pitchDatas }) {
+function Pitch({ score, setScore, songs, pitchData }) {
   const { id } = useParams();
   const [currentSeconds, setSeconds] = useState(0);
   const [pitches, setPitches] = useState([]);
@@ -36,17 +34,17 @@ function Pitch({ score, setScore, songs, pitchDatas }) {
 
   const handleSuccess = useCallback((stream, model) => {
     let context = new AudioContext({
-      latencyHint: 'playback',
+      latencyHint: "playback",
       sampleRate: MODEL_SAMPLE_RATE,
     });
     console.log(song);
     setTimeout(() => {
       context.close();
-      console.log('recording timed out');
+      console.log("recording timed out");
     }, 10000);
 
-    const retryButton = document.getElementById('retryButton');
-    retryButton.addEventListener('click', async () => {
+    const retryButton = document.getElementById("retryButton");
+    retryButton.addEventListener("click", async () => {
       context.close();
       setPitches([]);
       window.location.reload();
@@ -60,7 +58,7 @@ function Pitch({ score, setScore, songs, pitchDatas }) {
     );
 
     // Converts audio to mono.
-    processor.channelInterpretation = 'speakers';
+    processor.channelInterpretation = "speakers";
     processor.channelCount = 1;
 
     // Runs processor on audio source.
@@ -137,7 +135,7 @@ function Pitch({ score, setScore, songs, pitchDatas }) {
   );
 }
 
-const mapState = ({ songs, pitchDatas }) => ({ songs, pitchDatas });
+const mapState = ({ songs, pitchData }) => ({ songs, pitchData });
 
 const mapDispatch = (dispatch) => {
   return {

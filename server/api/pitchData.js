@@ -7,8 +7,8 @@ module.exports = router;
 // GET pitch datas
 router.get("/", async (req, res, next) => {
   try {
-    const pitchDatas = await PitchData.findAll();
-    res.json(pitchDatas);
+    const pitchData = await PitchData.findAll();
+    res.json(pitchData);
   } catch (err) {
     next(err);
   }

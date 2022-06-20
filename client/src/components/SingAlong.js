@@ -1,21 +1,22 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+import { connect } from "react-redux";
 import { useParams } from "react-router-dom";
 import { Button } from "@mui/material";
 import ReactAudioPlayer from "react-audio-player";
 // import { createSpeechlySpeechRecognition } from '@speechly/speech-recognition-polyfill';
-import axios from "axios";
 import Lyric from "./Lyric";
 import Pitch from "./Pitch";
-import { connect } from "react-redux";
+
 // import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
 
-function SingAlong({ songs, artists, score, setScore }) {
+function SingAlong({ songs, artists, newPitchData }) {
   const { id } = useParams();
-  const [currentSeconds, setSeconds] = useState(0);
-  const [userTranscript, setUserTranscript] = useState("");
-
   const song = songs.find((song) => song.id === id * 1);
   const artist = artists.find((artist) => artist.id === song?.artistId);
+
+  const [currentSeconds, setSeconds] = useState(0);
+
+  // const [userTranscript, setUserTranscript] = useState("");
 
   // const {
   //   transcript,
@@ -33,7 +34,6 @@ function SingAlong({ songs, artists, score, setScore }) {
   // const startListening = () =>
   //   SpeechRecognition.startListening({ continuous: true });
 
-  //Note:score temporarily displayed
   const onListen = (seconds) => {
     setSeconds(seconds);
   };
@@ -52,7 +52,7 @@ function SingAlong({ songs, artists, score, setScore }) {
         <p>original song</p>
         <p>instrumental</p>
         <ReactAudioPlayer
-          src={song.instrumentalAudio}
+          src={song?.instrumentalAudio}
           autoPlay
           controls
           // muted
@@ -68,22 +68,32 @@ function SingAlong({ songs, artists, score, setScore }) {
               <button onClick={resetTranscript}>Reset</button>
               <p>{transcript}</p>
             </div> */}
-        {/*<Button
-              onClick={() => {
-                handleScore(1);
-              }}
-              variant="contained"
-              color="secondary"
-              size="large"
-              style={{ alignSelf: "center", marginTop: 20 }}
-            >
-              View Score
-            </Button>*/}
+        <Button
+          href={`/score/${newPitchData?.id}`}
+          variant="contained"
+          sx={{
+            bgcolor: "#1F2833",
+            "&:hover": { bgcolor: "#45A29E" },
+          }}
+          style={{
+            m: 1,
+            width: "40%",
+            padding: "10px",
+            fontFamily: "Arvo",
+            fontSize: "1.5rem",
+          }}
+        >
+          View Score
+        </Button>
       </div>
     </div>
   );
 }
 
-const mapState = ({ songs, artists }) => ({ songs, artists });
+const mapState = ({ songs, artists, newPitchData }) => ({
+  songs,
+  artists,
+  newPitchData,
+});
 
 export default connect(mapState)(SingAlong);

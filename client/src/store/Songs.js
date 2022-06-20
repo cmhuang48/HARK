@@ -9,13 +9,13 @@ export const loadSongs = () => {
     const response = await axios.get(
       `${process.env.REACT_APP_BASE_URL}/api/songs`
     );
-    dispatch({ type: LOAD_SONGS, payload: response.data });
+    dispatch({ type: LOAD_SONGS, songs: response.data });
   };
 };
 
 // REDUCER
 const songs = (state = [], action) => {
-  if (action.type === LOAD_SONGS) return action.payload;
+  if (action.type === LOAD_SONGS) return action.songs;
   return state;
 };
 
