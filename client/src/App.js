@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 
-import { loadSongs, loadArtists, loadPitchDatas } from "./store";
+import { loadSongs, loadArtists, loadPitchData } from "./store";
 
 import Header from "./components/Header";
 import RoutesTree from "./RoutesTree";
@@ -11,7 +11,7 @@ class App extends React.Component {
   componentDidMount() {
     this.props.loadSongs();
     this.props.loadArtists();
-    this.props.loadPitchDatas();
+    this.props.loadPitchData();
   }
 
   render() {
@@ -31,7 +31,7 @@ const mapDispatch = (dispatch) => {
   return {
     loadSongs: () => dispatch(loadSongs()),
     loadArtists: () => dispatch(loadArtists()),
-    loadPitchDatas: () => dispatch(loadPitchDatas()),
+    loadPitchData: () => dispatch(loadPitchData()),
   };
 };
 

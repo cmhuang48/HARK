@@ -1,10 +1,22 @@
 import React from "react";
+import { connect } from "react-redux";
+import { useParams } from "react-router-dom";
 import { Button } from "@mui/material";
 
-export default function Score({ score }) {
+function Score({ songs, artists, pitchData }) {
+  const id = useParams();
+  const singlePitchData = pitchData.find(
+    (singlePitchData) => singlePitchData.id === id * 1
+  );
+  const song = songs.find((song) => song.id === singlePitchData?.songId);
+  const artist = artists.find((artist) => artist.id === song?.artistId);
+
   return (
     <div className="score">
-      <span className="title">Final Score : {score}</span>
+      <h2>
+        You sang {song?.name} by {artist?.name}
+      </h2>
+      <span className="title">Final Score : {singlePitchData?.score}</span>
       <Button
         variant="contained"
         color="secondary"
@@ -26,3 +38,11 @@ export default function Score({ score }) {
     </div>
   );
 }
+
+const mapState = ({ songs, artists, pitchData }) => ({
+  songs,
+  artists,
+  pitchData,
+});
+
+export default connect(mapState)(Score);

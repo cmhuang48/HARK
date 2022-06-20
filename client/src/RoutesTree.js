@@ -18,7 +18,7 @@ function RoutesTree() {
         <Route path="/songs" element={<SongList />} />
         <Route path="/preview/:id" element={<Preview />} />
         <Route path="/singalong/:id" element={<SingAlong />} />
-        <Route path="/score" element={<Score />} />
+        <Route path="/score/:id" element={<Score />} />
         <Route path="/aboutus" element={<AboutUs />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
