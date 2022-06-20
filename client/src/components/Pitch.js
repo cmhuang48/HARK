@@ -1,11 +1,8 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback } from "react";
 import { connect } from "react-redux";
-import { useParams } from "react-router-dom";
 import { useModel } from "react-tensorflow";
 import * as tf from "@tensorflow/tfjs";
 import { Button } from "@mui/material";
-
-import { createPitchData } from "../store/PitchData";
 
 const NUM_INPUT_SAMPLES = 1024;
 const MODEL_SAMPLE_RATE = 16000;
@@ -20,31 +17,14 @@ function getPitchHz(modelPitch) {
   return fmin * Math.pow(2.0, (1.0 * cqt_bin) / bins_per_octave);
 }
 
-function Pitch({ songs, newPitchData, createPitchData }) {
-  const { id } = useParams();
-  // const [currentSeconds, setSeconds] = useState(0);
-  const [pitches, setPitches] = useState([]);
-
-  const song = songs.find((song) => song.id === id * 1);
-
-  // setInterval(() => {
-  //   setSeconds((currentSeconds) => currentSeconds++);
-  // }, 1000);
-
+function Pitch({ setPitches, newPitchData }) {
   const handleSuccess = useCallback((stream, model) => {
+    console.log('handlesuccess')
+
     let context = new AudioContext({
       latencyHint: "playback",
       sampleRate: MODEL_SAMPLE_RATE,
     });
-    console.log(song);
-
-    // setTimeout(() => {
-    //   context.close();
-    //   console.log("PITCHES ARE", pitches);
-    //   console.log("recording timed out");
-    //   createPitchData(pitches, id);
-    //   console.log("created pitch data");
-    // }, 10000);
 
     const retryButton = document.getElementById("retryButton");
     retryButton.addEventListener("click", async () => {
@@ -68,7 +48,10 @@ function Pitch({ songs, newPitchData, createPitchData }) {
     source.connect(processor);
     processor.connect(context.destination);
 
-    processor.onaudioprocess = function (e) {
+    /*processor.onaudioprocess = function (e) {
+
+      console.log('audioprocess')
+
       const inputData = e.inputBuffer.getChannelData(0);
       const input = tf.reshape(tf.tensor(inputData), [NUM_INPUT_SAMPLES]);
       const output = model.execute({ input_audio_samples: input });
@@ -83,17 +66,10 @@ function Pitch({ songs, newPitchData, createPitchData }) {
         const pitch = getPitchHz(pitches[i]);
         // console.log(pitch);
         // console.log(currentSeconds);
-        setPitches((state) => [...state, pitch]);
+        //setPitches((state) => [...state, pitch]);
       }
-    };
-  }, []);
-
-  // console.log(pitches);
-
-  setTimeout(() => {
-    console.log("recording timed out");
-    createPitchData(pitches, id);
-  }, 10000);
+    };*/
+  }, [setPitches]);
 
   const onLoadCallback = useCallback(
     (model) => {
@@ -112,24 +88,8 @@ function Pitch({ songs, newPitchData, createPitchData }) {
     onLoadCallback,
   });
 
-  //console.log(song, currentSeconds, lrc)
-
-  // const onListen = (seconds) => {
-  //   setSeconds(seconds);
-  // };
-
   return (
-    <div className="singAlong">
-      {/* <ReactAudioPlayer
-        src={song.originalAudio}
-        autoPlay
-        controls
-        muted
-        listenInterval={3000}
-        onListen={onListen}
-      />  */}
-      {/* <div id="recordingStatus"></div> */}
-      {/* <button id="stopButton">stop</button> */}
+    <div className="singAlong">     
       <Button
         id="retryButton"
         variant="contained"
@@ -170,12 +130,6 @@ function Pitch({ songs, newPitchData, createPitchData }) {
   );
 }
 
-const mapState = ({ songs, newPitchData }) => ({ songs, newPitchData });
+const mapState = ({ newPitchData }) => ({ newPitchData });
 
-const mapDispatch = (dispatch) => {
-  return {
-    createPitchData: (pitches, id) => dispatch(createPitchData(pitches, id)),
-  };
-};
-
-export default connect(mapState, mapDispatch)(Pitch);
+export default connect(mapState)(Pitch);

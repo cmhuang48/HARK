@@ -4,25 +4,13 @@ import { useParams } from "react-router-dom";
 import LRC from "lrc.js";
 import { Box } from "@mui/material";
 
-// const lrc_string = ``;
-
 function Lyric({ songs, currentSeconds }) {
   const { id } = useParams();
+
   const song = songs.find((song) => song.id === id * 1);
+
   const lrc = LRC.parse(song?.lyrics);
-
-  // const [lrc, setLrc] = useState(() => {
-  //   return LRC.parse(lrc_string);
-  // });
-
-  // useEffect(() => {
-  //   axios.get(`/api/songs/${id}`).then((res) => {
-  //     setLrc(() => {
-  //       return LRC.parse(res.data.lyrics);
-  //     });
-  //   });
-  // }, []);
-
+  
   const currentIndex =
     lrc.ti === "Since U Been Gone"
       ? lrc.lines.findIndex((item) => item.time >= currentSeconds - 4) - 1

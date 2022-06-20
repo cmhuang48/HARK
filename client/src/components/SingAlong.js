@@ -1,41 +1,28 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import { connect } from "react-redux";
 import { useParams } from "react-router-dom";
 import ReactAudioPlayer from "react-audio-player";
-// import { createSpeechlySpeechRecognition } from '@speechly/speech-recognition-polyfill';
+
 import Lyric from "./Lyric";
 import Pitch from "./Pitch";
+import { createPitchData } from "../store";
 
-// import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
-
-function SingAlong({ songs, artists, newPitchData }) {
+function SingAlong({ songs, artists, createPitchData }) {
   const { id } = useParams();
+
   const song = songs.find((song) => song.id === id * 1);
   const artist = artists.find((artist) => artist.id === song?.artistId);
 
   const [currentSeconds, setSeconds] = useState(0);
+  const [pitches, setPitches] = useState([]);
 
-  // const [userTranscript, setUserTranscript] = useState("");
-
-  // const {
-  //   transcript,
-  //   listening,
-  //   resetTranscript,
-  //   browserSupportsSpeechRecognition,
-  // } = useSpeechRecognition();
-
-  // useEffect(() => {
-  //   setUserTranscript(transcript);
-  // }, [transcript]);
-
-  // console.log(transcript.split(' '));
-
-  // const startListening = () =>
-  //   SpeechRecognition.startListening({ continuous: true });
-
-  const onListen = (seconds) => {
+  const onListen = useCallback((seconds) => {
     setSeconds(seconds);
-  };
+  }, []);
+
+  const onEnded = useCallback(() => {
+    createPitchData(pitches, id)
+  }, [createPitchData, pitches, id]);
 
   return (
     <div className="singAlong">
@@ -48,28 +35,28 @@ function SingAlong({ songs, artists, newPitchData }) {
           src={song?.instrumentalAudio}
           autoPlay
           controls
-          // muted
+          muted
           listenInterval={500}
           onListen={onListen}
+          onEnded={onEnded}
         />
         <Lyric currentSeconds={currentSeconds} />
-        <Pitch />
-        {/* <div>
-              <p>Microphone: {listening ? 'on' : 'off'}</p>
-              <button onClick={startListening}>Start</button>
-              <button onClick={SpeechRecognition.stopListening}>Stop</button>
-              <button onClick={resetTranscript}>Reset</button>
-              <p>{transcript}</p>
-            </div> */}
+        <Pitch setPitches={setPitches} />
       </div>
     </div>
   );
 }
 
-const mapState = ({ songs, artists, newPitchData }) => ({
+const mapState = ({ songs, artists }) => ({
   songs,
   artists,
-  newPitchData,
 });
 
-export default connect(mapState)(SingAlong);
+const mapDispatch = (dispatch) => {
+  return {
+    createPitchData: (pitches, id) => dispatch(createPitchData(pitches, id)),
+  };
+};
+
+
+export default connect(mapState, mapDispatch)(SingAlong);
