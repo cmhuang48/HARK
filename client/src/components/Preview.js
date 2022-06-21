@@ -26,7 +26,6 @@ function Preview({ songs, artists }) {
             <Typography>Back To Song List</Typography>
           </Box>
         </Link>
-
         <Box
           sx={{
             marginTop: "60px",
@@ -64,20 +63,18 @@ function Preview({ songs, artists }) {
               allowFullScreen
             ></iframe>
           </div>
-
-          <Link className="singLink" to={`/singalong/${id}`}>
-            <Button
-              variant="contained"
-              sx={{
-                marginTop: "15px",
-                bgcolor: "#1F2833",
-                "&:hover": { bgcolor: "#45A29E" },
-              }}
-              style={{ m: 1, width: "20%", padding: "10px", fontSize: "1rem" }}
-            >
-              Start Singing
-            </Button>
-          </Link>
+          <Button
+            href={`/singalong/${id}`}
+            variant="contained"
+            sx={{
+              marginTop: "15px",
+              bgcolor: "#1F2833",
+              "&:hover": { bgcolor: "#45A29E" },
+            }}
+            style={{ m: 1, width: "20%", padding: "10px", fontSize: "1rem" }}
+          >
+            Start Singing
+          </Button>
         </Box>
       </Box>
     </div>

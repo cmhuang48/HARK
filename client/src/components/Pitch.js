@@ -5,8 +5,6 @@ import { useModel } from "react-tensorflow";
 import * as tf from "@tensorflow/tfjs";
 import { Button } from "@mui/material";
 
-import { createPitchData } from "../store/PitchData";
-
 const NUM_INPUT_SAMPLES = 1024;
 const MODEL_SAMPLE_RATE = 16000;
 const PT_OFFSET = 25.58;
@@ -20,12 +18,14 @@ function getPitchHz(modelPitch) {
   return fmin * Math.pow(2.0, (1.0 * cqt_bin) / bins_per_octave);
 }
 
-function Pitch({ songs, newPitchData, createPitchData }) {
+function Pitch({ songs, pitchData }) {
   const { id } = useParams();
-  // const [currentSeconds, setSeconds] = useState(0);
-  const [pitches, setPitches] = useState([]);
-
   const song = songs.find((song) => song.id === id * 1);
+  const originalPitchData = pitchData.find(
+    (singlePitchData) => singlePitchData.songId === song?.id
+  );
+  const [pitches, setPitches] = useState([]);
+  // const [currentSeconds, setSeconds] = useState(0);
 
   // setInterval(() => {
   //   setSeconds((currentSeconds) => currentSeconds++);
@@ -90,10 +90,17 @@ function Pitch({ songs, newPitchData, createPitchData }) {
 
   // console.log(pitches);
 
-  setTimeout(() => {
-    console.log("recording timed out");
-    createPitchData(pitches, id);
-  }, 10000);
+  const handleClick = () => {
+    const errorRates = originalPitchData.pitches.map((pitch, idx) => {
+      return pitches[idx] ? Math.abs(pitch - pitches[idx]) / pitch : 0;
+    });
+    const averageErrorRate =
+      errorRates.reduce((accum, rate) => accum + rate, 0) / errorRates.length;
+    const score = (1 - averageErrorRate) * 100;
+    console.log("score is", score);
+    window.localStorage.setItem("score", score);
+    window.location.href = `/score/${id}`;
+  };
 
   const onLoadCallback = useCallback(
     (model) => {
@@ -130,52 +137,37 @@ function Pitch({ songs, newPitchData, createPitchData }) {
       />  */}
       {/* <div id="recordingStatus"></div> */}
       {/* <button id="stopButton">stop</button> */}
+
       <Button
         id="retryButton"
         variant="contained"
         sx={{
+          marginTop: "15px",
           bgcolor: "#1F2833",
           "&:hover": { bgcolor: "#45A29E" },
         }}
-        style={{
-          m: 1,
-          width: "40%",
-          padding: "10px",
-          fontFamily: "Arvo",
-          fontSize: "1.5rem",
-        }}
+        style={{ m: 1, width: "20%", padding: "10px", fontSize: "1rem" }}
       >
         Restart
       </Button>
       <br />
       <br />
       <Button
-        href={`/score/${newPitchData?.id}`}
+        onClick={handleClick}
         variant="contained"
         sx={{
+          marginTop: "15px",
           bgcolor: "#1F2833",
           "&:hover": { bgcolor: "#45A29E" },
         }}
-        style={{
-          m: 1,
-          width: "40%",
-          padding: "10px",
-          fontFamily: "Arvo",
-          fontSize: "1.5rem",
-        }}
+        style={{ m: 1, width: "20%", padding: "10px", fontSize: "1rem" }}
       >
-        View Score
+        Calculate Score
       </Button>
     </div>
   );
 }
 
-const mapState = ({ songs, newPitchData }) => ({ songs, newPitchData });
+const mapState = ({ songs, pitchData }) => ({ songs, pitchData });
 
-const mapDispatch = (dispatch) => {
-  return {
-    createPitchData: (pitches, id) => dispatch(createPitchData(pitches, id)),
-  };
-};
-
-export default connect(mapState, mapDispatch)(Pitch);
+export default connect(mapState)(Pitch);
