@@ -44,10 +44,6 @@ p {
   text-shadow: 1px 1px 1px #000404;
 }
 
-.singLink {
-  text-decoration: none;
-}
-
 .backLink {
   color: #555555;
   text-decoration: none;
@@ -91,10 +87,21 @@ p {
 }
 
 .content {
+  display: "flex";
+  flex-direction: "column";
+  background-color: "#0B0C10";
+  box-shadow: 3;
   position: relative;
   z-index: 10;
 }
 
 .icons {
   display: flex;
+}
+
+.preview, .score {
+  display: "flex";
+  flex-direction: "column";
+  background-color: "#0B0C10";
+  box-shadow: 3;
 }

@@ -1,13 +1,10 @@
 import React, { useCallback, useState } from "react";
 import { connect } from "react-redux";
 import { useParams } from "react-router-dom";
-import ReactAudioPlayer from "react-audio-player";
 import { useModel } from "react-tensorflow";
 import * as tf from "@tensorflow/tfjs";
+import { Button } from "@mui/material";
 
-import { createPitchData } from "../store/PitchData";
-
-const lrc_string = ``;
 const NUM_INPUT_SAMPLES = 1024;
 const MODEL_SAMPLE_RATE = 16000;
 const PT_OFFSET = 25.58;
@@ -21,16 +18,18 @@ function getPitchHz(modelPitch) {
   return fmin * Math.pow(2.0, (1.0 * cqt_bin) / bins_per_octave);
 }
 
-function Pitch({ score, setScore, songs, pitchData }) {
+function Pitch({ songs, pitchData }) {
   const { id } = useParams();
-  const [currentSeconds, setSeconds] = useState(0);
-  const [pitches, setPitches] = useState([]);
-
   const song = songs.find((song) => song.id === id * 1);
+  const originalPitchData = pitchData.find(
+    (singlePitchData) => singlePitchData.songId === song?.id
+  );
+  const [pitches, setPitches] = useState([]);
+  // const [currentSeconds, setSeconds] = useState(0);
 
-  setInterval(() => {
-    setSeconds((currentSeconds) => currentSeconds++);
-  }, 1000);
+  // setInterval(() => {
+  //   setSeconds((currentSeconds) => currentSeconds++);
+  // }, 1000);
 
   const handleSuccess = useCallback((stream, model) => {
     let context = new AudioContext({
@@ -38,10 +37,14 @@ function Pitch({ score, setScore, songs, pitchData }) {
       sampleRate: MODEL_SAMPLE_RATE,
     });
     console.log(song);
-    setTimeout(() => {
-      context.close();
-      console.log("recording timed out");
-    }, 10000);
+
+    // setTimeout(() => {
+    //   context.close();
+    //   console.log("PITCHES ARE", pitches);
+    //   console.log("recording timed out");
+    //   createPitchData(pitches, id);
+    //   console.log("created pitch data");
+    // }, 10000);
 
     const retryButton = document.getElementById("retryButton");
     retryButton.addEventListener("click", async () => {
@@ -79,13 +82,25 @@ function Pitch({ score, setScore, songs, pitchData }) {
         }
         const pitch = getPitchHz(pitches[i]);
         // console.log(pitch);
-        console.log(currentSeconds);
+        // console.log(currentSeconds);
         setPitches((state) => [...state, pitch]);
       }
     };
   }, []);
 
-  console.log(pitches);
+  // console.log(pitches);
+
+  const handleClick = () => {
+    const errorRates = originalPitchData.pitches.map((pitch, idx) => {
+      return pitches[idx] ? Math.abs(pitch - pitches[idx]) / pitch : 0;
+    });
+    const averageErrorRate =
+      errorRates.reduce((accum, rate) => accum + rate, 0) / errorRates.length;
+    const score = (1 - averageErrorRate) * 100;
+    console.log("score is", score);
+    window.localStorage.setItem("score", score);
+    window.location.href = `/score/${id}`;
+  };
 
   const onLoadCallback = useCallback(
     (model) => {
@@ -104,22 +119,14 @@ function Pitch({ score, setScore, songs, pitchData }) {
     onLoadCallback,
   });
 
-  //Note:score temporarily displayed
-
   //console.log(song, currentSeconds, lrc)
 
-  const onListen = (seconds) => {
-    setSeconds(seconds);
-  };
+  // const onListen = (seconds) => {
+  //   setSeconds(seconds);
+  // };
 
   return (
     <div className="singAlong">
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-
       {/* <ReactAudioPlayer
         src={song.originalAudio}
         autoPlay
@@ -128,19 +135,39 @@ function Pitch({ score, setScore, songs, pitchData }) {
         listenInterval={3000}
         onListen={onListen}
       />  */}
-      <div id="recordingStatus"></div>
+      {/* <div id="recordingStatus"></div> */}
       {/* <button id="stopButton">stop</button> */}
-      <button id="retryButton">retry</button>
+
+      <Button
+        id="retryButton"
+        variant="contained"
+        sx={{
+          marginTop: "15px",
+          bgcolor: "#1F2833",
+          "&:hover": { bgcolor: "#45A29E" },
+        }}
+        style={{ m: 1, width: "20%", padding: "10px", fontSize: "1rem" }}
+      >
+        Restart
+      </Button>
+      <br />
+      <br />
+      <Button
+        onClick={handleClick}
+        variant="contained"
+        sx={{
+          marginTop: "15px",
+          bgcolor: "#1F2833",
+          "&:hover": { bgcolor: "#45A29E" },
+        }}
+        style={{ m: 1, width: "20%", padding: "10px", fontSize: "1rem" }}
+      >
+        Calculate Score
+      </Button>
     </div>
   );
 }
 
 const mapState = ({ songs, pitchData }) => ({ songs, pitchData });
 
-const mapDispatch = (dispatch) => {
-  return {
-    createPitchData: (pitches, id) => dispatch(createPitchData(pitches, id)),
-  };
-};
-
-export default connect(mapState, mapDispatch)(Pitch);
+export default connect(mapState)(Pitch);
