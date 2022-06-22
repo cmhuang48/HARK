@@ -22,9 +22,13 @@ function SingAlong({ songs, artists, pitchData }) {
   }, []);
 
   const onEnded = () => {
-    const errorRates = originalPitchData.pitches.map((pitch, idx) => {
-      return pitches[idx] ? Math.abs(pitch - pitches[idx]) / pitch : 0;
-    });
+    const errorRates = [];
+    for (let i = 0; i < originalPitchData.pitches.length; i++) {
+      const originalPitch = originalPitchData.pitches[i];
+      if (pitches[i]) {
+        errorRates.push(Math.abs(originalPitch - pitches[i]) / originalPitch);
+      }
+    }
     const averageErrorRate =
       errorRates.reduce((accum, rate) => accum + rate, 0) / errorRates.length;
     const score = (1 - averageErrorRate) * 100;

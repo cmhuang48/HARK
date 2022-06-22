@@ -21,7 +21,7 @@ function Score({ songs, artists }) {
           boxShadow: 3,
         }}
       >
-        <Typography variant="h4" fontFamily="Arvo" color="#66FCF1">
+        <Typography variant="h6" fontFamily="Arvo" color="#45A29E">
           You sang {song?.name} by {artist?.name}!
         </Typography>
         <Typography variant="h5" fontFamily="Arvo" color="white">
