@@ -1,5 +1,4 @@
-import React, { useCallback, useState } from "react";
-import { connect } from "react-redux";
+import React, { useCallback } from "react";
 import { useParams } from "react-router-dom";
 import { useModel } from "react-tensorflow";
 import * as tf from "@tensorflow/tfjs";
@@ -18,33 +17,14 @@ function getPitchHz(modelPitch) {
   return fmin * Math.pow(2.0, (1.0 * cqt_bin) / bins_per_octave);
 }
 
-function Pitch({ songs, pitchData }) {
+export default function Pitch({ setPitches }) {
   const { id } = useParams();
-  const song = songs.find((song) => song.id === id * 1);
-  const originalPitchData = pitchData.find(
-    (singlePitchData) => singlePitchData.songId === song?.id
-  );
-  const [pitches, setPitches] = useState([]);
-  // const [currentSeconds, setSeconds] = useState(0);
-
-  // setInterval(() => {
-  //   setSeconds((currentSeconds) => currentSeconds++);
-  // }, 1000);
 
   const handleSuccess = useCallback((stream, model) => {
     let context = new AudioContext({
       latencyHint: "playback",
       sampleRate: MODEL_SAMPLE_RATE,
     });
-    console.log(song);
-
-    // setTimeout(() => {
-    //   context.close();
-    //   console.log("PITCHES ARE", pitches);
-    //   console.log("recording timed out");
-    //   createPitchData(pitches, id);
-    //   console.log("created pitch data");
-    // }, 10000);
 
     const retryButton = document.getElementById("retryButton");
     retryButton.addEventListener("click", async () => {
@@ -81,26 +61,10 @@ function Pitch({ songs, pitchData }) {
           continue;
         }
         const pitch = getPitchHz(pitches[i]);
-        // console.log(pitch);
-        // console.log(currentSeconds);
         setPitches((state) => [...state, pitch]);
       }
     };
   }, []);
-
-  // console.log(pitches);
-
-  const handleClick = () => {
-    const errorRates = originalPitchData.pitches.map((pitch, idx) => {
-      return pitches[idx] ? Math.abs(pitch - pitches[idx]) / pitch : 0;
-    });
-    const averageErrorRate =
-      errorRates.reduce((accum, rate) => accum + rate, 0) / errorRates.length;
-    const score = (1 - averageErrorRate) * 100;
-    console.log("score is", score);
-    window.localStorage.setItem("score", score);
-    window.location.href = `/score/${id}`;
-  };
 
   const onLoadCallback = useCallback(
     (model) => {
@@ -119,25 +83,8 @@ function Pitch({ songs, pitchData }) {
     onLoadCallback,
   });
 
-  //console.log(song, currentSeconds, lrc)
-
-  // const onListen = (seconds) => {
-  //   setSeconds(seconds);
-  // };
-
   return (
     <div className="singAlong">
-      {/* <ReactAudioPlayer
-        src={song.originalAudio}
-        autoPlay
-        controls
-        muted
-        listenInterval={3000}
-        onListen={onListen}
-      />  */}
-      {/* <div id="recordingStatus"></div> */}
-      {/* <button id="stopButton">stop</button> */}
-
       <Button
         id="retryButton"
         variant="contained"
@@ -152,22 +99,22 @@ function Pitch({ songs, pitchData }) {
       </Button>
       <br />
       <br />
-      <Button
-        onClick={handleClick}
-        variant="contained"
-        sx={{
-          marginTop: "15px",
-          bgcolor: "#1F2833",
-          "&:hover": { bgcolor: "#45A29E" },
-        }}
-        style={{ m: 1, width: "20%", padding: "10px", fontSize: "1rem" }}
-      >
-        Calculate Score
-      </Button>
+      {window.localStorage.getItem("score") ? (
+        <Button
+          href={`/score/${id}`}
+          variant="contained"
+          sx={{
+            marginTop: "15px",
+            bgcolor: "#1F2833",
+            "&:hover": { bgcolor: "#45A29E" },
+          }}
+          style={{ m: 1, width: "20%", padding: "10px", fontSize: "1rem" }}
+        >
+          View Score
+        </Button>
+      ) : (
+        ""
+      )}
     </div>
   );
 }
-
-const mapState = ({ songs, pitchData }) => ({ songs, pitchData });
-
-export default connect(mapState)(Pitch);
