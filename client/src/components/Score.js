@@ -4,7 +4,7 @@ import { Box, Button } from "@mui/material";
 import { useParams } from "react-router-dom";
 
 function Score({ songs, artists }) {
-  const id = useParams();
+  const { id } = useParams();
   const song = songs.find((song) => song.id === id * 1);
   const artist = artists.find((artist) => artist.id === song?.artistId);
   const score = window.localStorage.getItem("score");
