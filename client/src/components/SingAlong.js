@@ -13,6 +13,8 @@ function SingAlong({ songs, artists, pitchData }) {
     (singlePitchData) => singlePitchData.songId === song?.id
   );
 
+  console.log(originalPitchData)
+
   const [currentSeconds, setSeconds] = useState(0);
   const [pitches, setPitches] = useState([]);
 
@@ -20,7 +22,7 @@ function SingAlong({ songs, artists, pitchData }) {
     setSeconds(seconds);
   }, []);
 
-  const onEnded = () => {
+  const onEnded = useCallback(() => {
     const errorRates = originalPitchData.pitches.map((pitch, idx) => {
       return pitches[idx] ? Math.abs(pitch - pitches[idx]) / pitch : 0;
     });
@@ -29,33 +31,29 @@ function SingAlong({ songs, artists, pitchData }) {
     const score = (1 - averageErrorRate) * 100;
     console.log("score is", score);
     window.localStorage.setItem("score", score);
-  };
+  },[originalPitchData?.pitches, pitches]);
 
   return (
     <div className="singAlong">
       <video src="/../images/spotlight.mp4" muted loop autoPlay></video>
       <div className="content">
-        <h1>
+        <h1 className="song-title">
           {song?.name} by {artist?.name}
         </h1>
         <ReactAudioPlayer
           src={song?.instrumentalAudio}
           autoPlay
-          controls
+          // controls
           // muted
           listenInterval={500}
           onListen={onListen}
           onEnded={onEnded}
         />
-        <Lyric currentSeconds={currentSeconds} />
+        <div className="lyrics">
+          <Lyric currentSeconds={currentSeconds} />
+        </div>
+
         <Pitch setPitches={setPitches} />
-        {/* <div>
-              <p>Microphone: {listening ? 'on' : 'off'}</p>
-              <button onClick={startListening}>Start</button>
-              <button onClick={SpeechRecognition.stopListening}>Stop</button>
-              <button onClick={resetTranscript}>Reset</button>
-              <p>{transcript}</p>
-            </div> */}
       </div>
     </div>
   );

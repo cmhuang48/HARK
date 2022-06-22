@@ -76,6 +76,8 @@ p {
 }
 
 .singAlong {
+  display: "flex";
+  flex-direction: "column";
   height: 100vh;
 }
 
@@ -104,4 +106,20 @@ p {
   flex-direction: "column";
   background-color: "#0B0C10";
   box-shadow: 3;
+}
+.score-retry-btn {
+  display: flex;
+  justify-content: center
+}
+.song-title {
+  display: flex;
+  justify-content: center;
+  text-decoration: none;
+}
+
+.lyrics {
+  margin: 18em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

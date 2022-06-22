@@ -63,8 +63,8 @@ export default function Pitch({ setPitches }) {
         const pitch = getPitchHz(pitches[i]);
         setPitches((state) => [...state, pitch]);
       }
-    };
-  }, []);
+    }
+  }, [setPitches]);
 
   const onLoadCallback = useCallback(
     (model) => {
@@ -85,8 +85,10 @@ export default function Pitch({ setPitches }) {
 
   return (
     <div className="singAlong">
+      <div className="score-retry-btn">
       <Button
         id="retryButton"
+        className="retry-btn"
         variant="contained"
         sx={{
           marginTop: "15px",
@@ -99,22 +101,28 @@ export default function Pitch({ setPitches }) {
       </Button>
       <br />
       <br />
-      {window.localStorage.getItem("score") ? (
-        <Button
-          href={`/score/${id}`}
-          variant="contained"
-          sx={{
-            marginTop: "15px",
-            bgcolor: "#1F2833",
-            "&:hover": { bgcolor: "#45A29E" },
-          }}
-          style={{ m: 1, width: "20%", padding: "10px", fontSize: "1rem" }}
-        >
-          View Score
-        </Button>
-      ) : (
-        ""
-      )}
+
+      </div>
+      <div className="score-retry-btn">
+        {window.localStorage.getItem("score") ? (
+          <Button
+            href={`/score/${id}`}
+            className="score-btn"
+            variant="contained"
+            sx={{
+              marginTop: "15px",
+              bgcolor: "#1F2833",
+              "&:hover": { bgcolor: "#45A29E" },
+            }}
+            style={{ m: 1, width: "20%", padding: "10px", fontSize: "1rem" }}
+          >
+            View Score
+          </Button>
+        ) : (
+          ""
+        )}
+      </div>
+
     </div>
   );
 }
