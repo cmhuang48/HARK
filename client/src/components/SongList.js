@@ -1,7 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-
 import { Box, Typography } from "@mui/material";
 
 function SongList({ songs, artists }) {

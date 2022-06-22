@@ -1,9 +1,9 @@
 import React from "react";
 import { connect } from "react-redux";
 import { useParams, Link } from "react-router-dom";
-import HeadphonesIcon from "@mui/icons-material/Headphones";
-import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import { Box, Button, Typography } from "@mui/material";
+import HeadphonesIcon from "@mui/icons-material/Headphones";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 function Preview({ songs, artists }) {
   const { id } = useParams();
@@ -14,18 +14,36 @@ function Preview({ songs, artists }) {
     <div className="preview">
       <Box
         sx={{
+          backgroundColor: "#0B0C10",
+          boxShadow: 3,
+        }}
+      >
+        <Button
+          href="/songs"
+          size="large"
+          sx={{ justifyContent: "left", marginLeft: "15px" }}
+        >
+          <ArrowBackIcon sx={{ color: "#45A29E" }} />{" "}
+          <Typography
+            variant="h6"
+            fontFamily="Arvo"
+            fontWeight="700"
+            backgroundColor="#0B0C10"
+            color="#45A29E"
+          >
+            Back To Song List
+          </Typography>
+        </Button>
+      </Box>
+
+      <Box
+        sx={{
           display: "flex",
           flexDirection: "column",
           backgroundColor: "#0B0C10",
           boxShadow: 3,
         }}
       >
-        <Link className="backLink" to="/songs" sx={{ justifyContent: "left" }}>
-          <Box sx={{ display: "flex", flexDirection: "row" }}>
-            <ArrowBackIosIcon />
-            <Typography>Back To Song List</Typography>
-          </Box>
-        </Link>
         <Box
           sx={{
             marginTop: "60px",
@@ -48,7 +66,7 @@ function Preview({ songs, artists }) {
             accurate score.
           </Typography>
           <br />
-          <Typography variant="h6" fontFamily="Arvo" color="white">
+          <Typography variant="h6" fontFamily="Arvo" color="#66FCF1">
             Watch {artist?.name} sing {song?.name}!
           </Typography>
           <br />

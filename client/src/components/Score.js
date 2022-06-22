@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Box, Button } from "@mui/material";
 import { useParams } from "react-router-dom";
+import { Box, Button, Typography } from "@mui/material";
 
 function Score({ songs, artists }) {
   const { id } = useParams();
@@ -15,14 +15,41 @@ function Score({ songs, artists }) {
         sx={{
           display: "flex",
           flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
           backgroundColor: "#0B0C10",
           boxShadow: 3,
         }}
       >
-        <h2>
+        <Typography variant="h4" fontFamily="Arvo" color="#66FCF1">
           You sang {song?.name} by {artist?.name}!
-        </h2>
-        <span className="title">Your Score: {score}</span>
+        </Typography>
+        <Typography variant="h5" fontFamily="Arvo" color="white">
+          Your Score:
+        </Typography>
+        <Typography variant="h3" fontFamily="Arvo" color="#66FCF1">
+          {Math.round(score)} / 100
+        </Typography>
+        {score < 50 && (
+          <Typography variant="h5" fontFamily="Arvo" color="#45A29E">
+            Meh, keep working and try again. You can do better!
+          </Typography>
+        )}
+        {score > 50 && score < 75 && (
+          <Typography variant="h5" fontFamily="Arvo" color="#45A29E">
+            Great vocals, but you have room to improve!
+          </Typography>
+        )}
+        {score > 75 && score < 100 && (
+          <Typography variant="h5" fontFamily="Arvo" color="#45A29E">
+            Fantastic, you're a natural!
+          </Typography>
+        )}
+        {!score && (
+          <Typography variant="h5" fontFamily="Arvo" color="#45A29E">
+            Sorry, there was an error. Please try again!
+          </Typography>
+        )}
         <Button
           href="/songs"
           variant="contained"
@@ -31,7 +58,7 @@ function Score({ songs, artists }) {
             bgcolor: "#1F2833",
             "&:hover": { bgcolor: "#45A29E" },
           }}
-          style={{ m: 1, width: "20%", padding: "10px", fontSize: "1rem" }}
+          style={{ m: 1, width: "40%", padding: "10px", fontSize: "1rem" }}
         >
           Sing Another Song?
         </Button>
@@ -43,7 +70,7 @@ function Score({ songs, artists }) {
             bgcolor: "#1F2833",
             "&:hover": { bgcolor: "#45A29E" },
           }}
-          style={{ m: 1, width: "20%", padding: "10px", fontSize: "1rem" }}
+          style={{ m: 1, width: "40%", padding: "10px", fontSize: "1rem" }}
         >
           Return to Home
         </Button>

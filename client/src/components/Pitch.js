@@ -1,8 +1,9 @@
 import React, { useCallback } from "react";
+import { connect } from "react-redux";
 import { useParams } from "react-router-dom";
 import { useModel } from "react-tensorflow";
 import * as tf from "@tensorflow/tfjs";
-import { Button } from "@mui/material";
+import { Box, Button } from "@mui/material";
 
 const NUM_INPUT_SAMPLES = 1024;
 const MODEL_SAMPLE_RATE = 16000;
@@ -17,8 +18,12 @@ function getPitchHz(modelPitch) {
   return fmin * Math.pow(2.0, (1.0 * cqt_bin) / bins_per_octave);
 }
 
-export default function Pitch({ setPitches }) {
+function Pitch({ pitches, setPitches, songs, pitchData }) {
   const { id } = useParams();
+  const song = songs.find((song) => song.id === id * 1);
+  const originalPitchData = pitchData.find(
+    (singlePitchData) => singlePitchData.songId === song?.id
+  );
 
   const handleSuccess = useCallback((stream, model) => {
     let context = new AudioContext({
@@ -83,38 +88,75 @@ export default function Pitch({ setPitches }) {
     onLoadCallback,
   });
 
+  const handleClick = () => {
+    const errorRates = originalPitchData.pitches.map((pitch, idx) => {
+      return pitches[idx] ? Math.abs(pitch - pitches[idx]) / pitch : 0;
+    });
+    const averageErrorRate =
+      errorRates.reduce((accum, rate) => accum + rate, 0) / errorRates.length;
+    const score = (1 - averageErrorRate) * 100;
+    console.log("score is", score);
+    window.localStorage.setItem("score", score);
+    window.location.href = `/score/${id}`;
+  };
+
   return (
-    <div className="singAlong">
-      <Button
-        id="retryButton"
-        variant="contained"
+    <div className="pitch">
+      <Box
         sx={{
-          marginTop: "15px",
-          bgcolor: "#1F2833",
-          "&:hover": { bgcolor: "#45A29E" },
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
         }}
-        style={{ m: 1, width: "20%", padding: "10px", fontSize: "1rem" }}
       >
-        Restart
-      </Button>
-      <br />
-      <br />
-      {window.localStorage.getItem("score") ? (
         <Button
-          href={`/score/${id}`}
+          id="retryButton"
           variant="contained"
           sx={{
             marginTop: "15px",
             bgcolor: "#1F2833",
             "&:hover": { bgcolor: "#45A29E" },
           }}
-          style={{ m: 1, width: "20%", padding: "10px", fontSize: "1rem" }}
+          style={{ m: 1, width: "50%", padding: "10px", fontSize: "1rem" }}
         >
-          View Score
+          Restart
         </Button>
-      ) : (
-        ""
-      )}
+        <br />
+        <Button
+          onClick={handleClick}
+          variant="contained"
+          sx={{
+            marginTop: "15px",
+            bgcolor: "#1F2833",
+            "&:hover": { bgcolor: "#45A29E" },
+          }}
+          style={{ m: 1, width: "50%", padding: "10px", fontSize: "1rem" }}
+        >
+          Calculate Score
+        </Button>
+        <br />
+        {window.localStorage.getItem("score") ? (
+          <Button
+            href={`/score/${id}`}
+            variant="contained"
+            sx={{
+              marginTop: "15px",
+              bgcolor: "#1F2833",
+              "&:hover": { bgcolor: "#45A29E" },
+            }}
+            style={{ m: 1, width: "50%", padding: "10px", fontSize: "1rem" }}
+          >
+            View Score
+          </Button>
+        ) : (
+          ""
+        )}
+      </Box>
     </div>
   );
 }
+
+const mapState = ({ songs, pitchData }) => ({ songs, pitchData });
+
+export default connect(mapState)(Pitch);
