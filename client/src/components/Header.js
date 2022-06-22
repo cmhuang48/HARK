@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 // import { connect } from "react-redux";
-//import { logout } from "../server/store";
+// import { logout } from "../server/store";
 
 const Header = () => (
   <div className="header">

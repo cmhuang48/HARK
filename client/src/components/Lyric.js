@@ -18,11 +18,10 @@ function Lyric({ currentSeconds, songs }) {
   const lyric = lrc.lines[currentIndex === 0 ? 1 : currentIndex];
 
   return (
-    <div>
+    <div className="lyric">
       <Box
         sx={{
           display: "flex",
-          textAlign: "center",
           flexDirection: "column",
           justifyContent: "center",
           alignItems: "center",
