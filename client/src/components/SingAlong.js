@@ -1,10 +1,10 @@
-import React, { useState, useCallback } from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 import { useParams } from "react-router-dom";
 import ReactAudioPlayer from "react-audio-player";
 import { Box, Typography } from "@mui/material";
 import Lyric from "./Lyric";
-import Pitch from "./Pitch";
+import Pitch from "./Pitch1";
 
 function SingAlong({ songs, artists, pitchData }) {
   const { id } = useParams();
@@ -17,9 +17,10 @@ function SingAlong({ songs, artists, pitchData }) {
   const [currentSeconds, setSeconds] = useState(0);
   const [pitches, setPitches] = useState([]);
 
-  const onListen = useCallback((seconds) => {
+  const onListen = (seconds) => {
+    console.log("onListen");
     setSeconds(seconds);
-  }, []);
+  };
 
   const onEnded = () => {
     const errorRates = [];
