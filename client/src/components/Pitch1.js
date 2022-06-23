@@ -50,6 +50,14 @@ function Pitch({ pitches, setPitches, songs, pitchData }) {
       sampleRate: MODEL_SAMPLE_RATE,
     });
 
+    const retryButton = document.getElementById("retryButton");
+    retryButton.addEventListener("click", async () => {
+      console.log("clicked");
+      context.close();
+      setPitches([]);
+      window.location.reload();
+    });
+
     let source = context.createMediaStreamSource(stream);
     let processor = context.createScriptProcessor(
       NUM_INPUT_SAMPLES,
