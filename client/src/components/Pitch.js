@@ -69,7 +69,7 @@ function Pitch({ pitches, setPitches, songs, pitchData }) {
         setPitches((state) => [...state, pitch]);
       }
     };
-  }, []);
+  }, [setPitches]);
 
   const onLoadCallback = useCallback(
     (model) => {
