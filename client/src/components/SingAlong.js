@@ -70,7 +70,7 @@ function SingAlong({ songs, artists, pitchData }) {
             <ReactAudioPlayer
               src={song?.instrumentalAudio}
               autoPlay
-              controls
+              // controls
               // muted
               listenInterval={500}
               onListen={onListen}
