@@ -24,16 +24,19 @@ function SingAlong({ songs, artists, pitchData }) {
 
   const onEnded = () => {
     const errorRates = [];
+    console.log("pitches", pitches);
     for (let i = 0; i < originalPitchData.pitches.length; i++) {
       const originalPitch = originalPitchData.pitches[i];
       if (pitches[i]) {
-        errorRates.push(Math.abs(originalPitch - pitches[i]) / originalPitch);
+        errorRates.push(Math.abs(pitches[i] - originalPitch) / originalPitch);
       }
     }
+    console.log("error rates", errorRates);
     const averageErrorRate =
       errorRates.reduce((accum, rate) => accum + rate, 0) / errorRates.length;
+    console.log("average error rate", averageErrorRate);
     const score = (1 - averageErrorRate) * 100;
-    console.log("score is", score);
+    console.log("score", score);
     window.localStorage.setItem("score", score);
   };
 
