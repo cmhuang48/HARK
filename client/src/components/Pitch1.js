@@ -1,22 +1,8 @@
-import React, { useCallback } from 'react';
-import { connect } from 'react-redux';
-import { useParams } from 'react-router-dom';
-import { useModel } from 'react-tensorflow';
-import * as tf from '@tensorflow/tfjs';
-import { Box, Button } from '@mui/material';
-
-const NUM_INPUT_SAMPLES = 1024;
-const MODEL_SAMPLE_RATE = 3000;
-const PT_OFFSET = 25.58;
-const PT_SLOPE = 63.07;
-const CONF_THRESHOLD = 0.9;
-
-function getPitchHz(modelPitch) {
-  const fmin = 10.0;
-  const bins_per_octave = 12.0;
-  const cqt_bin = modelPitch * PT_SLOPE + PT_OFFSET;
-  return fmin * Math.pow(2.0, (1.0 * cqt_bin) / bins_per_octave);
-}
+import React, { useEffect } from "react";
+import { connect } from "react-redux";
+import { useParams } from "react-router-dom";
+import * as tf from "@tensorflow/tfjs";
+import { Box, Button } from "@mui/material";
 
 function Pitch({ pitches, setPitches, songs, pitchData }) {
   const { id } = useParams();
@@ -25,17 +11,44 @@ function Pitch({ pitches, setPitches, songs, pitchData }) {
     (singlePitchData) => singlePitchData.songId === song?.id
   );
 
-  const handleSuccess = useCallback((stream, model) => {
-    let context = new AudioContext({
-      latencyHint: 'playback',
-      sampleRate: MODEL_SAMPLE_RATE,
-    });
+  useEffect(() => {
+    console.log("useEffect");
+    startDemo();
+  }, []);
 
-    const retryButton = document.getElementById('retryButton');
-    retryButton.addEventListener('click', async () => {
-      context.close();
-      setPitches([]);
-      window.location.reload();
+  const NUM_INPUT_SAMPLES = 1024;
+  const MODEL_SAMPLE_RATE = 8000;
+  const PT_OFFSET = 25.58;
+  const PT_SLOPE = 63.07;
+  const CONF_THRESHOLD = 0.9;
+  const MODEL_URL = "https://tfhub.dev/google/tfjs-model/spice/2/default/1";
+  let model;
+
+  async function startDemo() {
+    console.log("startDemo");
+    model = await tf.loadGraphModel(MODEL_URL, { fromTFHub: true });
+    navigator.mediaDevices
+      .getUserMedia({ audio: true, video: false })
+      .then(handleSuccess)
+      .catch(handleError);
+  }
+
+  function handleError(err) {
+    console.log(err);
+  }
+
+  function getPitchHz(modelPitch) {
+    const fmin = 10.0;
+    const bins_per_octave = 12.0;
+    const cqt_bin = modelPitch * PT_SLOPE + PT_OFFSET;
+    return fmin * Math.pow(2.0, (1.0 * cqt_bin) / bins_per_octave);
+  }
+
+  function handleSuccess(stream) {
+    console.log("handleSuccess");
+    let context = new AudioContext({
+      latencyHint: "playback",
+      sampleRate: MODEL_SAMPLE_RATE,
     });
 
     let source = context.createMediaStreamSource(stream);
@@ -46,7 +59,7 @@ function Pitch({ pitches, setPitches, songs, pitchData }) {
     );
 
     // Converts audio to mono.
-    processor.channelInterpretation = 'speakers';
+    processor.channelInterpretation = "speakers";
     processor.channelCount = 1;
 
     // Runs processor on audio source.
@@ -69,24 +82,7 @@ function Pitch({ pitches, setPitches, songs, pitchData }) {
         setPitches((state) => [...state, pitch]);
       }
     };
-  }, []);
-
-  const onLoadCallback = useCallback(
-    (model) => {
-      if (model) {
-        navigator.mediaDevices
-          .getUserMedia({ audio: true, video: false })
-          .then((data) => handleSuccess(data, model))
-          .catch((err) => console.log(err));
-      }
-    },
-    [handleSuccess]
-  );
-
-  useModel({
-    modelUrl: `https://tfhub.dev/google/tfjs-model/spice/2/default/1`,
-    onLoadCallback,
-  });
+  }
 
   const handleClick = () => {
     const errorRates = [];
@@ -111,21 +107,21 @@ function Pitch({ pitches, setPitches, songs, pitchData }) {
     <div className="pitch">
       <Box
         sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'center',
-          alignItems: 'center',
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
         }}
       >
         <Button
           id="retryButton"
           variant="contained"
           sx={{
-            marginTop: '15px',
-            bgcolor: '#1F2833',
-            '&:hover': { bgcolor: '#45A29E' },
+            marginTop: "15px",
+            bgcolor: "#1F2833",
+            "&:hover": { bgcolor: "#45A29E" },
           }}
-          style={{ m: 1, width: '50%', padding: '10px', fontSize: '1rem' }}
+          style={{ m: 1, width: "50%", padding: "10px", fontSize: "1rem" }}
         >
           Restart
         </Button>
@@ -134,11 +130,11 @@ function Pitch({ pitches, setPitches, songs, pitchData }) {
           onClick={handleClick}
           variant="contained"
           sx={{
-            marginTop: '15px',
-            bgcolor: '#1F2833',
-            '&:hover': { bgcolor: '#45A29E' },
+            marginTop: "15px",
+            bgcolor: "#1F2833",
+            "&:hover": { bgcolor: "#45A29E" },
           }}
-          style={{ m: 1, width: '50%', padding: '10px', fontSize: '1rem' }}
+          style={{ m: 1, width: "50%", padding: "10px", fontSize: "1rem" }}
         >
           Calculate Score
         </Button>
