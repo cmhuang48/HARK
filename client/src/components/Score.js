@@ -35,12 +35,17 @@ function Score({ songs, artists }) {
             Meh, keep working and try again. You can do better!
           </Typography>
         )}
-        {score > 50 && score < 75 && (
+        {score > 50 && score < 80 && (
           <Typography variant="h5" fontFamily="Arvo" color="#45A29E">
-            Great vocals, but you have room to improve!
+            Nice job, but you have room to improve!
           </Typography>
         )}
-        {score > 75 && score < 100 && (
+        {score > 80 && score < 90 && (
+          <Typography variant="h5" fontFamily="Arvo" color="#45A29E">
+            Amazing vocals, but you still have room to improve!
+          </Typography>
+        )}
+        {score > 90 && score < 100 && (
           <Typography variant="h5" fontFamily="Arvo" color="#45A29E">
             Fantastic, you're a natural!
           </Typography>
