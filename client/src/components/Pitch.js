@@ -1,12 +1,12 @@
-import React, { useCallback } from "react";
-import { connect } from "react-redux";
-import { useParams } from "react-router-dom";
-import { useModel } from "react-tensorflow";
-import * as tf from "@tensorflow/tfjs";
-import { Box, Button } from "@mui/material";
+import React, { useCallback } from 'react';
+import { connect } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import { useModel } from 'react-tensorflow';
+import * as tf from '@tensorflow/tfjs';
+import { Box, Button } from '@mui/material';
 
 const NUM_INPUT_SAMPLES = 1024;
-const MODEL_SAMPLE_RATE = 16000;
+const MODEL_SAMPLE_RATE = 3000;
 const PT_OFFSET = 25.58;
 const PT_SLOPE = 63.07;
 const CONF_THRESHOLD = 0.9;
@@ -27,12 +27,12 @@ function Pitch({ pitches, setPitches, songs, pitchData }) {
 
   const handleSuccess = useCallback((stream, model) => {
     let context = new AudioContext({
-      latencyHint: "playback",
+      latencyHint: 'playback',
       sampleRate: MODEL_SAMPLE_RATE,
     });
 
-    const retryButton = document.getElementById("retryButton");
-    retryButton.addEventListener("click", async () => {
+    const retryButton = document.getElementById('retryButton');
+    retryButton.addEventListener('click', async () => {
       context.close();
       setPitches([]);
       window.location.reload();
@@ -46,7 +46,7 @@ function Pitch({ pitches, setPitches, songs, pitchData }) {
     );
 
     // Converts audio to mono.
-    processor.channelInterpretation = "speakers";
+    processor.channelInterpretation = 'speakers';
     processor.channelCount = 1;
 
     // Runs processor on audio source.
@@ -111,21 +111,21 @@ function Pitch({ pitches, setPitches, songs, pitchData }) {
     <div className="pitch">
       <Box
         sx={{
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          alignItems: "center",
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'center',
         }}
       >
         <Button
           id="retryButton"
           variant="contained"
           sx={{
-            marginTop: "15px",
-            bgcolor: "#1F2833",
-            "&:hover": { bgcolor: "#45A29E" },
+            marginTop: '15px',
+            bgcolor: '#1F2833',
+            '&:hover': { bgcolor: '#45A29E' },
           }}
-          style={{ m: 1, width: "50%", padding: "10px", fontSize: "1rem" }}
+          style={{ m: 1, width: '50%', padding: '10px', fontSize: '1rem' }}
         >
           Restart
         </Button>
@@ -134,11 +134,11 @@ function Pitch({ pitches, setPitches, songs, pitchData }) {
           onClick={handleClick}
           variant="contained"
           sx={{
-            marginTop: "15px",
-            bgcolor: "#1F2833",
-            "&:hover": { bgcolor: "#45A29E" },
+            marginTop: '15px',
+            bgcolor: '#1F2833',
+            '&:hover': { bgcolor: '#45A29E' },
           }}
-          style={{ m: 1, width: "50%", padding: "10px", fontSize: "1rem" }}
+          style={{ m: 1, width: '50%', padding: '10px', fontSize: '1rem' }}
         >
           Calculate Score
         </Button>
