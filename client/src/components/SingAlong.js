@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import ReactAudioPlayer from "react-audio-player";
 import { Box, Typography } from "@mui/material";
 import Lyric from "./Lyric";
-import Pitch from "./Pitch1";
+import Pitch from "./Pitch";
 
 function SingAlong({ songs, artists, pitchData }) {
   const { id } = useParams();

@@ -33,6 +33,7 @@ function Pitch({ pitches, setPitches, songs, pitchData }) {
 
     const retryButton = document.getElementById('retryButton');
     retryButton.addEventListener('click', async () => {
+      console.log('clicked');
       context.close();
       setPitches([]);
       window.location.reload();
@@ -90,20 +91,20 @@ function Pitch({ pitches, setPitches, songs, pitchData }) {
 
   const handleClick = () => {
     const errorRates = [];
-    console.log("pitches", pitches);
+    console.log('pitches', pitches);
     for (let i = 0; i < originalPitchData.pitches.length; i++) {
       const originalPitch = originalPitchData.pitches[i];
       if (pitches[i]) {
         errorRates.push(Math.abs(pitches[i] - originalPitch) / originalPitch);
       }
     }
-    console.log("error rates", errorRates);
+    console.log('error rates', errorRates);
     const averageErrorRate =
       errorRates.reduce((accum, rate) => accum + rate, 0) / errorRates.length;
-    console.log("average error rate", averageErrorRate);
+    console.log('average error rate', averageErrorRate);
     const score = (1 - averageErrorRate) * 100;
-    console.log("score", score);
-    window.localStorage.setItem("score", score);
+    console.log('score', score);
+    window.localStorage.setItem('score', score);
     window.location.href = `/score/${id}`;
   };
 
@@ -126,6 +127,7 @@ function Pitch({ pitches, setPitches, songs, pitchData }) {
             '&:hover': { bgcolor: '#45A29E' },
           }}
           style={{ m: 1, width: '50%', padding: '10px', fontSize: '1rem' }}
+          onClick={() => console.log('clicko')}
         >
           Restart
         </Button>
