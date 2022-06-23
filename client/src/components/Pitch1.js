@@ -128,38 +128,23 @@ function Pitch({ pitches, setPitches, songs, pitchData }) {
             bgcolor: "#1F2833",
             "&:hover": { bgcolor: "#45A29E" },
           }}
-          style={{ m: 1, width: "50%", padding: "10px", fontSize: "1rem" }}
+          style={{ m: 1, width: "100%", padding: "20px", fontSize: "1rem" }}
         >
           Restart
         </Button>
         <br />
-        {window.localStorage.getItem("score") ? (
-          <Button
-            href={`/score/${id}`}
-            variant="contained"
-            sx={{
-              marginTop: "15px",
-              bgcolor: "#1F2833",
-              "&:hover": { bgcolor: "#45A29E" },
-            }}
-            style={{ m: 1, width: "50%", padding: "10px", fontSize: "1rem" }}
-          >
-            View Score
-          </Button>
-        ) : (
-          <Button
-            onClick={handleClick}
-            variant="contained"
-            sx={{
-              marginTop: "15px",
-              bgcolor: "#1F2833",
-              "&:hover": { bgcolor: "#45A29E" },
-            }}
-            style={{ m: 1, width: "50%", padding: "10px", fontSize: "1rem" }}
-          >
-            Calculate Score Now
-          </Button>
-        )}
+        <Button
+          onClick={handleClick}
+          variant="contained"
+          sx={{
+            marginTop: "15px",
+            bgcolor: "#1F2833",
+            "&:hover": { bgcolor: "#45A29E" },
+          }}
+          style={{ m: 1, width: "100%", padding: "20px", fontSize: "1rem" }}
+        >
+          Calculate Score Now
+        </Button>
       </Box>
     </div>
   );

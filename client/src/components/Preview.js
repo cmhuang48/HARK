@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { useParams, Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { Box, Button, Typography } from "@mui/material";
 import HeadphonesIcon from "@mui/icons-material/Headphones";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
@@ -31,11 +31,10 @@ function Preview({ songs, artists }) {
             backgroundColor="#0B0C10"
             color="#45A29E"
           >
-            Back To Song List
+            Back To Songs
           </Typography>
         </Button>
       </Box>
-
       <Box
         sx={{
           display: "flex",
@@ -46,7 +45,7 @@ function Preview({ songs, artists }) {
       >
         <Box
           sx={{
-            marginTop: "60px",
+            marginTop: "20px",
             marginBottom: "50px",
             textAlign: "center",
             flexDirection: "column",
@@ -85,7 +84,7 @@ function Preview({ songs, artists }) {
             href={`/singalong/${id}`}
             variant="contained"
             sx={{
-              marginTop: "15px",
+              marginTop: "20px",
               bgcolor: "#1F2833",
               "&:hover": { bgcolor: "#45A29E" },
             }}

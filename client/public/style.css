@@ -32,15 +32,14 @@ p {
 
 .active {
   color: #4bfff3;
-  font-size: 28px;
+  font-size: 40px;
   margin: 1rem 0;
-  /* fontStyle={{  */
   text-shadow: 2px 2px 2px #000000;
 }
 
 .inActive {
   color: #a5fdf7e4;
-  font-size: 18px;
+  font-size: 20px;
   text-shadow: 1px 1px 1px #000404;
 }
 
@@ -77,6 +76,7 @@ p {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  z-index: 1;
 }
 
 .content {
@@ -85,6 +85,8 @@ p {
   background-color: "#0B0C10";
   box-shadow: 3;
   position: relative;
+  width: 100%;
+  height: 100%;
   z-index: 10;
 }
 
