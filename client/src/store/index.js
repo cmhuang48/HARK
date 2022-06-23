@@ -5,11 +5,6 @@ import songs from "./Songs";
 import artists from "./Artists";
 import pitchData from "./PitchData";
 
-//not sure if env variable will work, necessary bc we are using a separate server file
-const PORT = process.env.port || 8080;
-
-console.log(process.env);
-
 const reducer = combineReducers({ songs, artists, pitchData });
 
 const store = createStore(reducer, applyMiddleware(thunk, logger));

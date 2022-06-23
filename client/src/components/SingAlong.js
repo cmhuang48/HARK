@@ -18,7 +18,6 @@ function SingAlong({ songs, artists, pitchData }) {
   const [pitches, setPitches] = useState([]);
 
   const onListen = (seconds) => {
-    console.log("onListen");
     setSeconds(seconds);
   };
 
@@ -44,27 +43,27 @@ function SingAlong({ songs, artists, pitchData }) {
     <div className="singAlong">
       <Box
         sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'center',
-          alignItems: 'center',
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
         }}
       >
         <video src="/../images/spotlight.mp4" muted loop autoPlay></video>
         <div className="content">
           <Box
             sx={{
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'center',
-              alignItems: 'center',
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "center",
             }}
           >
             <Typography
               variant="h3"
               fontFamily="Arvo"
               color="#66FCF1"
-              sx={{ marginBottom: '10px' }}
+              sx={{ marginBottom: "10px" }}
             >
               {song?.name} by {artist?.name}
             </Typography>

@@ -18,7 +18,6 @@ router.get("/", async (req, res, next) => {
 router.get("/:id", async (req, res, next) => {
   try {
     const song = await Song.findByPk(req.params.id);
-    console.log('??????',JSON.stringify(song))
     res.json(song);
   } catch (error) {
     next(error);

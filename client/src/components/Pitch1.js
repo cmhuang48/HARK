@@ -13,6 +13,7 @@ function Pitch({ pitches, setPitches, songs, pitchData }) {
 
   useEffect(() => {
     console.log("useEffect");
+    window.localStorage.removeItem("score");
     startDemo();
   }, []);
 
@@ -25,7 +26,6 @@ function Pitch({ pitches, setPitches, songs, pitchData }) {
   let model;
 
   async function startDemo() {
-    console.log("startDemo");
     model = await tf.loadGraphModel(MODEL_URL, { fromTFHub: true });
     navigator.mediaDevices
       .getUserMedia({ audio: true, video: false })
@@ -45,7 +45,6 @@ function Pitch({ pitches, setPitches, songs, pitchData }) {
   }
 
   function handleSuccess(stream) {
-    console.log("handleSuccess");
     let context = new AudioContext({
       latencyHint: "playback",
       sampleRate: MODEL_SAMPLE_RATE,
@@ -126,19 +125,6 @@ function Pitch({ pitches, setPitches, songs, pitchData }) {
           Restart
         </Button>
         <br />
-        <Button
-          onClick={handleClick}
-          variant="contained"
-          sx={{
-            marginTop: "15px",
-            bgcolor: "#1F2833",
-            "&:hover": { bgcolor: "#45A29E" },
-          }}
-          style={{ m: 1, width: "50%", padding: "10px", fontSize: "1rem" }}
-        >
-          Calculate Score
-        </Button>
-        {/* <br />
         {window.localStorage.getItem("score") ? (
           <Button
             href={`/score/${id}`}
@@ -153,8 +139,19 @@ function Pitch({ pitches, setPitches, songs, pitchData }) {
             View Score
           </Button>
         ) : (
-          ""
-        )} */}
+          <Button
+            onClick={handleClick}
+            variant="contained"
+            sx={{
+              marginTop: "15px",
+              bgcolor: "#1F2833",
+              "&:hover": { bgcolor: "#45A29E" },
+            }}
+            style={{ m: 1, width: "50%", padding: "10px", fontSize: "1rem" }}
+          >
+            Calculate Score Now
+          </Button>
+        )}
       </Box>
     </div>
   );

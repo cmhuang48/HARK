@@ -23,13 +23,3 @@ router.get("/:id", async (req, res, next) => {
     next(err);
   }
 });
-
-// POST / create new pitch data
-router.post("/", async (req, res, next) => {
-  try {
-    const pitchData = await PitchData.create(req.body);
-    res.status(201).json(pitchData);
-  } catch (err) {
-    next(err);
-  }
-});
