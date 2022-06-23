@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 import { useParams } from "react-router-dom";
 import ReactAudioPlayer from "react-audio-player";
-import { Box, Typography } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import Lyric from "./Lyric";
 import Pitch from "./Pitch1";
 
@@ -37,10 +37,14 @@ function SingAlong({ songs, artists, pitchData }) {
     const score = (1 - averageErrorRate) * 100;
     console.log("score", score);
     window.localStorage.setItem("score", score);
+    if (window.localStorage.score) {
+      window.location.href = `/score/${id}`;
+    }
   };
 
   return (
     <div className="singAlong">
+      <video src="/../images/spotlight.mp4" muted loop autoPlay></video>
       <Box
         sx={{
           display: "flex",
@@ -49,7 +53,6 @@ function SingAlong({ songs, artists, pitchData }) {
           alignItems: "center",
         }}
       >
-        <video src="/../images/spotlight.mp4" muted loop autoPlay></video>
         <div className="content">
           <Box
             sx={{
