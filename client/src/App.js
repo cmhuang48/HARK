@@ -31,7 +31,7 @@ const mapDispatch = (dispatch) => {
   return {
     loadSongs: () => dispatch(loadSongs()),
     loadArtists: () => dispatch(loadArtists()),
-    loadPitchData: () => dispatch(loadPitchData()),
+    loadPitchData: () => dispatch(loadPitchData())
   };
 };
 

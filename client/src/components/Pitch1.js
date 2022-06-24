@@ -7,9 +7,7 @@ import { Box, Button } from "@mui/material";
 function Pitch({ pitches, setPitches, songs, pitchData }) {
   const { id } = useParams();
   const song = songs.find((song) => song.id === id * 1);
-  const originalPitchData = pitchData.find(
-    (singlePitchData) => singlePitchData.songId === song?.id
-  );
+  const originalPitchData = pitchData.find((singlePitchData) => singlePitchData.songId === song?.id);
 
   useEffect(() => {
     console.log("useEffect");
@@ -27,10 +25,7 @@ function Pitch({ pitches, setPitches, songs, pitchData }) {
 
   async function startDemo() {
     model = await tf.loadGraphModel(MODEL_URL, { fromTFHub: true });
-    navigator.mediaDevices
-      .getUserMedia({ audio: true, video: false })
-      .then(handleSuccess)
-      .catch(handleError);
+    navigator.mediaDevices.getUserMedia({ audio: true, video: false }).then(handleSuccess).catch(handleError);
   }
 
   function handleError(err) {
@@ -47,7 +42,7 @@ function Pitch({ pitches, setPitches, songs, pitchData }) {
   function handleSuccess(stream) {
     let context = new AudioContext({
       latencyHint: "playback",
-      sampleRate: MODEL_SAMPLE_RATE,
+      sampleRate: MODEL_SAMPLE_RATE
     });
 
     const retryButton = document.getElementById("retryButton");
@@ -59,11 +54,7 @@ function Pitch({ pitches, setPitches, songs, pitchData }) {
     });
 
     let source = context.createMediaStreamSource(stream);
-    let processor = context.createScriptProcessor(
-      NUM_INPUT_SAMPLES,
-      /*num_inp_channels=*/ 1,
-      /*num_out_channels=*/ 1
-    );
+    let processor = context.createScriptProcessor(NUM_INPUT_SAMPLES, /*num_inp_channels=*/ 1, /*num_out_channels=*/ 1);
 
     // Converts audio to mono.
     processor.channelInterpretation = "speakers";
@@ -101,8 +92,7 @@ function Pitch({ pitches, setPitches, songs, pitchData }) {
       }
     }
     console.log("error rates", errorRates);
-    const averageErrorRate =
-      errorRates.reduce((accum, rate) => accum + rate, 0) / errorRates.length;
+    const averageErrorRate = errorRates.reduce((accum, rate) => accum + rate, 0) / errorRates.length;
     console.log("average error rate", averageErrorRate);
     const score = (1 - averageErrorRate) * 100;
     console.log("score", score);
@@ -117,18 +107,19 @@ function Pitch({ pitches, setPitches, songs, pitchData }) {
           display: "flex",
           flexDirection: "column",
           justifyContent: "center",
-          alignItems: "center",
+          alignItems: "center"
         }}
       >
         <Button
           id="retryButton"
           variant="contained"
           sx={{
+            m: 0.5,
             marginTop: "15px",
             bgcolor: "#1F2833",
-            "&:hover": { bgcolor: "#45A29E" },
+            "&:hover": { bgcolor: "#45A29E" }
           }}
-          style={{ m: 1, width: "100%", padding: "20px", fontSize: "1rem" }}
+          style={{ width: "100%", padding: "15px", fontSize: ".9rem" }}
         >
           Restart
         </Button>
@@ -137,11 +128,11 @@ function Pitch({ pitches, setPitches, songs, pitchData }) {
           onClick={handleClick}
           variant="contained"
           sx={{
-            marginTop: "15px",
+            m: 0.5,
             bgcolor: "#1F2833",
-            "&:hover": { bgcolor: "#45A29E" },
+            "&:hover": { bgcolor: "#45A29E" }
           }}
-          style={{ m: 1, width: "100%", padding: "20px", fontSize: "1rem" }}
+          style={{ width: "100%", padding: "15px", fontSize: ".9rem" }}
         >
           Calculate Score Now
         </Button>

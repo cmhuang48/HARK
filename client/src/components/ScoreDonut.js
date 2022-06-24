@@ -11,20 +11,12 @@ export default function ScoreDonut({ score }) {
     new DonutChart(document.getElementById("myChart"), {
       data: [
         { label: "teal", value: Math.round(score), color: "#66FCF1" },
-        { label: "grey", value: 100 - Math.round(score), color: "#C5C6C7" },
+        { label: "grey", value: 100 - Math.round(score), color: "#C5C6C7" }
       ],
       holeSize: 0.6,
-      animationSpeed: 0.5,
+      animationSpeed: 0.5
     });
   }, [score]);
 
-  return (
-    <canvas
-      ref={canvasRef}
-      id="myChart"
-      width="200px"
-      height="200px"
-      margin="20px"
-    ></canvas>
-  );
+  return <canvas ref={canvasRef} id="myChart" width="200px" height="200px" margin="20px"></canvas>;
 }
