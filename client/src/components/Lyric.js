@@ -9,10 +9,7 @@ function Lyric({ currentSeconds, songs }) {
   const song = songs.find((song) => song.id === id * 1);
   const lrc = LRC.parse(song?.lyrics);
 
-  const currentIndex =
-    lrc.ti === "Since U Been Gone"
-      ? lrc.lines.findIndex((item) => item.time >= currentSeconds - 4) - 1
-      : lrc.lines.findIndex((item) => item.time >= currentSeconds) - 1;
+  const currentIndex = lrc.ti === "Since U Been Gone" ? lrc.lines.findIndex((item) => item.time >= currentSeconds - 4) - 1 : lrc.lines.findIndex((item) => item.time >= currentSeconds) - 1;
   const prevLyric = lrc.lines[currentIndex === 0 ? 0 : currentIndex - 1];
   const lyric = lrc.lines[currentIndex === 0 ? 1 : currentIndex];
   const futureLyric = lrc.lines[currentIndex === 0 ? 2 : currentIndex + 1];
@@ -25,8 +22,8 @@ function Lyric({ currentSeconds, songs }) {
           flexDirection: "column",
           justifyContent: "center",
           alignItems: "center",
-          marginTop: "10%",
-          marginBottom: "10%",
+          marginTop: "15%",
+          marginBottom: "10%"
         }}
       >
         <p className="inActive">{prevLyric?.text}</p>
