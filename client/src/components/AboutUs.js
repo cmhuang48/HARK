@@ -11,19 +11,12 @@ export default function AboutUs() {
     px: 5,
     height: "100%",
     border: "5px solid #45A29E",
-    borderRadius: "20px",
+    borderRadius: "20px"
   };
 
   return (
     <div className="aboutUs">
-      <Typography
-        variant="h2"
-        fontFamily="Arvo"
-        fontWeight="700"
-        backgroundColor="#0B0C10"
-        color="#66FCF1"
-        textAlign="center"
-      >
+      <Typography variant="h2" fontFamily="Arvo" fontWeight="700" backgroundColor="#0B0C10" color="#66FCF1" textAlign="center">
         About Us
       </Typography>
       <Box
@@ -31,23 +24,14 @@ export default function AboutUs() {
         sx={{
           display: "flex",
           overflow: "hidden",
-          bgcolor: "#0B0C10",
+          bgcolor: "#0B0C10"
         }}
       >
-        <Container
-          sx={{ mt: 15, mb: 30, display: "flex", position: "relative" }}
-        >
+        <Container sx={{ mt: 15, mb: 30, display: "flex", position: "relative" }}>
           <Grid container spacing={5}>
             <Grid item xs={12} md={3}>
               <Box sx={item}>
-                <Typography
-                  variant="h5"
-                  sx={{ mt: 5, mb: 4 }}
-                  fontFamily="Arvo"
-                  fontWeight="700"
-                  color="white"
-                  textAlign="center"
-                >
+                <Typography variant="h5" sx={{ mt: 5, mb: 4 }} fontFamily="Arvo" fontWeight="700" color="white" textAlign="center">
                   Chanelle Huang
                 </Typography>
                 <div className="icons">
@@ -58,7 +42,7 @@ export default function AboutUs() {
                         marginRight: "15px",
                         marginBottom: "20px",
                         color: "white",
-                        "&:hover": { color: "#45A29E" },
+                        "&:hover": { color: "#45A29E" }
                       }}
                     />
                   </a>
@@ -69,7 +53,7 @@ export default function AboutUs() {
                         marginLeft: "15px",
                         marginBottom: "20px",
                         color: "white",
-                        "&:hover": { color: "#45A29E" },
+                        "&:hover": { color: "#45A29E" }
                       }}
                     />
                   </a>
@@ -78,14 +62,7 @@ export default function AboutUs() {
             </Grid>
             <Grid item xs={12} md={3}>
               <Box sx={item}>
-                <Typography
-                  variant="h5"
-                  sx={{ mt: 5, mb: 4 }}
-                  fontFamily="Arvo"
-                  fontWeight="700"
-                  color="white"
-                  textAlign="center"
-                >
+                <Typography variant="h5" sx={{ mt: 5, mb: 4 }} fontFamily="Arvo" fontWeight="700" color="white" textAlign="center">
                   Hannah Abbasi
                 </Typography>
                 <div className="icons">
@@ -96,7 +73,7 @@ export default function AboutUs() {
                         marginRight: "15px",
                         marginBottom: "20px",
                         color: "white",
-                        "&:hover": { color: "#45A29E" },
+                        "&:hover": { color: "#45A29E" }
                       }}
                     />
                   </a>
@@ -107,7 +84,7 @@ export default function AboutUs() {
                         marginLeft: "15px",
                         marginBottom: "20px",
                         color: "white",
-                        "&:hover": { color: "#45A29E" },
+                        "&:hover": { color: "#45A29E" }
                       }}
                     />
                   </a>
@@ -116,14 +93,7 @@ export default function AboutUs() {
             </Grid>
             <Grid item xs={12} md={3}>
               <Box sx={item}>
-                <Typography
-                  variant="h5"
-                  sx={{ mt: 5, mb: 4 }}
-                  fontFamily="Arvo"
-                  fontWeight="700"
-                  color="white"
-                  textAlign="center"
-                >
+                <Typography variant="h5" sx={{ mt: 5, mb: 4 }} fontFamily="Arvo" fontWeight="700" color="white" textAlign="center">
                   Joshua Reyes
                 </Typography>
                 <div className="icons">
@@ -134,7 +104,7 @@ export default function AboutUs() {
                         marginRight: "15px",
                         marginBottom: "20px",
                         color: "white",
-                        "&:hover": { color: "#45A29E" },
+                        "&:hover": { color: "#45A29E" }
                       }}
                     />
                   </a>
@@ -145,7 +115,7 @@ export default function AboutUs() {
                         marginLeft: "15px",
                         marginBottom: "20px",
                         color: "white",
-                        "&:hover": { color: "#45A29E" },
+                        "&:hover": { color: "#45A29E" }
                       }}
                     />
                   </a>
@@ -154,14 +124,7 @@ export default function AboutUs() {
             </Grid>
             <Grid item xs={12} md={3}>
               <Box sx={item}>
-                <Typography
-                  variant="h5"
-                  sx={{ mt: 5, mb: 4 }}
-                  fontFamily="Arvo"
-                  fontWeight="700"
-                  color="white"
-                  textAlign="center"
-                >
+                <Typography variant="h5" sx={{ mt: 5, mb: 4 }} fontFamily="Arvo" fontWeight="700" color="white" textAlign="center">
                   Lisa Knox
                 </Typography>
                 <div className="icons">
@@ -172,7 +135,7 @@ export default function AboutUs() {
                         marginRight: "15px",
                         marginBottom: "20px",
                         color: "white",
-                        "&:hover": { color: "#45A29E" },
+                        "&:hover": { color: "#45A29E" }
                       }}
                     />
                   </a>
@@ -183,7 +146,7 @@ export default function AboutUs() {
                         marginLeft: "15px",
                         marginBottom: "20px",
                         color: "white",
-                        "&:hover": { color: "#45A29E" },
+                        "&:hover": { color: "#45A29E" }
                       }}
                     />
                   </a>
@@ -191,12 +154,7 @@ export default function AboutUs() {
               </Box>
             </Grid>
             <Grid item xs={12}>
-              <Typography
-                variant="h5"
-                fontFamily="Arvo"
-                color="#C5C6C7"
-                textAlign="center"
-              >
+              <Typography variant="h5" fontFamily="Arvo" color="#C5C6C7" textAlign="center">
                 {`The four of us met at Fullstack Academy and built this karaoke
                   app together as our capstone project. HARK is the combination
                   of our last initials and means "to listen," which we found
@@ -213,39 +171,18 @@ export default function AboutUs() {
               </Typography>
             </Grid>
             <Grid item xs={12}>
-              <Typography
-                variant="h3"
-                fontFamily="Arvo"
-                fontWeight="700"
-                color="#66FCF1"
-                textAlign="center"
-              >
+              <Typography variant="h3" fontFamily="Arvo" fontWeight="700" color="#66FCF1" textAlign="center">
                 Technologies
               </Typography>
             </Grid>
             <Grid item xs={12} md={4}>
-              <Box
-                component="img"
-                src="/images/React.jpeg"
-                alt="clock"
-                sx={{ width: "100%", height: "auto" }}
-              />
+              <Box component="img" src="/images/React.jpeg" alt="clock" sx={{ width: "100%", height: "auto" }} />
             </Grid>
             <Grid item xs={12} md={4}>
-              <Box
-                component="img"
-                src="/images/LALAL.AI.jpeg"
-                alt="clock"
-                sx={{ width: "100%", height: "auto" }}
-              />
+              <Box component="img" src="/images/LALAL.AI.jpeg" alt="clock" sx={{ width: "100%", height: "auto" }} />
             </Grid>
             <Grid item xs={12} md={4}>
-              <Box
-                component="img"
-                src="/images/TensorFlow.js.jpeg"
-                alt="clock"
-                sx={{ width: "100%", height: "auto" }}
-              />
+              <Box component="img" src="/images/TensorFlow.js.jpeg" alt="clock" sx={{ width: "100%", height: "auto" }} />
             </Grid>
           </Grid>
         </Container>
