@@ -24,7 +24,13 @@ function Score({ songs, artists }) {
         }}
       >
         {isNaN(score) ? (
-          <Typography variant="h5" fontFamily="Arvo" color="#66FCF1">
+          <Typography
+            variant="h5"
+            fontFamily="Arvo"
+            color="#66FCF1"
+            margin="10px"
+            text-align="center"
+          >
             Sorry, there was an error. You may need to sing longer. Please try
             again!
           </Typography>
@@ -39,33 +45,69 @@ function Score({ songs, artists }) {
               boxShadow: 3,
             }}
           >
-            <Typography variant="h4" fontFamily="Arvo" color="#45A29E">
+            <Typography
+              variant="h4"
+              fontFamily="Arvo"
+              color="#45A29E"
+              margin="10px"
+              text-align="center"
+            >
               You sang {song?.name} by {artist?.name}!
             </Typography>
             <Typography variant="h5" fontFamily="Arvo" color="white">
               Your Score:
             </Typography>
-            <Typography variant="h3" fontFamily="Arvo" color="#66FCF1">
+            <Typography
+              variant="h3"
+              fontFamily="Arvo"
+              color="#66FCF1"
+              margin="10px"
+              text-align="center"
+            >
               {Math.round(score)} / 100
             </Typography>
             <ScoreDonut score={score} />
             {score < 50 && (
-              <Typography variant="h5" fontFamily="Arvo" color="#45A29E">
+              <Typography
+                variant="h5"
+                fontFamily="Arvo"
+                color="#45A29E"
+                margin="10px"
+                text-align="center"
+              >
                 Meh, keep working and try again. You can do better!
               </Typography>
             )}
             {score > 50 && score < 80 && (
-              <Typography variant="h5" fontFamily="Arvo" color="#45A29E">
+              <Typography
+                variant="h5"
+                fontFamily="Arvo"
+                color="#45A29E"
+                margin="10px"
+                text-align="center"
+              >
                 Nice job, but you have room to improve!
               </Typography>
             )}
             {score > 80 && score < 90 && (
-              <Typography variant="h5" fontFamily="Arvo" color="#45A29E">
+              <Typography
+                variant="h5"
+                fontFamily="Arvo"
+                color="#45A29E"
+                margin="10px"
+                text-align="center"
+              >
                 Amazing vocals, but you still have room to improve!
               </Typography>
             )}
             {score > 90 && score < 100 && (
-              <Typography variant="h5" fontFamily="Arvo" color="#45A29E">
+              <Typography
+                variant="h5"
+                fontFamily="Arvo"
+                color="#45A29E"
+                margin="10px"
+                text-align="center"
+              >
                 Fantastic, you're a natural!
               </Typography>
             )}
