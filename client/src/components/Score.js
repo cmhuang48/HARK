@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { useParams } from "react-router-dom";
 import { Box, Button, Typography } from "@mui/material";
+import ScoreDonut from "./ScoreDonut";
 
 function Score({ songs, artists }) {
   const { id } = useParams();
@@ -38,7 +39,7 @@ function Score({ songs, artists }) {
               boxShadow: 3,
             }}
           >
-            <Typography variant="h6" fontFamily="Arvo" color="#45A29E">
+            <Typography variant="h4" fontFamily="Arvo" color="#45A29E">
               You sang {song?.name} by {artist?.name}!
             </Typography>
             <Typography variant="h5" fontFamily="Arvo" color="white">
@@ -47,6 +48,7 @@ function Score({ songs, artists }) {
             <Typography variant="h3" fontFamily="Arvo" color="#66FCF1">
               {Math.round(score)} / 100
             </Typography>
+            <ScoreDonut score={score} />
             {score < 50 && (
               <Typography variant="h5" fontFamily="Arvo" color="#45A29E">
                 Meh, keep working and try again. You can do better!
