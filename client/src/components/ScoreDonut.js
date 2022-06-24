@@ -22,8 +22,8 @@ export default function ScoreDonut({ score }) {
     <canvas
       ref={canvasRef}
       id="myChart"
-      width="400px"
-      height="400px"
+      width="200px"
+      height="200px"
       margin="20px"
     ></canvas>
   );
