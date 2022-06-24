@@ -13,18 +13,18 @@ function SongList({ songs, artists }) {
           flexDirection: "column",
           justifyContent: "center",
           alignItems: "center",
-          bgcolor: "#0B0C10",
+          bgcolor: "#0B0C10"
         }}
       >
-        <Box sx={{ marginTop: "70px", marginBottom: "30px" }}>
+        <Box sx={{ marginTop: "50px", marginBottom: "15px" }}>
           <Typography
-            color="#f2f2f2"
+            color="#66FCF1"
             variant="h5"
             sx={{
               fontFamily: "Arvo",
               fontWeight: "700",
               fontStyle: "italic",
-              marginBottom: "20px",
+              marginBottom: "30px"
             }}
           >
             Choose Your Song
@@ -32,9 +32,7 @@ function SongList({ songs, artists }) {
 
           <div className="songSelect">
             {songs?.map((song) => {
-              const artist = artists.find(
-                (artist) => artist.id === song.artistId
-              );
+              const artist = artists.find((artist) => artist.id === song.artistId);
               return (
                 <div key={song.id} style={{ margin: "1rem" }}>
                   <Typography
@@ -42,7 +40,7 @@ function SongList({ songs, artists }) {
                     sx={{
                       lineHeight: 2,
                       bgcolor: "transparent",
-                      "&:hover": { bgcolor: "transparent" },
+                      "&:hover": { bgcolor: "transparent" }
                     }}
                     style={{ width: "100%", fontSize: "1.5rem" }}
                   >
