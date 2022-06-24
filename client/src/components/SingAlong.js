@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 import { useParams } from "react-router-dom";
 import ReactAudioPlayer from "react-audio-player";
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import Lyric from "./Lyric";
 import Pitch from "./Pitch1";
 

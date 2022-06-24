@@ -6,7 +6,6 @@ import Home from "./components/Home";
 import SongList from "./components/SongList";
 import Preview from "./components/Preview";
 import SingAlong from "./components/SingAlong";
-import Pitch from "./components/Pitch";
 import Score from "./components/Score";
 import AboutUs from "./components/AboutUs";
 
