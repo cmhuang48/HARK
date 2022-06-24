@@ -34,7 +34,7 @@ export default function AboutUs() {
             bgcolor: "#0B0C10"
           }}
         >
-          <Container sx={{ mt: 5, mb: 15, display: "flex", position: "relative" }}>
+          <Container sx={{ mt: 6, mb: 15, display: "flex", position: "relative" }}>
             <Grid container spacing={5}>
               <Grid item xs={12} md={3}>
                 <Box sx={item}>
