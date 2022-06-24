@@ -10,9 +10,7 @@ function SingAlong({ songs, artists, pitchData }) {
   const { id } = useParams();
   const song = songs.find((song) => song.id === id * 1);
   const artist = artists.find((artist) => artist.id === song?.artistId);
-  const originalPitchData = pitchData.find(
-    (singlePitchData) => singlePitchData.songId === song?.id
-  );
+  const originalPitchData = pitchData.find((singlePitchData) => singlePitchData.songId === song?.id);
 
   const [currentSeconds, setSeconds] = useState(0);
   const [pitches, setPitches] = useState([]);
@@ -31,8 +29,7 @@ function SingAlong({ songs, artists, pitchData }) {
       }
     }
     console.log("error rates", errorRates);
-    const averageErrorRate =
-      errorRates.reduce((accum, rate) => accum + rate, 0) / errorRates.length;
+    const averageErrorRate = errorRates.reduce((accum, rate) => accum + rate, 0) / errorRates.length;
     console.log("average error rate", averageErrorRate);
     const score = (1 - averageErrorRate) * 100;
     console.log("score", score);
@@ -50,7 +47,7 @@ function SingAlong({ songs, artists, pitchData }) {
           display: "flex",
           flexDirection: "column",
           justifyContent: "center",
-          alignItems: "center",
+          alignItems: "center"
         }}
       >
         <div className="content">
@@ -59,15 +56,10 @@ function SingAlong({ songs, artists, pitchData }) {
               display: "flex",
               flexDirection: "column",
               justifyContent: "center",
-              alignItems: "center",
+              alignItems: "center"
             }}
           >
-            <Typography
-              variant="h3"
-              fontFamily="Arvo"
-              color="#66FCF1"
-              sx={{ marginBottom: "10px" }}
-            >
+            <Typography variant="h3" fontFamily="Arvo" color="#66FCF1" sx={{ marginTop: "15px", marginBottom: "15px" }}>
               {song?.name} by {artist?.name}
             </Typography>
             <ReactAudioPlayer
@@ -91,7 +83,7 @@ function SingAlong({ songs, artists, pitchData }) {
 const mapState = ({ songs, artists, pitchData }) => ({
   songs,
   artists,
-  pitchData,
+  pitchData
 });
 
 export default connect(mapState)(SingAlong);
