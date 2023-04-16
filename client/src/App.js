@@ -18,7 +18,7 @@ class App extends React.Component {
     return (
       <div className="app">
         <Header />
-        <RoutesTree />
+        <div class="contentContainer"><RoutesTree /></div>
         <Footer />
       </div>
     );

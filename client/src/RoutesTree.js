@@ -11,7 +11,7 @@ import AboutUs from "./components/AboutUs";
 
 function RoutesTree() {
   return (
-    <div>
+    <div class="routesTree">
       <Routes>
         <Route exact path="/" element={<Home />} />
         <Route path="/songs" element={<SongList />} />
