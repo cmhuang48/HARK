@@ -14,10 +14,10 @@ export default function Home() {
           bgcolor: "#1f2833",
           backgroundImage: "url('/images/music1.jpeg')",
           width: "100%",
-          height: "80vh",
+          height: "85vh",
           backgroundSize: "cover",
           opacity: "0.75",
-          boxShadow: 3
+          boxShadow: 3,
         }}
       >
         <Box>

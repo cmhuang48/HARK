@@ -25,6 +25,29 @@
   background-color: #1f2833;
 }
 
+
+.contentContainer {
+  display: flex;
+  flex: 1;
+  height: 100%;
+  align-items: center;
+  background-color: #0B0C10;
+}
+
+.routesTree {
+  flex: 1;
+  height: 100%;
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+
+
+
 p {
   color: rgba(105, 105, 105);
   font-size: 14px;

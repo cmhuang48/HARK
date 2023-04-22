@@ -13,10 +13,11 @@ function SongList({ songs, artists }) {
           flexDirection: "column",
           justifyContent: "center",
           alignItems: "center",
-          bgcolor: "#0B0C10"
+          alignContent: "center",
+          bgcolor: "#0B0C10",
         }}
       >
-        <Box sx={{ marginTop: "50px", marginBottom: "15px" }}>
+        <Box>
           <Typography
             color="#66FCF1"
             variant="h5"

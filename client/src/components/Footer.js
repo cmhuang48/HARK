@@ -11,7 +11,7 @@ export default function Footer() {
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
-          padding: "10px"
+          padding: "10px",
         }}
       >
         <Link className="aboutLink" to="/aboutus">
